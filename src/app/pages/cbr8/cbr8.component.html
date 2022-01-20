@@ -1,0 +1,52 @@
+<div class="container">
+    <mat-card>
+      <mat-card-title>Cisco CBR8</mat-card-title>
+      <mat-card-subtitle>Start</mat-card-subtitle>
+      <br>
+      <strong>
+        Interface Cable
+        <mat-form-field appearance="fill" class="interface">
+          <mat-select disableRipple #iF>
+            <mat-option [value]="interFace" *ngFor="let interFace of interFaces">
+              {{ interFace }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        /0/
+        <mat-form-field appearance="fill" class="interface">
+          <mat-select disableRipple #sl>
+            <mat-option [value]="slot" *ngFor="let slot of slots">
+              {{ slot }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </strong>
+      <table id="tableTop">
+        <tr>
+          <td><mat-checkbox #desc></mat-checkbox></td>
+          <td>description</td>
+          <td><input type="text" [disabled]="!desc.checked"></td>
+        </tr>
+        <tr>
+          <td><mat-checkbox #load></mat-checkbox></td>
+          <td>load-interval</td> 
+          <td><input type="text" [disabled]="!load.checked" [value]="30"></td>
+        </tr>
+        <tr>
+          <td><mat-checkbox #ds1></mat-checkbox></td>
+          <td>downstream Integrated-Cable</td>
+          <td>
+              <mat-label [textContent]=iF.value></mat-label>
+              /0/
+              <mat-label [textContent]=sl.value></mat-label>
+              rf-channel
+            </td>
+          <td><input type="text" [disabled]="!ds1.checked" [value]="30"></td>
+        </tr>
+        </table>
+      <br><br>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Generar script</button>
+      </mat-card-actions>
+      </mat-card>
+</div>  
