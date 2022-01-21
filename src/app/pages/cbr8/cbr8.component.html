@@ -1,10 +1,10 @@
 <div class="container">
-    <mat-card>
-      <mat-card-title>Cisco CBR8</mat-card-title>
-      <mat-card-subtitle>Start</mat-card-subtitle>
-      <br>
+  <mat-card>
+    <mat-card-title>Cisco CBR8</mat-card-title>
+    <mat-card-subtitle>Start</mat-card-subtitle>
+    <div class="div__interface">
       <strong>
-        Interface Cable
+        <span>Interface Cable</span>
         <mat-form-field appearance="fill" class="interface">
           <mat-select disableRipple #iF>
             <mat-option [value]="interFace" *ngFor="let interFace of interFaces">
@@ -12,41 +12,266 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-        /0/
+        <span>/0/</span>
         <mat-form-field appearance="fill" class="interface">
-          <mat-select disableRipple #sl>
+          <mat-select disableRipple #sl value="">
             <mat-option [value]="slot" *ngFor="let slot of slots">
               {{ slot }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </strong>
-      <table id="tableTop">
-        <tr>
-          <td><mat-checkbox #desc></mat-checkbox></td>
-          <td>description</td>
-          <td><input type="text" [disabled]="!desc.checked"></td>
-        </tr>
-        <tr>
-          <td><mat-checkbox #load></mat-checkbox></td>
-          <td>load-interval</td> 
-          <td><input type="text" [disabled]="!load.checked" [value]="30"></td>
-        </tr>
-        <tr>
-          <td><mat-checkbox #ds1></mat-checkbox></td>
-          <td>downstream Integrated-Cable</td>
-          <td>
-              <mat-label [textContent]=iF.value></mat-label>
-              /0/
-              <mat-label [textContent]=sl.value></mat-label>
-              rf-channel
-            </td>
-          <td><input type="text" [disabled]="!ds1.checked" [value]="30"></td>
-        </tr>
-        </table>
-      <br><br>
-      <mat-card-actions>
-        <button mat-raised-button color="primary">Generar script</button>
-      </mat-card-actions>
-      </mat-card>
-</div>  
+    </div>
+    
+    <div class="div__line">
+      <mat-checkbox #desc></mat-checkbox>
+      description
+      <input type="text" [disabled]="!desc.checked">
+    </div>
+    <div class="div__line">
+      <mat-checkbox #load></mat-checkbox>
+      load-interval
+      <input type="text" [disabled]="!load.checked" [value]="30" class="short__input">
+    </div>
+    <!--downstream 1-->
+    <div class="div__line">
+      <mat-checkbox #ds1></mat-checkbox>
+      downstream Integrated-Cable
+      <mat-label [textContent]=iF.value></mat-label>
+      /0/
+      <mat-label [textContent]=sl.value></mat-label>
+      rf-channel
+      <input type="text" [disabled]="!ds1.checked" class="short__input">
+      -
+      <input type="text" [disabled]="!ds1.checked" class="short__input">&nbsp;
+      <mat-checkbox #ds1No [disabled]="!ds1.checked">No</mat-checkbox>&nbsp;
+      <mat-checkbox #ds1Otro [disabled]="!ds1.checked" >Otro</mat-checkbox>&nbsp;
+    </div>    
+    <!--downstream 2-->
+    <div class="div__line" [hidden]="!ds1Otro.checked">
+        <mat-checkbox #ds2></mat-checkbox>
+        downstream Integrated-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value></mat-label>
+        rf-channel
+        <input type="text" [disabled]="!ds2.checked" class="short__input">
+        -
+        <input type="text" [disabled]="!ds2.checked" class="short__input">&nbsp;
+        <mat-checkbox #ds2No [disabled]="!ds2.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #ds2Otro [disabled]="!ds2.checked">Otro</mat-checkbox>&nbsp;
+      </div>
+    <!--downstream 3-->
+    <div class="div__line" [hidden]="!ds2Otro.checked">
+        <mat-checkbox #ds3></mat-checkbox>
+        downstream Integrated-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value></mat-label>
+        rf-channel
+        <input type="text" [disabled]="!ds3.checked" class="short__input">
+        -
+        <input type="text" [disabled]="!ds3.checked" class="short__input">&nbsp;
+        <mat-checkbox #ds3No [disabled]="!ds3.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #ds3Otro [disabled]="!ds2.checked">Otro</mat-checkbox>&nbsp;
+      </div>
+    <!--downstream 4-->
+    <div class="div__line" [hidden]="!ds3Otro.checked">
+        <mat-checkbox #ds4></mat-checkbox>
+        downstream Integrated-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value></mat-label>
+        rf-channel
+        <input type="text" [disabled]="!ds4.checked" class="short__input">
+        -
+        <input type="text" [disabled]="!ds4.checked" class="short__input">&nbsp;
+        <mat-checkbox #ds4No [disabled]="!ds4.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #ds4Otro [disabled]="!ds2.checked">Otro</mat-checkbox>&nbsp;
+    </div>
+    <!--downstream 5-->
+    <div class="div__line" [hidden]="!ds4Otro.checked">
+        <mat-checkbox #ds5></mat-checkbox>      
+        downstream Integrated-Cable  
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value></mat-label>
+        rf-channel
+        <input type="text" [disabled]="!ds5.checked" class="short__input">
+        -
+        <input type="text" [disabled]="!ds5.checked" class="short__input">&nbsp;
+        <mat-checkbox #ds5No [disabled]="!ds5.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #ds5Otro [disabled]="!ds2.checked">Otro</mat-checkbox>&nbsp;
+    </div>
+    <!--downstream 6-->
+    <div class="div__line" [hidden]="!ds5Otro.checked">
+        <mat-checkbox #ds6></mat-checkbox>      
+        downstream Integrated-Cable  
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value></mat-label>
+        rf-channel
+        <input type="text" [disabled]="!ds6.checked" class="short__input">
+        -
+        <input type="text" [disabled]="!ds6.checked" class="short__input">&nbsp;
+        <mat-checkbox #ds6No [disabled]="!ds6.checked">No</mat-checkbox>&nbsp;
+    </div>
+    <!--upstream 1-->
+    <div class="div__line">
+        <mat-checkbox #us1></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us1.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2></mat-label>
+        us-channel 0&nbsp;
+        <mat-checkbox #us1No [disabled]="!us1.checked">No</mat-checkbox>
+    </div>
+    <!--upstream 2-->
+    <div class="div__line">
+        <mat-checkbox #us2></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us2.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2></mat-label>
+        us-channel 1&nbsp;
+        <mat-checkbox #us2No [disabled]="!us2.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us2Otro [disabled]="!us2.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 3-->
+    <div class="div__line" [hidden]="!us2Otro.checked">
+        <mat-checkbox #us3></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us3.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2></mat-label>
+        us-channel 2&nbsp;
+        <mat-checkbox #us3No [disabled]="!us3.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us3Otro [disabled]="!us3.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 4-->
+    <div class="div__line" [hidden]="!us3Otro.checked">
+        <mat-checkbox #us4></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us4.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2></mat-label>
+        us-channel 3&nbsp;
+        <mat-checkbox #us4No [disabled]="!us4.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us4Otro [disabled]="!us4.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 5-->
+    <div class="div__line" [hidden]="!us4Otro.checked">
+        <mat-checkbox #us5></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us5.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2></mat-label>
+        us-channel 4&nbsp;
+        <mat-checkbox #us5No [disabled]="!us5.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us5Otro [disabled]="!us5.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 6-->
+    <div class="div__line" [hidden]="!us5Otro.checked">
+        <mat-checkbox #us6></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us6.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 5&nbsp;
+        <mat-checkbox #us6No [disabled]="!us6.checked">No</mat-checkbox>&nbsp;
+    </div>
+    <!--upstream 7-->
+    <div class="div__line">
+        <mat-checkbox #us7></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us7.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 0&nbsp;
+        <mat-checkbox #us7No [disabled]="!us7.checked">No</mat-checkbox>
+    </div>
+    <!--upstream 8-->
+    <div class="div__line">
+        <mat-checkbox #us8></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us8.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 1&nbsp;
+        <mat-checkbox #us8No [disabled]="!us8.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us8Otro [disabled]="!us8.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 9-->
+    <div class="div__line" [hidden]="!us8Otro.checked">
+        <mat-checkbox #us9></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us9.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 2&nbsp;
+        <mat-checkbox #us9No [disabled]="!us9.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us9Otro [disabled]="!us9.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 10-->
+    <div class="div__line" [hidden]="!us9Otro.checked">
+        <mat-checkbox #us10></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us10.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 3&nbsp;
+        <mat-checkbox #us10No [disabled]="!us10.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us10Otro [disabled]="!us10.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 11-->
+    <div class="div__line" [hidden]="!us10Otro.checked">
+        <mat-checkbox #us11></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us11.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 4&nbsp;
+        <mat-checkbox #us11No [disabled]="!us11.checked">No</mat-checkbox>&nbsp;
+        <mat-checkbox #us11Otro [disabled]="!us11.checked">Otro</mat-checkbox>
+    </div>
+    <!--upstream 12-->
+    <div class="div__line" [hidden]="!us11Otro.checked">
+        <mat-checkbox #us12></mat-checkbox>      
+        upstream
+        <input type="text" [disabled]="!us12.checked" class="short__input">
+        Upstream-Cable
+        <mat-label [textContent]=iF.value></mat-label>
+        /0/
+        <mat-label [textContent]=sl.value*2+1></mat-label>
+        us-channel 5&nbsp;
+        <mat-checkbox #us12No [disabled]="!us12.checked">No</mat-checkbox>&nbsp;
+    </div>
+    <br><br>
+    <!--Generar script-->
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Generar script</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
