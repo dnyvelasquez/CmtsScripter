@@ -1,0 +1,31 @@
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .card {
+    margin: 5px;    
+    align-items: center;
+    width: 300px;
+    height: 400px;
+
+    img{
+      display: block;
+      margin: auto;
+      width: 250px;
+      height: auto;
+    }
+
+    .enter{
+      text-decoration: none;
+      color: white;
+    }
+    
+  }
+
+}
+
+  

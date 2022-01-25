@@ -1,0 +1,14 @@
+<div class="div__line">
+  <span>downstream Integrated-Cable</span>&nbsp;
+  <span>{{interF}}/0/{{slt}} rf-channel</span>&nbsp;
+  <input #start type="text" class="short__input">
+  <span>-</span>
+  <input #end type="text" class="short__input">&nbsp;
+  <mat-checkbox #dsNo>No |</mat-checkbox>&nbsp;
+  <mat-checkbox #dsChange (change)="inputDown(dsChange.checked, start.value, end.value, dsNo.checked)">To change |</mat-checkbox>&nbsp;
+  <mat-checkbox #dsOther>Other</mat-checkbox>&nbsp;
+</div>
+<div class="div__line">
+  <app-down-stream [interF]="interF" [slt]="slt" *ngIf="dsOther.checked; else noCheck"></app-down-stream>
+  <ng-template #noCheck></ng-template>
+</div>

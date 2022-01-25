@@ -6,6 +6,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     exports:[
@@ -15,7 +16,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MatMenuModule,
         MatCardModule,
         MatSelectModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatExpansionModule
     ]
 })
 

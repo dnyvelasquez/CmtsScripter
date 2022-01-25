@@ -1,0 +1,12 @@
+<div class="div__line">
+  <span>upstream</span>&nbsp; 
+  <input type="text" #upStream (blur)="addPowerAdjust(upStream.value)" class="short__input">&nbsp; 
+  <span>Upstream-Cable {{interF}}/0/{{slt}} us-channel {{us}}</span>&nbsp; 
+  <mat-checkbox #usNo>No |</mat-checkbox>&nbsp;
+  <mat-checkbox #usChange (change)="inputUp(usChange.checked, upStream.value, usNo.checked)">To change |</mat-checkbox>&nbsp;
+  <mat-checkbox #usOther>Other</mat-checkbox>
+</div>
+<div class="div__line">
+  <app-up-stream [interF]="interF" [slt]="slt" [us]=us+1 *ngIf="usOther.checked; else noCheck"></app-up-stream>
+  <ng-template #noCheck></ng-template>
+</div>

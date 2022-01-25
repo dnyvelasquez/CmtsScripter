@@ -1,0 +1,12 @@
+<div class="div__line">&nbsp;
+    <span>upstream</span>&nbsp;
+    <input type="text" #upText class="short__input">&nbsp;
+    <mat-checkbox #us0No>No |</mat-checkbox>&nbsp;
+    <mat-checkbox #us0 (change)="inputText(us0.checked, '  upstrream ' + upText.value, us0No.checked)">To change |</mat-checkbox>&nbsp;
+    <mat-checkbox #us0Other>Other</mat-checkbox>&nbsp;
+</div>
+<div class="div__line">
+    <app-bgupstream *ngIf="us0Other.checked; else noCheck" [checked]="checked"></app-bgupstream>
+    <ng-template #noCheck></ng-template>
+</div>
+  

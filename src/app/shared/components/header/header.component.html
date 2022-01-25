@@ -31,21 +31,13 @@
 </mat-menu>
 
 <mat-menu #menu1="matMenu">
-    <button mat-menu-item>
-      <a [routerLink]="['/cbr8']" class="submenu">
-        <span>CBR8</span>
-      </a>
-    </button>
-    <button mat-menu-item>
-      <span>UBR 10000</span>
-    </button>
+  <a [routerLink]="['/cbr8']" class="submenu">
+    <button mat-menu-item>CBR8</button>
+  </a>
+  <button mat-menu-item>UBR 10000</button>
   </mat-menu>
 
   <mat-menu #menu2="matMenu">
-    <button mat-menu-item>
-      <span>E6000 V1</span>
-    </button>
-    <button mat-menu-item>
-      <span>E6000 V2</span>
-    </button>
+    <button mat-menu-item>E6000 V1</button>
+    <button mat-menu-item>E6000 V2</button>
   </mat-menu>

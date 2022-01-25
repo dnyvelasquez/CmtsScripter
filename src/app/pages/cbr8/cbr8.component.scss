@@ -1,5 +1,5 @@
 .container{
-    max-width: 80%;
+    max-width: 70%;
     margin: auto;
 }
 
@@ -16,10 +16,41 @@
     }
 }
 
+.div__subinterface{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    span mat-label{
+        font-size: 1.2em;
+    }
+}
+
 .div__line{
     margin-top: 5px;
 }
 
 .short__input{
     width: 20px;
+}
+
+.midd__input{
+    width: 80px;
+}
+
+.middplus__input{
+    width: 130px;
+}
+
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+.accordion{
+    margin-top: 10;
+}
+
+#script{
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 500px;
+    height: 1000px;
 }

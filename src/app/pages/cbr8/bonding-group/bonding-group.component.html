@@ -1,0 +1,21 @@
+<div class="div__line">
+    <span>cable upstream bonding-group</span>&nbsp;
+    <input type="text" #bgText class="short__input">&nbsp;
+    <mat-checkbox #bg1No>No |</mat-checkbox>&nbsp;
+    <mat-checkbox #bg1 (change)="changeChecked(bg1.checked, ' cable upstream bonding-group ' + bgText.value, bg1No.checked)">To change |</mat-checkbox>&nbsp;
+    <mat-checkbox #bg1Other>Other</mat-checkbox>
+</div>
+<!--Upstream-->
+<app-bgupstream [checked]="checked"></app-bgupstream>
+<!--Attributes-->
+<div class="div__line">&nbsp;
+    <span>attributes</span>&nbsp;
+    <input type="text" #attText value="80000000" class="midd__input">&nbsp;
+    <mat-checkbox #att1No>No |</mat-checkbox>&nbsp;
+    <mat-checkbox #att1 (change)="inputText(att1.checked, '  attributes ' + attText.value, att1No.checked)">To change</mat-checkbox>
+</div>
+<!--Other bonding group-->
+<div class="div__line">
+    <app-bonding-group  *ngIf="bg1Other.checked; else noCheck"></app-bonding-group>
+    <ng-template #noCheck></ng-template>
+</div>
