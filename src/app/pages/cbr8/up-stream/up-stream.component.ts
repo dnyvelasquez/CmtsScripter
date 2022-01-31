@@ -10,8 +10,9 @@ export class UpStreamComponent implements OnInit {
 
   @Input() interF!: number;
   @Input() slt!: number;
+  @Input() usCh!: number;
+  @Input() pos!: number;
   @Input() us!: number;
-  item: string = "";
 
   constructor(private cbr8Svc: Cbr8Service) { }
 
@@ -22,21 +23,16 @@ export class UpStreamComponent implements OnInit {
     this.cbr8Svc.addPowerAdjust(upStream);
   }
 
-  inputUp(isChecked: boolean, us: string, noChk: boolean): void{
-    if(isChecked){
-      this.item = " upstream " + us;
-      if(!noChk){
-        this.item = this.item + " Upstream-Cable " + this.interF + "/0/" + this.slt + " us-channel " + this.us;
+  inputCommand(usChange: boolean, usNo: boolean, us: string){
+    if(usChange){
+      if(usNo){
+        this.cbr8Svc.addCommand(' no upstream ' + us, this.pos);
       }else{
-        this.item = " no" + this.item;
+      this.cbr8Svc.addCommand(' upstream ' + us + ' Upstream-Cable ' + this.interF + '/0/' + this.slt + ' us-channel ' + this.usCh, this.pos);
       }
     }else{
-      this.item = "";
-    }
-    if(this.item != ""){
-      this.cbr8Svc.addItem(this.item);
+      this.cbr8Svc.addCommand('', this.pos);
     }
   }
-  
 
 }

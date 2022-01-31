@@ -10,28 +10,24 @@ export class DownStreamComponent implements OnInit {
 
   @Input() interF!: number;
   @Input() slt!: number;  
-  item: string = "";
-
+  @Input() pos!: number;
+  
   constructor(private cbr8Svc: Cbr8Service) { }
 
   ngOnInit(): void {
   }
 
-  inputDown(isChecked: boolean, start: string, end: string, noChk: boolean): void{
-    if(isChecked){
-      this.item = " downstream Integrated-Cable " + this.interF + "/0/" + this.slt + " rf-channel " + start;
-      if(end != ""){
-        this.item = this.item + "-" + end;
-      }
-      if(noChk){
-        this.item = " no" + this.item;
+  inputCommand(dsChange: boolean, dsNo: boolean, start: string, end: string){
+    if(dsChange){
+      if(dsNo){
+        this.cbr8Svc.addCommand(' no downstream Integrated-Cable ' + this.interF + '/0/' + this.slt + ' rf-channel ' + start + '-' + end, this.pos);
+      }else{
+      this.cbr8Svc.addCommand(' downstream Integrated-Cable ' + this.interF + '/0/' + this.slt + ' rf-channel ' + start + '-' + end, this.pos);
       }
     }else{
-      this.item = "";
-    }
-    if(this.item != ""){
-      this.cbr8Svc.addItem(this.item);
+      this.cbr8Svc.addCommand('', this.pos);
     }
   }
+
 
   }

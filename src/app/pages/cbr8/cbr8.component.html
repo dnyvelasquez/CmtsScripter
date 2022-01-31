@@ -8,8 +8,10 @@
       <strong>
         <span>Interface Cable</span>
         <mat-form-field appearance="fill" class="interface">
-          <mat-select disableRipple #iF value="" (valueChange)="interF = iF.value">
-            <mat-option [value]="interFace" *ngFor="let interFace of interFaces">{{ interFace }}</mat-option>
+          <mat-select disableRipple #iF value="" (valueChange)="interF = iF.value" value>
+            <mat-option [value]="interFace" *ngFor="let interFace of interFaces">
+              <span id="sel">{{ interFace }}</span>
+            </mat-option>
           </mat-select>
         </mat-form-field>
         <span>/0/</span>
@@ -25,124 +27,108 @@
       <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Interface Cable attribites
+            Interface Cable attributes
           </mat-panel-title>
           <mat-panel-description>
             Click to {{panelOpenState ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <!--Description-->
-        <div class="div__line">
-          <span>description</span>&nbsp;
-          <input type="text" #descText>&nbsp;
-          <mat-checkbox #descNo (change)="!descNo.checked ? true : descText.value = ''">No |</mat-checkbox>&nbsp;
-          <mat-checkbox #descChange (change)="inputText(descChange.checked, ' description ' + descText.value, descNo.checked)">
-            To change
-          </mat-checkbox>&nbsp;
+        <div class="div__line__pri">
+          <mat-checkbox #descUpdate color="primary">description</mat-checkbox>&nbsp;
+          <input type="text" #descText [disabled]="descNo.checked">&nbsp;
+          <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false">No</mat-checkbox>
         </div>
         <!--Load-interval-->
-        <div class="div__line">
-          <span>load-interval</span>&nbsp;      
-          <input type="text" #loadText [value]="30" class="short__input">&nbsp;
-          <mat-checkbox #loadChange (change)="inputChange(loadChange.checked, ' load-interval ' + loadText.value)">
-            | To change
-          </mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #loadUpdate color="primary">load-interval</mat-checkbox>&nbsp;     
+          <input type="text" #loadText [value]="30" class="short__input">
         </div>
         <!--Downstream channels-->
-        <app-down-stream [interF]="iF.value" [slt]="sl.value"></app-down-stream>
+        <app-down-stream [interF]="iF.value" [slt]="sl.value" [pos]=100></app-down-stream>
         <!--Upstream channels-->
-        <app-up-stream [interF]="iF.value" [slt]="sl.value*2" [us]=0></app-up-stream>
-        <app-up-stream [interF]="iF.value" [slt]="sl.value*2+1" [us]=0></app-up-stream>
+        <app-up-stream [interF]="iF.value" [slt]="sl.value*2" [us]=0 [usCh]=0 [pos]=200></app-up-stream>
+        <app-up-stream [interF]="iF.value" [slt]="sl.value*2+1" [us]=5 [usCh]=0 [pos]=300></app-up-stream>
         <!--Power adjust-->
-        <div class="div__line">
-          <strong>Setting power-adjust?</strong>&nbsp;
-          <mat-checkbox #pa (change)="powerAdjust(pa.checked)">(yes)</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #pa color="primary" (change)="powerAdjust(pa.checked)"><strong>Setting power-adjust?</strong> (yes)</mat-checkbox>
         </div>
-        <div class="div__line" *ngIf="pa.checked">
+        <div class="div__line__pri" *ngIf="pa.checked">
           <div *ngFor="let upStream of upStreams">
-            <span>cable upstream {{upStream}} power-adjust continue</span>&nbsp;
+            <mat-checkbox #pa1 color="primary" (change)="pa1.checked ? inputPowerAdjust(upStream, paText.value) : false">
+                cable upstream {{upStream}} power-adjust continue
+            </mat-checkbox>&nbsp;
             <input type="text" #paText class="short__input" value="6">&nbsp;
-            <span>|</span>&nbsp;
-            <mat-checkbox #pa1 (change)="inputChange(pa1.checked, ' cable upstream ' + upStream + ' power-adjust continue ' + paText.value)">To change</mat-checkbox>
           </div>
         </div>
         <!--Balance scheduling-->
-        <div class="div__line">
-          <span #schText>cable upstream balance-scheduling</span>&nbsp;
-          <mat-checkbox #schNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #schChange (change)="inputText(schChange.checked, ' cable upstream balance-scheduling', schNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #schUpdate color="primary">
+              cable upstream balance-scheduling
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #schNo>No</mat-checkbox>&nbsp;
         </div>
         <!--Bonding group-->
-        <app-bonding-group></app-bonding-group>
+        <app-bonding-group [pos]=600></app-bonding-group>
         <!--cable bundle-->
-        <div class="div__line">
-          <span>cable bundle</span>&nbsp;
+        <div class="div__line__pri">
+          <mat-checkbox #bundle color="primary">cable bundle</mat-checkbox>&nbsp;
           <input type="text" #bundleText value="2" class="short__input">&nbsp;
-          <mat-checkbox #bundleNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #bundle (change)="inputText(bundle.checked, ' cable bundle ' + bundleText.value, bundleNo.checked)">To change</mat-checkbox>&nbsp;
+          <mat-checkbox #bundleNo>No</mat-checkbox>
         </div>
         <!--dynamic-secret-->
-        <div class="div__line">
-          <span>cable dynamic-secret</span>&nbsp;
+        <div class="div__line__pri">
+          <mat-checkbox color="primary" #secret>cable dynamic-secret</mat-checkbox>&nbsp;
           <input type="text" #secretText value="reject" class="midd__input">&nbsp;
-          <mat-checkbox #secretNo (change)="!secretNo.checked ? true : secretText.value = ''">No |</mat-checkbox>&nbsp;
-          <mat-checkbox #secret (change)="inputText(secret.checked, ' cable dynamic-secret ' + secretText.value, secretNo.checked)">To change</mat-checkbox>&nbsp;
+          <mat-checkbox #secretNo (change)="secretNo.checked ? secretText.value = '' : false">No</mat-checkbox>
         </div>
         <!--enable-trap-->
-        <div class="div__line">
-          <span>cable enable-trap</span>&nbsp;<!--Revisar ejecusion-->
+        <div class="div__line__pri">
+          <mat-checkbox color="primary" #trap>cable enable-trap</mat-checkbox>&nbsp;
           <input type="text" #trapText value="cmonoff-notification" class="middplus__input">&nbsp;
-          <mat-checkbox #trapNo (change)="!trapNo.checked ? true : trapText.value = ''">No |</mat-checkbox>&nbsp;
-          <mat-checkbox #trap (change)="inputText(trap.checked, ' cable enable-trap ' + trapText.value, trapNo.checked)">To change</mat-checkbox>
+          <mat-checkbox #trapNo (change)="!trapNo.checked ? trapText.value = '' : false"> No</mat-checkbox>
         </div>
         <!--trap-interval-->
-        <div class="div__line">
-          <span>cable enable-trap cmonoff-interval</span>&nbsp;<!--Revisar ejecusion-->
+        <div class="div__line__pri">
+          <mat-checkbox color="primary" #trapi>cable enable-trap cmonoff-interval</mat-checkbox>&nbsp;
           <input type="text" #trapiText value="1200" class="midd__input">&nbsp;
-          <mat-checkbox #trapiNo (change)="!trapiNo.checked ? true : trapiText.value = ''">No |</mat-checkbox>&nbsp;
-          <mat-checkbox #trapi (change)="inputText(trapi.checked, ' cable enable-trap cmonoff-interval ' + trapiText.value, trapiNo.checked)">To change</mat-checkbox>&nbsp;
+          <mat-checkbox #trapiNo (change)="!trapiNo.checked ? trapiText.value = '' : false">No</mat-checkbox>
         </div>
         <!--registration-timeout-->
-        <div class="div__line">
-          <span>cable registration-timeout</span>&nbsp;
-          <input type="text" value="2" class="short__input">&nbsp;
-          <mat-checkbox #timeoutNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #timeout (change)="inputText(timeout.checked, ' cable registration-timeout ' + timeout.value, timeoutNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #timeout color="primary">cable registration-timeout</mat-checkbox>&nbsp;
+          <input type="text" #timeoutText value="2" class="short__input">&nbsp;
+          <mat-checkbox #timeoutNo (change)="!timeoutNo.checked ? timeoutText.value = '' : false">No</mat-checkbox>
         </div>
         <!--privacy mandatory-->
-        <div class="div__line">
-          <span>cable privacy mandatory</span>&nbsp;
-          <mat-checkbox #privacyNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #privacy (change)="inputText(privacy.checked, ' cable privacy mandatory', privacyNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #privacy color="primary">cable privacy mandatory</mat-checkbox>&nbsp;
+          <mat-checkbox #privacyNo>No </mat-checkbox>
         </div>
         <!--bpi-plus-policy-->
-        <div class="div__line">
-          <span>cable privacy bpi-plus-policy</span>&nbsp;
+        <div class="div__line__pri">
+          <mat-checkbox #bpi color="primary">cable privacy bpi-plus-policy</mat-checkbox>&nbsp;
           <input type="text" #bpiText value="capable-enforcement" class="middplus__input">&nbsp;
-          <mat-checkbox #bpiNo (change)="!bpiNo.checked ? true : bpiText.value = ''">No |</mat-checkbox>&nbsp;
-          <mat-checkbox #bpi (change)="inputText(bpi.checked, ' cable privacy bpi-plus-policy ' + bpiText.value, bpiNo.checked)">To change</mat-checkbox>
+          <mat-checkbox #bpiNo (change)="!bpiNo.checked ? bpiText.value = '' : false">No</mat-checkbox>
         </div>
         <!--hold-queue in-->
-        <div class="div__line">
-          <span>hold-queue</span>&nbsp;
-          <input type="text" #holdInText value="2048" class="midd__input">&nbsp;
-          <span>in</span>&nbsp;
-          <mat-checkbox #holdInNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #holdIn (change)="inputText(holdIn.checked, ' cable privacy mandatory ' + holdInText.value, holdInNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">  
+          <mat-checkbox #holdIn color="primary">hold-queue
+            <input type="text" #holdInText value="2048" class="midd__input"> in
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #holdInNo (change)="!holdInNo.checked ? holdInText.value = '' : false">No</mat-checkbox>
         </div>
         <!--hold-queue out-->
-        <div class="div__line">
-          <span>hold-queue</span>&nbsp;
-          <input type="text" #holdOutText value="2048" class="midd__input">&nbsp;
-          <span>out</span>&nbsp;
-          <mat-checkbox #holdOutNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #holdOut (change)="inputText(holdOut.checked, ' cable privacy mandatory ' + holdOutText.value, holdOutNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #holdOut color="primary">hold-queue
+            <input type="text" #holdOutText value="2048" class="midd__input"> out
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #holdOutNo (change)="!holdOutNo.checked ? holdOutText.value = '' : false">No</mat-checkbox>
         </div>
         <!--shutdown-->
-        <div class="div__line">
-          <span>shutdown</span>&nbsp;
-          <mat-checkbox #shutNo>No |</mat-checkbox>&nbsp;
-          <mat-checkbox #shut (change)="inputText(shut.checked, ' shutdown', shutNo.checked)">To change</mat-checkbox>
+        <div class="div__line__pri">
+          <mat-checkbox #shut color="primary">shutdown</mat-checkbox>&nbsp;
+          <mat-checkbox #shutNo>No</mat-checkbox>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
@@ -160,7 +146,7 @@
             Click to {{panelOpenState ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-wide-band [interF]="iF.value" [slt]="sl.value" [description]="descText.value"></app-wide-band>
+        <app-wide-band [interF]="iF.value" [slt]="sl.value" [pos]="1000" [description]="descText.value"></app-wide-band>
       </mat-expansion-panel>
     </mat-accordion>
     <br>
@@ -170,24 +156,99 @@
         <mat-expansion-panel-header>
           <mat-panel-title>
             <strong>
-              <span>controller Integrated-Cable</span>
+              <span>Controller Integrated-Cable</span>
             </strong>
           </mat-panel-title>
           <mat-panel-description>
             Click to {{panelOpenState ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-integrated-cable [interF]="iF.value" [slt]="sl.value" [description]="descText.value"></app-integrated-cable>
+        <app-integrated-cable [interF]="iF.value" [slt]="sl.value" [pos]="1100" [description]="descText.value"></app-integrated-cable>
       </mat-expansion-panel>
     </mat-accordion>
-
-
-
-    <br><br>
-
-    <!--Generar script-->
+    <br>
+    <!--controllers Upstream-Cable A-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>
+              <span>Controllers Upstream-Cable A</span>
+            </strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenState ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-upstream-cable [interF]="iF.value" [slt]="sl.value*2" [description]="descText.value"></app-upstream-cable>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <!--controllers Upstream-Cable B-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>
+              <span>Controllers Upstream-Cable B</span>
+            </strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenState ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-upstream-cable [interF]="iF.value" [slt]="sl.value*2+1" [description]="descText.value"></app-upstream-cable>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <!--Generate script-->
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="generate()" (click)="showScript = true">
+      <button mat-raised-button id="btn" color="primary" 
+        (click)="inputCommand('interface Cable' + interF + '/0/' + slt, 0);
+          descUpdate.checked ? !descNo.checked 
+            ? inputCommand(' description ' + descText.value, 1) : inputCommand(' no description', 1) 
+            : inputCommand('', 1);
+          loadUpdate.checked 
+            ? inputCommand(' load-interval ' + loadText.value, 2) 
+            : inputCommand('', 2);
+          schUpdate.checked ? !schNo.checked 
+            ? inputCommand(' cable upstream balance-scheduling', 500) : inputCommand(' no cable upstream balance-scheduling', 500) 
+            : inputCommand('', 500);
+          bundle.checked ? !bundleNo.checked 
+            ? inputCommand(' cable bundle ' + bundleText.value, 900) : inputCommand(' no cable bundle ' + bundleText.value, 900) 
+            : inputCommand('', 900);
+          secret.checked ? !secretNo.checked 
+            ? inputCommand(' cable dynamic-secret ' + secretText.value, 901) : inputCommand(' no cable dynamic-secret', 901) 
+            : inputCommand('', 901);
+          trap.checked ? !trapNo.checked 
+            ? inputCommand(' cable enable-trap ' + trapText.value, 902) : inputCommand(' no cable enable-trap', 902) 
+            : inputCommand('', 902);
+          trapi.checked ? !trapiNo.checked 
+            ? inputCommand(' cable enable-trap cmonoff-interval ' + trapiText.value, 903) : inputCommand(' no cable enable-trap cmonoff-interval', 903) 
+            : inputCommand('', 903);
+          timeout.checked ? !timeoutNo.checked
+            ? inputCommand(' cable registration-timeout ' + timeoutText.value, 904) : inputCommand(' no cable registration-timeout', 904) 
+            : inputCommand('', 904);
+          privacy.checked ? !privacyNo.checked
+            ? inputCommand(' cable privacy mandatory' , 905) : inputCommand(' no cable privacy mandatory', 905) 
+            : inputCommand('', 905);
+          bpi.checked ? !bpiNo.checked 
+            ? inputCommand(' cable privacy bpi-plus-policy ' + bpiText.value, 906) : inputCommand(' no cable privacy bpi-plus-policy', 906) 
+            : inputCommand('', 906);
+          holdIn.checked ? !holdInNo.checked 
+            ? inputCommand(' cable privacy mandatory ' + holdInText.value + ' in', 907) : inputCommand(' no cable privacy mandatory in', 907)
+            : inputCommand('', 907);
+          holdOut.checked ? !holdOutNo.checked 
+            ? inputCommand(' cable privacy mandatory ' + holdOutText.value + ' out', 908) : inputCommand(' no cable privacy mandatory out', 908)
+            : inputCommand('', 908);
+          shut.checked ? !shutNo.checked 
+            ? inputCommand(' shutdown', 909) : inputCommand(' no shutdown', 909)
+            : inputCommand('', 909);
+
+
+          showScript = true;
+          
+          getScript()">
         Generate script
       </button>
       <div class="div__line">

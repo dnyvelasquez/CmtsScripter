@@ -13,6 +13,9 @@
     margin-bottom: 20px;
     span{
         font-size: 1.5em;
+        #sel{
+            font-size: 1.5em;
+        }
     }
 }
 
@@ -24,7 +27,7 @@
     }
 }
 
-.div__line{
+.div__line__pri{
     margin-top: 5px;
 }
 
@@ -53,4 +56,8 @@
     margin-left: 10px;
     width: 500px;
     height: 1000px;
+}
+
+#btn{
+    margin-left: 10px;
 }

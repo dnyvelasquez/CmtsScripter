@@ -1,0 +1,16 @@
+<div class="div__line__pri">
+    <mat-checkbox #upstreamChange color="primary">
+        controller Upstrream-Cable {{interF}}/0/{{slt}}
+    </mat-checkbox>&nbsp;
+    <mat-checkbox #controllerChange (change)="controllerChange.checked 
+        ? inputItem('\ncontroller Integrated-Cable ' + interF + '/0/' + slt) 
+        : false">
+        Change
+    </mat-checkbox>
+</div>
+<app-us-channel [usCh]="'0'"></app-us-channel>
+<app-us-channel [usCh]="'1'"></app-us-channel>
+<app-us-channel [usCh]="'2'"></app-us-channel>
+<app-us-channel [usCh]="'3'"></app-us-channel>
+<app-us-channel [usCh]="'4'"></app-us-channel>
+<app-us-channel [usCh]="'5'"></app-us-channel>

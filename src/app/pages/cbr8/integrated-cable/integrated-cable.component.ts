@@ -11,24 +11,20 @@ export class IntegratedCableComponent implements OnInit {
   @Input() interF!: number;
   @Input() slt!: number;
   @Input() description!: string;
-  item: string = "";
+  @Input() pos!: number;
 
   constructor(private cbr8Svc: Cbr8Service) { }
 
   ngOnInit(): void {
   }
 
-  inputText(isChecked: boolean, value: string, noChk: boolean){
-    if(isChecked){
-      this.item = value;
-      if(noChk){
-        this.item = " no" + this.item;
-      }
-    }else{
-      this.item = "";
-    }
-    if(this.item != ""){
-      this.cbr8Svc.addItem(this.item);
+  inputCommand(command: string, pos: number){
+    this.cbr8Svc.addCommand(command, pos);
+  }
+
+  inputNoRfChn(pos: number){
+    for(let i = 0; i < 10; i++){
+      this.cbr8Svc.addCommand('', pos+i);
     }
   }
 

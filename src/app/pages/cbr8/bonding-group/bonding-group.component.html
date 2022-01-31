@@ -1,21 +1,30 @@
-<div class="div__line">
-    <span>cable upstream bonding-group</span>&nbsp;
-    <input type="text" #bgText class="short__input">&nbsp;
-    <mat-checkbox #bg1No>No |</mat-checkbox>&nbsp;
-    <mat-checkbox #bg1 (change)="changeChecked(bg1.checked, ' cable upstream bonding-group ' + bgText.value, bg1No.checked)">To change |</mat-checkbox>&nbsp;
-    <mat-checkbox #bg1Other>Other</mat-checkbox>
+<div class="div__line__pri">
+    <mat-checkbox #bg color="primary" (change)=" bg.checked ? checked=true : checked=false;   checked=bg.checked;             
+        inputGroup(bg.checked, bgText.value, bgNo.checked);  
+        inputGroup(bg.checked, bgText.value, bgNo.checked)">
+        cable upstream bonding-group
+    </mat-checkbox>&nbsp;
+    <input type="text" #bgText class="short__input" (blur)="inputGroup(bg.checked, bgText.value, bgNo.checked)">&nbsp;
+    <mat-checkbox #bgNo (change)="inputGroup(bg.checked, bgText.value, bgNo.checked)">No |</mat-checkbox>&nbsp;
+    <mat-checkbox #bg1Other>Add bonding-group</mat-checkbox>
 </div>
 <!--Upstream-->
-<app-bgupstream [checked]="checked"></app-bgupstream>
+<app-bgupstream [pos]="pos + 10" [checked]="checked" *ngIf="bg.checked; else noBg"></app-bgupstream>
+<ng-template #noBg>{{inputNobgUpstream(pos + 10, bg.checked)}}</ng-template>
 <!--Attributes-->
-<div class="div__line">&nbsp;
-    <span>attributes</span>&nbsp;
-    <input type="text" #attText value="80000000" class="midd__input">&nbsp;
-    <mat-checkbox #att1No>No |</mat-checkbox>&nbsp;
-    <mat-checkbox #att1 (change)="inputText(att1.checked, '  attributes ' + attText.value, att1No.checked)">To change</mat-checkbox>
+<div class="div__line__sec" *ngIf="bg.checked; else noAtt">
+    <mat-checkbox #att color="primary" (change)="inputAtt(att.checked, attText.value, attNo.checked)" [disabled]="!checked">
+        attributes
+    </mat-checkbox >&nbsp;
+    <input type="text" #attText value="80000000" class="midd__input" [disabled]="!checked" 
+        (blur)="inputAtt(att.checked, attText.value, attNo.checked)">&nbsp;
+    <mat-checkbox #attNo (change)="attNo.checked ? attText.value = '' : false" [disabled]="!checked" 
+        (change)="inputAtt(att.checked, attText.value, attNo.checked)">
+        No
+    </mat-checkbox>&nbsp;
 </div>
+<ng-template #noAtt>{{inputAtt(false, '', false)}}</ng-template>
 <!--Other bonding group-->
-<div class="div__line">
-    <app-bonding-group  *ngIf="bg1Other.checked; else noCheck"></app-bonding-group>
-    <ng-template #noCheck></ng-template>
-</div>
+<app-bonding-group  *ngIf="bg1Other.checked; else noCheck" [pos]="pos + 30"></app-bonding-group>
+<ng-template #noCheck></ng-template>
+

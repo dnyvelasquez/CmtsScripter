@@ -17,6 +17,8 @@ import { WideBandComponent } from './pages/cbr8/wide-band/wide-band.component';
 import { RfChanComponent } from './pages/cbr8/rf-chan/rf-chan.component';
 import { StartComponent } from './pages/start/start.component';
 import { IntegratedCableComponent } from './pages/cbr8/integrated-cable/integrated-cable.component';
+import { UpstreamCableComponent } from './pages/cbr8/upstream-cable/upstream-cable.component';
+import { UsChannelComponent } from './pages/cbr8/us-channel/us-channel.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { IntegratedCableComponent } from './pages/cbr8/integrated-cable/integrat
     WideBandComponent,
     RfChanComponent,
     StartComponent,
-    IntegratedCableComponent
+    IntegratedCableComponent,
+    UpstreamCableComponent,
+    UsChannelComponent
   ],
   imports: [
     BrowserModule, 

@@ -1,43 +1,97 @@
-<div class="div__line">
-    <span>controller Integrated-Cable</span>&nbsp;
-    <span>{{interF}}/0/{{slt}}</span>&nbsp;
-    <mat-checkbox #controllerChange (change)="inputText(controllerChange.checked, '\ninterface Wideband-Cable' + interF + '/0/' + slt, false)">
-        To change
-    </mat-checkbox>
+<div class="div__line__pri">
+  <mat-checkbox #controllerChange color="primary" (change)=" carrierChange.checked = false; baseChange.checked= false;
+    descChange.checked = false; shutDown.checked = false; 
+    controllerChange.checked 
+      ? inputCommand('\ncontroller Integrated-Cable ' + interF + '/0/' + slt, pos)
+      : inputCommand('', pos);  
+      carrierChange.checked 
+      ? inputCommand(' max-carrier ' + carrierText.value, this.pos + 1)
+      : inputCommand('', pos +  1);
+      baseChange.checked 
+      ? inputCommand(' base-channel-power ' + baseText.value, this.pos + 2)
+      : inputCommand('', pos +  2);
+      descChange.checked ? !descNo.checked
+        ? inputCommand(' description ' + descText.value, pos + 90)
+        : inputCommand(' no description ', pos + 90)
+      : inputCommand('', pos + 90);
+      shutDown.checked ? !shutDownNo.checked
+        ? inputCommand(' shutdown', pos + 91)
+        : inputCommand(' no shutdown', pos + 91)
+      : inputCommand('', pos + 91)"> 
+      controller Integrated-Cable {{interF}}/0/{{slt}}
+  </mat-checkbox>
 </div>
 <!--max-carrier-->
-<div class="div__line">&nbsp;
-    <span>max-carrier</span>&nbsp;
-    <input type="text" #carrierText class="short__input" [disabled]="!controllerChange.checked">&nbsp;
-    <mat-checkbox #carrierChange (change)="inputText(carrierChange.checked, ' max-carrier ' + carrierText.value, false)" [disabled]="!controllerChange.checked">
-      To change
-    </mat-checkbox>&nbsp;
+<div class="div__line__sec">
+  <mat-checkbox #carrierChange color="primary" (change)="
+    carrierChange.checked 
+      ? inputCommand(' max-carrier ' + carrierText.value, this.pos + 1)
+      : inputCommand('', pos +  1)"
+    [disabled]="!controllerChange.checked">
+    max-carrier
+  </mat-checkbox>&nbsp;
+  <input type="text" #carrierText class="short__input" [disabled]="!controllerChange.checked" (blur)="
+    carrierChange.checked 
+      ? inputCommand(' max-carrier ' + carrierText.value, this.pos + 1)
+      : inputCommand('', pos +  1)">&nbsp;
 </div>
 <!--base-channel-power-->
-<div class="div__line">&nbsp;
-    <span>base-channel-power</span>&nbsp;
-    <input type="text" #baseText class="short__input" value="35" [disabled]="!controllerChange.checked">&nbsp;
-    <mat-checkbox #baseChange (change)="inputText(baseChange.checked, ' base-channel-power ' + baseText.value, false)" [disabled]="!controllerChange.checked">
-      To change
-    </mat-checkbox>&nbsp;
+<div class="div__line__sec">
+  <mat-checkbox #baseChange color="primary" (change)="
+  baseChange.checked 
+    ? inputCommand(' base-channel-power ' + baseText.value, this.pos + 2)
+    : inputCommand('', pos +  2)"
+    [disabled]="!controllerChange.checked">
+    base-channel-power
+  </mat-checkbox>&nbsp;
+  <input type="text" #baseText class="short__input" value="35" [disabled]="!controllerChange.checked" (blur)="
+  baseChange.checked 
+    ? inputCommand(' base-channel-power ' + baseText.value, this.pos + 2)
+    : inputCommand('', pos +  2)">&nbsp;
 </div>
 <!--rf-chan-->
-<app-rf-chan [checked]="controllerChange.checked"></app-rf-chan>
+<app-rf-chan  *ngIf="controllerChange.checked; else noRf" [checked]="controllerChange.checked" [pos]="pos+10"></app-rf-chan>
+<ng-template #noRf><app-rf-chan [checked]="controllerChange.checked" [pos]="pos+10">
+  {{inputNoRfChn(pos+10)}}
+</app-rf-chan></ng-template>
 <!--description-->
-<div class="div__line">&nbsp;
-  <span>description</span>&nbsp;
-  <input type="text" #descText [value]="description" [disabled]="!controllerChange.checked">&nbsp;
-  <mat-checkbox #descNo (change)="!descNo.checked ? true : descText.value = ''" [disabled]="!controllerChange.checked">No |</mat-checkbox>&nbsp;
-  <mat-checkbox #descChange (change)="inputText(descChange.checked, ' description ' + descText.value, descNo.checked)" [disabled]="!controllerChange.checked">
-    To change
+<div class="div__line__sec">
+  <mat-checkbox #descChange color="primary" (change)="
+    descChange.checked ? !descNo.checked
+      ? inputCommand(' description ' + descText.value, pos + 90)
+      : inputCommand(' no description ', pos + 90)
+    : inputCommand('', pos + 90)"
+    [disabled]="!controllerChange.checked"> 
+    description
+  </mat-checkbox>&nbsp;
+  <input type="text" #descText [value]="description" [disabled]="!controllerChange.checked" (blur)="
+    descChange.checked ? !descNo.checked
+      ? inputCommand(' description ' + descText.value, pos + 90)
+      : inputCommand(' no description ', pos + 90)
+    : inputCommand('', pos + 90)">&nbsp;
+  <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false" [disabled]="!controllerChange.checked" (change)="
+    descChange.checked ? !descNo.checked
+      ? inputCommand(' description ' + descText.value, pos + 90)
+      : inputCommand(' no description ', pos + 90)
+    : inputCommand('', pos + 90)">
+    No
   </mat-checkbox>&nbsp;
 </div>
 <!--shutdown-->
-<div class="div__line">&nbsp;
-  <span>shutdown</span>&nbsp;
-  <mat-checkbox #shutNo [disabled]="!controllerChange.checked">No |</mat-checkbox>&nbsp;
-  <mat-checkbox #shut (change)="inputText(shut.checked, ' shutdown', shutNo.checked)" [disabled]="!controllerChange.checked">
-    To change
+<div class="div__line__sec">
+  <mat-checkbox #shutDown color="primary" (change)="
+    shutDown.checked ? !shutDownNo.checked
+      ? inputCommand(' shutdown', pos + 91)
+      : inputCommand(' no shutdown', pos + 91)
+    : inputCommand('', pos + 91)"
+  [disabled]="!controllerChange.checked">
+    shutdown
+  </mat-checkbox>&nbsp;
+  <mat-checkbox #shutDownNo [disabled]="!controllerChange.checked" (change)="
+    shutDown.checked ? !shutDownNo.checked
+      ? inputCommand(' shutdown', pos + 91)
+      : inputCommand(' no shutdown', pos + 91)
+    : inputCommand('', pos + 91)"> 
+    No
   </mat-checkbox>
 </div>
-

@@ -1,45 +1,115 @@
-<div class="div__line">
-    <span>interface Wideband-Cable</span>
-    <span>{{interF}}/0/{{slt}}:</span>
-    <input type="text" #wB class="short__input">&nbsp;
-    <mat-checkbox #wbNo>No |</mat-checkbox>&nbsp;
-    <mat-checkbox #wbChange (change)="inputText(wbChange.checked, '\ninterface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, wbNo.checked)">
-        To change |
+<div class="div__line__pri">
+    <mat-checkbox #wbChange color="primary" (change)="bundleChange.checked=false; rfChChange.checked=false; 
+      descChange.checked=false; wbNo.checked = false; 
+      wbChange.checked ? !wbNo.checked
+        ? inputCommand('\ninterface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)
+        : inputCommand('\nno interface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)
+      : inputCommand('', pos);  
+      descChange.checked ? !descNo.checked
+        ? inputCommand(' description ' + descText.value, pos + 1)
+        : inputCommand(' no description', pos + 1)
+      : inputCommand('', pos + 1);  
+      bundleChange.checked ? !bundleNo.checked
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 2)
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 2)
+      : inputCommand('', pos + 2);  
+      rfChChange.checked ? !rfChNo.checked
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)">
+        interface Wideband-Cable {{interF}}/0/{{slt}}:
     </mat-checkbox>&nbsp;
-    <mat-checkbox #wbOther>Other</mat-checkbox>&nbsp;
+    <input type="text" #wB class="short__input" (blur)="!wbNo.checked
+      ? inputCommand('\ninterface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)
+      : inputCommand('\nno interface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)">&nbsp;
+    <mat-checkbox #wbNo (change)="!wbNo.checked
+      ? inputCommand('\ninterface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)
+      : inputCommand('\nno interface Wideband-Cable' + interF + '/0/' + slt + ':' + wB.value, pos)">
+      No
+    </mat-checkbox>
   </div>
   <!--description-->
-  <div class="div__line">&nbsp;
-    <span>description</span>&nbsp;
-    <input type="text" #descText [value]="description" [disabled]="!wbChange.checked">&nbsp;
-    <mat-checkbox #descNo (change)="!descNo.checked ? true : descText.value = ''" [disabled]="!wbChange.checked">No |</mat-checkbox>&nbsp;
-    <mat-checkbox #descChange (change)="inputText(descChange.checked, ' description ' + descText.value, descNo.checked)" [disabled]="!wbChange.checked">
-      To change
+  <div class="div__line__sec">
+    <mat-checkbox #descChange color="primary" (change)="
+      descChange.checked ? !descNo.checked 
+        ? inputCommand(' description ' + descText.value, pos + 1)
+        : inputCommand(' no description', pos + 1)
+      : inputCommand('', pos + 1)" 
+      [disabled]="!wbChange.checked">
+      description
     </mat-checkbox>&nbsp;
+    <input type="text" #descText [value]="description" [disabled]="!wbChange.checked" (blur)="
+    descChange.checked ? !descNo.checked 
+      ? inputCommand(' description ' + descText.value, pos + 1)
+      : inputCommand(' no description', pos + 1)
+    : inputCommand('', pos + 1)" 
+    [disabled]="!wbChange.checked">&nbsp;
+    <mat-checkbox #descNo [disabled]="!wbChange.checked" (change)="descNo.checked ? descText.value = '' : false;
+      descChange.checked ? !descNo.checked 
+        ? inputCommand(' description ' + descText.value, pos + 1)
+        : inputCommand(' no description', pos + 1)
+      : inputCommand('', pos + 1)">
+      No
+    </mat-checkbox>
   </div>
   <!--cable bundle-->
-  <div class="div__line">&nbsp;
-    <span>cable bundle</span>&nbsp;
-    <input type="text" #bundleText value="2" class="short__input" [disabled]="!wbChange.checked">&nbsp;
-    <mat-checkbox #bundleNo (change)="!bundleNo.checked ? true : bundleText.value = ''" [disabled]="!wbChange.checked">No |</mat-checkbox>&nbsp;
-    <mat-checkbox #bundleChange (change)="inputText(bundleChange.checked, ' cable bundle ' + bundleText.value, bundleNo.checked)" [disabled]="!wbChange.checked">
-      To change
+  <div class="div__line__sec">
+    <mat-checkbox #bundleChange color="primary" (change)="
+      bundleChange.checked ? !bundleNo.checked 
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 2)
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 2)
+      : inputCommand('', pos + 2)"
+      [disabled]="!wbChange.checked">
+      cable bundle
     </mat-checkbox>&nbsp;
+    <input type="text" #bundleText value="2" class="short__input" [disabled]="!wbChange.checked" (blur)="
+      bundleChange.checked ? !bundleNo.checked 
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 2)
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 2)
+      : inputCommand('', pos + 2)">&nbsp;
+    <mat-checkbox #bundleNo [disabled]="!wbChange.checked" (change)="
+      bundleChange.checked ? !bundleNo.checked 
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 2)
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 2)
+      : inputCommand('', pos + 2)"
+      >
+      No
+    </mat-checkbox>
   </div>
   <!--rf-channels-->
-  <div class="div__line">&nbsp;
-    <span>cable rf-channels channel-list</span>&nbsp;
-    <input type="text" #rfChStart class="short__input" [disabled]="!wbChange.checked">
-    <span>-</span>
-    <input type="text" #rfChEnd class="short__input" [disabled]="!wbChange.checked">&nbsp;
-    <span>bandwidth-percent</span>&nbsp;
-    <input type="text" value="1" #percentText class="short__input" [disabled]="!wbChange.checked">&nbsp;
-    <mat-checkbox #rfChNo [disabled]="!wbChange.checked">No |</mat-checkbox>&nbsp;
-    <mat-checkbox #rfChChange (change)="inputText(rfChChange.checked, ' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent 1', rfChNo.checked)" [disabled]="!wbChange.checked">
-      To change
+  <div class="div__line__sec">
+    <mat-checkbox #rfChChange color="primary" (change)="
+     rfChChange.checked ? !rfChNo.checked 
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)" 
+      [disabled]="!wbChange.checked">
+      cable rf-channels channel-list
     </mat-checkbox>&nbsp;
+    <input type="text" #rfChStart class="short__input" [disabled]="!wbChange.checked" (blur)="
+      rfChChange.checked ? !rfChNo.checked 
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)">
+    <span>-</span>
+    <input type="text" #rfChEnd class="short__input" [disabled]="!wbChange.checked" (blur)="
+      rfChChange.checked ? !rfChNo.checked 
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)">&nbsp;
+    <span>bandwidth-percent</span>&nbsp;
+    <input type="text" value="1" #percentText class="short__input" [disabled]="!wbChange.checked" (blur)="
+      rfChChange.checked ? !rfChNo.checked 
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)">&nbsp;
+    <mat-checkbox #rfChNo [disabled]="!wbChange.checked" (change)="
+      rfChChange.checked ? !rfChNo.checked 
+        ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
+        : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
+      : inputCommand('', pos + 3)">No |</mat-checkbox>&nbsp;
+    <mat-checkbox #wbOther>Add Wideband</mat-checkbox>
   </div>
-  <div class="div__line">
-    <app-wide-band [interF]="interF" [slt]="slt" [description]="description" *ngIf="wbOther.checked; else noCheck"></app-wide-band>
-    <ng-template #noCheck></ng-template>
-  </div>
+<app-wide-band [interF]="interF" [slt]="slt" [pos]="pos + 20" [description]="description" *ngIf="wbOther.checked; else noCheck"></app-wide-band>
+<ng-template #noCheck></ng-template>
+
