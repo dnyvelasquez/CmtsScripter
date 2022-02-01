@@ -11,14 +11,22 @@ export class UpstreamCableComponent implements OnInit {
   @Input() interF!: number;
   @Input() slt!: number;
   @Input() description!: string;
+  @Input() pos!: number;
 
   constructor(private cbr8Svc: Cbr8Service) { }
 
   ngOnInit(): void {
   }
 
-  inputItem(value: string){
-    this.cbr8Svc.addItem(value);
+  inputCommand(command: string, pos: number){
+    this.cbr8Svc.addCommand(command, pos);
   }
+
+  inputNoUsChan(pos: number){
+    for(let i = 0; i < 15; i++){
+      this.cbr8Svc.addCommand('', pos+i);
+    }
+  }
+
 
 }

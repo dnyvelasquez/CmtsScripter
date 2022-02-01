@@ -85,24 +85,25 @@
       : inputCommand('', pos + 3)" 
       [disabled]="!wbChange.checked">
       cable rf-channels channel-list
-    </mat-checkbox>&nbsp;
+
     <input type="text" #rfChStart class="short__input" [disabled]="!wbChange.checked" (blur)="
       rfChChange.checked ? !rfChNo.checked 
         ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
         : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
       : inputCommand('', pos + 3)">
-    <span>-</span>
+    -
     <input type="text" #rfChEnd class="short__input" [disabled]="!wbChange.checked" (blur)="
       rfChChange.checked ? !rfChNo.checked 
         ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
         : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
       : inputCommand('', pos + 3)">&nbsp;
-    <span>bandwidth-percent</span>&nbsp;
+    bandwidth-percent
     <input type="text" value="1" #percentText class="short__input" [disabled]="!wbChange.checked" (blur)="
       rfChChange.checked ? !rfChNo.checked 
         ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)
         : inputCommand(' no cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value, pos + 3)
       : inputCommand('', pos + 3)">&nbsp;
+    </mat-checkbox>&nbsp;
     <mat-checkbox #rfChNo [disabled]="!wbChange.checked" (change)="
       rfChChange.checked ? !rfChNo.checked 
         ? inputCommand(' cable rf-channels channel-list ' + rfChStart.value + '-' + rfChEnd.value + ' bandwidth-percent ' + percentText.value, pos + 3)

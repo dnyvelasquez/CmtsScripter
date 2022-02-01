@@ -51,9 +51,9 @@
 </div>
 <!--rf-chan-->
 <app-rf-chan  *ngIf="controllerChange.checked; else noRf" [checked]="controllerChange.checked" [pos]="pos+10"></app-rf-chan>
-<ng-template #noRf><app-rf-chan [checked]="controllerChange.checked" [pos]="pos+10">
-  {{inputNoRfChn(pos+10)}}
-</app-rf-chan></ng-template>
+<ng-template #noRf>
+  <app-rf-chan [checked]="controllerChange.checked" [pos]="pos+10">{{inputNoRfChn(pos+10)}}</app-rf-chan>
+</ng-template>
 <!--description-->
 <div class="div__line__sec">
   <mat-checkbox #descChange color="primary" (change)="

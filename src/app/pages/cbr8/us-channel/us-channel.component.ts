@@ -8,16 +8,18 @@ import { Cbr8Service } from '../../services/cbr8.service';
 })
 export class UsChannelComponent implements OnInit {
 
-  @Input() usCh: string = "";
+  @Input() usCh!: string;
+  @Input() pos!: number;
+  @Input() checked!: boolean;
+  @Input() description!: string;
 
   constructor(private cbr8Svc: Cbr8Service) { }
 
   ngOnInit(): void {
   }
 
-  inputItem(value: string){
-    this.cbr8Svc.addItem(value);
+  inputCommand(command: string, pos: number){
+    this.cbr8Svc.addCommand(command, pos);
   }
-
 
 }
