@@ -68,6 +68,10 @@
         : inputCommand('', pos + 2)">
         frequency
     </mat-checkbox>&nbsp;
+    <select class="midd__input">
+        <option value="515"></option>
+        <option value="521"></option>
+    </select>
     <input type="text" #freqText color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" style="width: 25px;" (blur)="
         freqChange.checked ? !freqNo.checked
             ? inputCommand('  frequency ' + freqText.value + '000000', pos + 2)

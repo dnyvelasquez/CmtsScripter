@@ -1,5 +1,5 @@
 .container{
-    max-width: 70%;
+    max-width: 60%;
     margin: auto;
 }
 
@@ -54,10 +54,26 @@
 #script{
     margin-top: 20px;
     margin-left: 10px;
-    width: 500px;
+    width: 70%;
     height: 1000px;
 }
 
 #btn{
     margin-left: 10px;
 }
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  mat-toolbar{
+      span{
+          font-size: 0.9rem;
+      }
+      font-size: 0.8rem;
+  }
+  

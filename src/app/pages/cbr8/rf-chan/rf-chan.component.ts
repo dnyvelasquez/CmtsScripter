@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { tap } from 'rxjs/operators';
+import { SharedService } from 'src/app/shared/services/shared.service';
 import { Cbr8Service } from '../../services/cbr8.service';
 
 @Component({
@@ -11,9 +13,14 @@ export class RfChanComponent implements OnInit {
   @Input() checked!: boolean;
   @Input() pos!: number;
 
-  constructor(private cbr8Svc: Cbr8Service) { }
+  constructor(private cbr8Svc: Cbr8Service, private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
+    this.sharedSvc.getFrequencies()
+      .pipe(
+        tap(res => console.log(res))
+      )
+      .subscribe();
   }
 
   inputChannel(channelChange: boolean, channelText: string){

@@ -8,7 +8,6 @@ export class Cbr8Service {
   constructor() { }
 
   private powerAdjust: string[] = [];
-  private script: string = "";
   private scriptArr: string[] = [];
 
   addPowerAdjust(upStream: string): void{
@@ -17,14 +16,6 @@ export class Cbr8Service {
 
   getPowerAdjust():string[]{
     return this.powerAdjust;
-  }
-
-  addItem(item: string){
-    this.script = this.script + item + "\n";
-  }
-
-  getScript(): string{
-    return this.script;
   }
 
   addCommand(command: string, pos: number): void{
