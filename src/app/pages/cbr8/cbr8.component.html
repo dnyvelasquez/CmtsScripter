@@ -1,8 +1,7 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Cisco CBR8</mat-card-title>
-    <!--<mat-card-subtitle>Start</mat-card-subtitle>-->
-
+    <mat-card-title>CBR8</mat-card-title>
+    <mat-card-subtitle>Cisco</mat-card-subtitle>
     <!--interface Cable-->
     <div class="div__interface">
       <strong>
@@ -26,34 +25,43 @@
     </div>
     <!--interface Cable attributes-->
     <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel (opened)="panelOpenStateAtt = true" (closed)="panelOpenStateAtt = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             Interface Cable attributes
           </mat-panel-title>
           <mat-panel-description>
-            Click to {{panelOpenState ? 'close' : 'open'}}
+            Click to {{panelOpenStateAtt ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <!--shutdown-->
+        <div class="div__line__pri">
+          <mat-checkbox #shutStart color="primary" (change)="
+            shutStart.checked  
+              ? inputCommand(' shutdown', 1) 
+              : inputCommand('', 1)">
+            shutdown
+          </mat-checkbox>
+        </div>
         <!--Description-->
         <div class="div__line__pri">
           <mat-checkbox #descUpdate color="primary" (change)="          
             descUpdate.checked ? !descNo.checked 
-                ? inputCommand(' description ' + descText.value, 1) 
-                : inputCommand(' no description', 1) 
-              : inputCommand('', 1)">
+                ? inputCommand(' description ' + descText.value, 2) 
+                : inputCommand(' no description', 2) 
+              : inputCommand('', 2)">
               description
           </mat-checkbox>&nbsp;
           <input type="text" #descText [disabled]="descNo.checked" (blur)="            
             descUpdate.checked ? !descNo.checked 
-              ? inputCommand(' description ' + descText.value, 1) 
-              : inputCommand(' no description', 1) 
-            : inputCommand('', 1)">&nbsp;
+              ? inputCommand(' description ' + descText.value, 2) 
+              : inputCommand(' no description', 2) 
+            : inputCommand('', 2)">&nbsp;
           <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false" (change)="
             descUpdate.checked ? !descNo.checked 
-              ? inputCommand(' description ' + descText.value, 1) 
-              : inputCommand(' no description', 1) 
-            : inputCommand('', 1)">
+              ? inputCommand(' description ' + descText.value, 2) 
+              : inputCommand(' no description', 2) 
+            : inputCommand('', 2)">
             No
           </mat-checkbox>
         </div>
@@ -61,14 +69,14 @@
         <div class="div__line__pri">
           <mat-checkbox #loadUpdate color="primary" (change)="
             loadUpdate.checked 
-              ? inputCommand(' load-interval ' + loadText.value, 2) 
-              : inputCommand('', 2)">
+              ? inputCommand(' load-interval ' + loadText.value, 3) 
+              : inputCommand('', 3)">
             load-interval
           </mat-checkbox>&nbsp;     
           <input type="text" #loadText [value]="30" class="short__input" (blur)="
             loadUpdate.checked 
-              ? inputCommand(' load-interval ' + loadText.value, 2) 
-              : inputCommand('', 2)">
+              ? inputCommand(' load-interval ' + loadText.value, 3) 
+              : inputCommand('', 3)">
         </div>
         <!--Downstream channels-->
         <div class="div__line__pri" *ngFor="let downStream of downStreams">
@@ -331,19 +339,11 @@
         </div>
         <!--shutdown-->
         <div class="div__line__pri">
-          <mat-checkbox #shut color="primary" (change)="
-            shut.checked ? !shutNo.checked 
-              ? inputCommand(' shutdown', 909) 
-              : inputCommand(' no shutdown', 909)
-            : inputCommand('', 909)">          
-            shutdown
-          </mat-checkbox>&nbsp;
-          <mat-checkbox #shutNo (change)="
-            shut.checked ? !shutNo.checked 
-              ? inputCommand(' shutdown', 909) 
-              : inputCommand(' no shutdown', 909)
-            : inputCommand('', 909)">          
-            No
+          <mat-checkbox #shutEnd color="primary" (change)="
+            shutEnd.checked  
+              ? inputCommand(' no shutdown', 909) 
+              : inputCommand('', 909)">
+            no shutdown
           </mat-checkbox>
         </div>
       </mat-expansion-panel>
@@ -351,7 +351,7 @@
     <br>
     <!--Interface Wideband-Cable-->
     <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel (opened)="panelOpenStateWide = true" (closed)="panelOpenStateWide = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <strong>
@@ -359,7 +359,7 @@
             </strong>
           </mat-panel-title>
           <mat-panel-description>
-            Click to {{panelOpenState ? 'close' : 'open'}}
+            Click to {{panelOpenStateWide ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <app-wide-band [interF]="interF" [slt]="slt" [pos]="1000" [description]="descText.value"></app-wide-band>
@@ -368,7 +368,7 @@
     <br>
     <!--controller Integrated-Cable-->
     <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel (opened)="panelOpenStateDown = true" (closed)="panelOpenStateDown = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <strong>
@@ -376,7 +376,7 @@
             </strong>
           </mat-panel-title>
           <mat-panel-description>
-            Click to {{panelOpenState ? 'close' : 'open'}}
+            Click to {{panelOpenStateDown ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <app-integrated-cable [interF]="interF" [slt]="slt" [pos]="1100" [description]="descText.value"></app-integrated-cable>
@@ -385,7 +385,7 @@
     <br>
     <!--controllers Upstream-Cable A-->
     <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel (opened)="panelOpenStateUpA = true" (closed)="panelOpenStateUpA = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <strong>
@@ -393,7 +393,7 @@
             </strong>
           </mat-panel-title>
           <mat-panel-description>
-            Click to {{panelOpenState ? 'close' : 'open'}}
+            Click to {{panelOpenStateUpA ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <app-upstream-cable [interF]="interF" [slt]="slt*2" [description]="descText.value" [pos]="1200"></app-upstream-cable>
@@ -402,7 +402,7 @@
     <br>
     <!--controllers Upstream-Cable B-->
     <mat-accordion>
-      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel (opened)="panelOpenStateUpB = true" (closed)="panelOpenStateUpB = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <strong>
@@ -410,7 +410,7 @@
             </strong>
           </mat-panel-title>
           <mat-panel-description>
-            Click to {{panelOpenState ? 'close' : 'open'}}
+            Click to {{panelOpenStateUpB ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <app-upstream-cable [interF]="interF" [slt]="slt*2+1" [description]="descText.value" [pos]="1300"></app-upstream-cable>

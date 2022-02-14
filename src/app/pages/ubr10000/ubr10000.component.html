@@ -1,7 +1,7 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Cisco UBR10000</mat-card-title>
-    <!--<mat-card-subtitle>Start</mat-card-subtitle>-->
+    <mat-card-title>UBR10000</mat-card-title>
+    <mat-card-subtitle>Cisco</mat-card-subtitle>
     <!--interface Cable-->
     <div class="div__interface">
       <strong>
@@ -45,18 +45,10 @@
         <!--shutdown-->
         <div class="div__line__pri">
           <mat-checkbox #shutStartChange color="primary" (change)="
-            shutStartChange.checked ? !shutStartNo.checked
+            shutStartChange.checked 
               ? inputCommand(' shutdown', 1)
-              : inputCommand(' no shutdown', 1)
-            : inputCommand('', 1)">
+              : inputCommand('', 1)">
             shutdown
-          </mat-checkbox>&nbsp;
-          <mat-checkbox #shutStartNo color="accent" (change)="
-            shutStartChange.checked ? !shutStartNo.checked
-              ? inputCommand(' shutdown', 1)
-              : inputCommand(' no shutdown', 1)
-            : inputCommand('', 1)">
-            No
           </mat-checkbox>
         </div>
         <!--Description-->
@@ -517,19 +509,11 @@
         <!--shutdown-->
         <div class="div__line__pri">
           <mat-checkbox #shutEndChange color="primary" (change)="
-            shutEndChange.checked ? !shutEndNo.checked
-              ? inputCommand(' shutdown', 406)
-              : inputCommand(' no shutdown', 406)
-            : inputCommand('', 406)">
+            shutEndChange.checked
+              ? inputCommand(' no shutdown', 406)
+              : inputCommand('', 406)">
             shutdown
           </mat-checkbox>&nbsp;
-          <mat-checkbox #shutEndNo color="accent" (change)="
-            shutEndChange.checked ? !shutEndNo.checked
-              ? inputCommand(' shutdown', 406)
-              : inputCommand(' no shutdown', 406)
-            : inputCommand('', 406)">
-            No
-          </mat-checkbox>
         </div>
       </mat-expansion-panel>
     </mat-accordion>

@@ -19,7 +19,11 @@ export class CBR8Component implements OnInit {
   downStreams: number[] = [100];
   posBgs: number[] = [600];
   upStreams!: string[];
-  panelOpenState = false;
+  panelOpenStateAtt = false;
+  panelOpenStateWide = false;
+  panelOpenStateDown = false;
+  panelOpenStateUpA = false;
+  panelOpenStateUpB = false;
   interF!: number;
   slt!: number;
   

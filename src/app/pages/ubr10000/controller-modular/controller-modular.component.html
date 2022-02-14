@@ -28,18 +28,10 @@
         <!--rf-shutdown-->
         <div class="div__line__sec">
           <mat-checkbox #shutStartChange color="primary" (change)="
-            shutStartChange.checked ? !shutStartNo.checked
+            shutStartChange.checked 
             ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
-            : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
-          : inputCommand('', pos + 1 + i *10)">
-            rf-channel {{rfChannel}} rf-shutdown
-          </mat-checkbox>&nbsp;
-          <mat-checkbox #shutStartNo color="accent" (change)="
-            shutStartChange.checked ? !shutStartNo.checked
-              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
-              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
             : inputCommand('', pos + 1 + i *10)">
-            No
+            rf-channel {{rfChannel}} rf-shutdown
           </mat-checkbox>&nbsp;
         </div>
         <!--description-->
@@ -165,19 +157,11 @@
         <!--shutdown-->
         <div class="div__line__sec">
           <mat-checkbox #shutEndChange color="primary" (change)="
-            shutEndChange.checked ? !shutEndNo.checked
-              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
-              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
-            : inputCommand('', pos + 7 + i *10)">
-                      rf-channel {{rfChannel}} rf-shutdown
-                    </mat-checkbox>&nbsp;
-                    <mat-checkbox #shutEndNo color="accent" (change)="
-            shutEndChange.checked ? !shutEndNo.checked
-              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
-              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
-            : inputCommand('', pos + 7 + i *10)">
-            No
-          </mat-checkbox>&nbsp;
+            shutEndChange.checked 
+              ? inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
+              : inputCommand('', pos + 7 + i *10)">
+            no rf-channel {{rfChannel}} rf-shutdown
+            </mat-checkbox>&nbsp;
         </div>
       </div>
     </div>    </mat-expansion-panel>
