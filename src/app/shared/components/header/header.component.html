@@ -40,6 +40,8 @@
   </mat-menu>
 
   <mat-menu #menu2="matMenu">
-    <button mat-menu-item>E6000 V1</button>
-    <button mat-menu-item>E6000 V2</button>
+    <a [routerLink]="['/e6000-v1']" class="submenu">
+      <button mat-menu-item>E6000 V1</button>
+    </a>
+      <button mat-menu-item>E6000 V2</button>
   </mat-menu>

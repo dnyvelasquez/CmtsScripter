@@ -23,7 +23,8 @@ import { UpstreamModComponent } from './pages/ubr10000/upstream-mod/upstream-mod
 import { ControllerModularComponent } from './pages/ubr10000/controller-modular/controller-modular.component';
 import { LoadBalanceComponent } from './pages/ubr10000/load-balance/load-balance.component';
 import { BondingGroupModComponent } from './pages/ubr10000/bonding-group-mod/bonding-group-mod.component';
-import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-mod.component'
+import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-mod.component';
+import { E6000V1Component } from './pages/e6000-v1/e6000-v1.component'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-m
     ControllerModularComponent,
     LoadBalanceComponent,
     BondingGroupModComponent,
-    WideBandModComponent
+    WideBandModComponent,
+    E6000V1Component
   ],
   imports: [
     BrowserModule, 
