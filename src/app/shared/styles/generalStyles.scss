@@ -1,0 +1,120 @@
+.container{
+    max-width: 60%; 
+    margin: auto;
+}
+
+.interface{
+    max-width: 60px;
+    max-height: 10px;
+}
+
+.div__interface{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    .ifPri__select{
+        font-size: 1em;
+        font-weight: bold;
+        width: 35px;
+        border: none;
+    }    
+}
+
+.div__subinterface{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    span mat-label{
+        font-size: 1.2em;
+    }
+}
+
+.div__line__pri{
+    margin-top: 5px;
+}
+
+.div__line__sec{
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.div__line__thi{
+    margin-top: 5px;
+    margin-left: 40px;
+}
+
+.short__input{
+    width: 20px;
+}
+
+.shortplus__input{
+    width: 30px;
+}
+
+.midd__input{
+    width: 80px;
+}
+
+.middplus__input{
+    width: 130px;
+}
+
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+.accordion{
+    margin-top: 10;
+}
+
+#btn{
+    margin-left: 10px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  .mat-radio-button {
+    margin-left: 16px;
+}
+
+#script__toolbar{
+      span{
+          font-size: 0.9rem;
+      }
+      font-size: 0.8rem;
+}
+  
+#script{
+    margin-left: 5px;
+    width: 80%;
+    height: 1000px;
+}
+
+.script__button{
+    margin-left: 10px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+#title{
+    text-decoration: none;
+    color: white;
+}
+
+.submenu{
+    text-decoration: none;
+    color: black;
+}
+
+
+.mod__select{
+    width: 35px;
+    border: none;
+}
+
+.freq__select{
+    width: 50px;
+}

@@ -1,0 +1,184 @@
+<!--controller Modular-Cable-->
+
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+
+          <div class="div__line__pri">
+            <mat-checkbox #controllerChange color="primary" (change)="getRfChannels();
+              controllerChange.checked
+              ? inputCommand('\ncontroller Modular-Cable ' + interF + '/' + subInterF + '/' + slt, pos)  
+              : inputCommand('', pos)">
+              controller Modular-Cable {{interF}}/{{subInterF}}/{{slt}}
+            </mat-checkbox>&nbsp;
+          </div>
+          
+          
+        </mat-panel-title>
+        <mat-panel-description>
+          Click to {{panelOpenState ? 'close' : 'open'}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="controllerChange.checked">
+
+
+      <div *ngFor="let rfChannel of rfChannels; index as i">
+        <!--rf-shutdown-->
+        <div class="div__line__sec">
+          <mat-checkbox #shutStartChange color="primary" (change)="
+            shutStartChange.checked ? !shutStartNo.checked
+            ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
+            : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
+          : inputCommand('', pos + 1 + i *10)">
+            rf-channel {{rfChannel}} rf-shutdown
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #shutStartNo color="accent" (change)="
+            shutStartChange.checked ? !shutStartNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 1 + i *10)
+            : inputCommand('', pos + 1 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--description-->
+        <div class="div__line__sec">
+          <mat-checkbox #descChange color="primary" (change)="
+            descChange.checked ? !descNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' description ' + descText.value, pos + 2 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' description', pos + 2 + i *10)
+            : inputCommand('', pos + 2 + i *10)">
+            rf-channel {{rfChannel}} description
+            <input type="text" #descText>
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #descNo color="accent" (change)="
+            descChange.checked ? !descNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' description ' + descText.value, pos + 2 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' description', pos + 2 + i *10)
+            : inputCommand('', pos + 2 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--channel-id-->
+        <div class="div__line__sec">
+          <mat-checkbox #idChange color="primary" (change)="
+            idChange.checked 
+              ? inputCommand(' rf-channel ' + rfChannel + ' cable downstream channel-id ' + idText.value, pos + 3 + i *10)
+              : inputCommand('', pos + 3 + i *10)">
+              rf-channel {{rfChannel}} cable downstream channel-id
+            <input type="text" #idText class="shortplus__input" (blur)="
+              idChange.checked 
+                ? inputCommand(' rf-channel ' + rfChannel + ' cable downstream channel-id ' + idText.value, pos + 3 + i *10)
+                : inputCommand('', pos + 3 + i *10)">
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--frequency-->
+        <div class="div__line__sec">
+          <mat-checkbox #freqChange color="primary" (change)="
+            freqChange.checked ? !freqNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos + 4 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+            : inputCommand('', pos + 4 + i *10)">
+                  rf-channel {{rfChannel}} frequency
+            <select #freqText class="freq__select" (change)="changeFreqs(i, freqText.value); 
+              freqChange.checked ? !freqNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos + 4 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+              : inputCommand('', pos + 4 + i *10)">
+              <option>{{freqs[i]}}</option>
+              <option *ngFor="let freq of frequencies">{{freq}}</option>
+            </select>000000 annex
+            <input type="text" #anexText class="short__input" value="B" (blur)="
+              freqChange.checked ? !freqNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos + 4 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+              : inputCommand('', pos + 4 + i *10)">&nbsp;modulation
+            <input type="text" #modText class="midd__input" value="256qam" (blur)="
+              freqChange.checked ? !freqNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos + 4 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+              : inputCommand('', pos + 4 + i *10)">&nbsp;interleave
+            <input type="text" #interText class="short__input" value="32" (blur)="
+              freqChange.checked ? !freqNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos +  4 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+              : inputCommand('', pos + 4 + i *10)">
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #freqNo color="accent" (change)="
+            freqChange.checked ? !freqNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' frequency ' + freqText.value + '000000 annex ' + anexText.value + ' modulation ' + modText.value + ' interleave ' + interText.value, pos + 4 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' frequency', pos + 4 + i *10)
+            : inputCommand('', pos + 4 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--depi-tunnel-->
+        <div class="div__line__sec">
+          <mat-checkbox #depiChange color="primary" (change)="
+            depiChange.checked ? !depiNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value  + ' tsid ' + tsidText.value, pos + 5 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value, pos + 5 + i *10)
+            : inputCommand('', pos + 5 + i *10)">
+            rf-channel {{rfChannel}} depi-tunnel
+            <input type="text" #depiText class="shortplus__input" (blur)="
+              depiChange.checked ? !depiNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value  + ' tsid ' + tsidText.value, pos + 5 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value, pos + 5 + i *10)
+              : inputCommand('', pos + 5 + i *10)">&nbsp;tsid
+            <input type="text" #tsidText class="shortplus__input" (blur)="
+              depiChange.checked ? !depiNo.checked
+                ? inputCommand(' rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value  + ' tsid ' + tsidText.value, pos + 5 + i *10)
+                : inputCommand(' no rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value, pos + 5 + i *10)
+              : inputCommand('', pos + 5 + i *10)">&nbsp;
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #depiNo color="accent" (change)="
+            depiChange.checked ? !depiNo.checked
+            ? inputCommand(' rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value  + ' tsid ' + tsidText.value, pos + 5 + i *10)
+            : inputCommand(' no rf-channel ' + rfChannel + ' depi-tunnel ' + depiText.value, pos + 5 + i *10)
+          : inputCommand('', pos + 5 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--rf-power-->
+        <div class="div__line__sec">
+          <mat-checkbox #powerChange color="primary" (change)="
+            powerChange.checked ? !powerNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-power ' + powerText.value, pos + 6 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-power', pos + 6 + i *10)
+            : inputCommand('', pos + 6 + i *10)">
+            rf-channel {{rfChannel}} rf-power
+          </mat-checkbox>&nbsp;
+          <input type="text" #powerText class="shortplus__input" value="38.0" (blur)="
+            powerChange.checked ? !powerNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-power ' + powerText.value, pos + 6 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-power', pos + 6 + i *10)
+            : inputCommand('', pos + 6 + i *10)">&nbsp;
+                    <mat-checkbox #powerNo color="accent" (change)="
+            powerChange.checked ? !powerNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-power ' + powerText.value, pos + 6 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-power', pos + 6 + i *10)
+            : inputCommand('', pos + 6 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--shutdown-->
+        <div class="div__line__sec">
+          <mat-checkbox #shutEndChange color="primary" (change)="
+            shutEndChange.checked ? !shutEndNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
+            : inputCommand('', pos + 7 + i *10)">
+                      rf-channel {{rfChannel}} rf-shutdown
+                    </mat-checkbox>&nbsp;
+                    <mat-checkbox #shutEndNo color="accent" (change)="
+            shutEndChange.checked ? !shutEndNo.checked
+              ? inputCommand(' rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
+              : inputCommand(' no rf-channel ' + rfChannel + ' rf-shutdown', pos + 7 + i *10)
+            : inputCommand('', pos + 7 + i *10)">
+            No
+          </mat-checkbox>&nbsp;
+        </div>
+      </div>
+    </div>    </mat-expansion-panel>
+  </mat-accordion>

@@ -1,0 +1,299 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        upstream {{us}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Click to {{panelOpenState ? 'close' : 'open'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!--shutdown-->
+    <div class="div__line__pri">
+      <mat-checkbox #shutStartChange color="primary" (change)="
+        shutStartChange.checked ? !shutStartNo.checked
+            ? inputCommand(' cable upstream ' + us + ' shutdown', pos)
+            : inputCommand(' no cable upstream ' + us + ' shutdown', pos)
+        : inputCommand('', pos+14)">
+        cable upstream {{us}} shutdown
+      </mat-checkbox>&nbsp;
+      <mat-checkbox #shutStartNo color="accent" (change)="
+        shutStartChange.checked ? !shutStartNo.checked
+            ? inputCommand(' cable upstream ' + us + ' shutdown', pos)
+            : inputCommand(' no cable upstream ' + us + ' shutdown', pos)
+        : inputCommand('', pos+14)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--connector-->
+    <div class="div__line__pri">
+      <mat-checkbox #connChange color="primary" (change)="
+        connChange.checked ? !connNo.checked
+            ? inputCommand(' cable upstream ' + us + ' connector ' + connText.value, pos+1)
+            : inputCommand(' no cable upstream ' + us + ' connector', pos+1)
+        : inputCommand('', pos+1)">
+        cable upstream {{us}} connector
+      </mat-checkbox>&nbsp;
+      <input type="text" #connText class="short__input" (blur)="
+        connChange.checked ? !connNo.checked
+            ? inputCommand(' cable upstream ' + us + ' connector ' + connText.value, pos+1)
+            : inputCommand(' no cable upstream ' + us + ' connector', pos+1)
+        : inputCommand('', pos+1)">&nbsp;
+      <mat-checkbox #connNo color="accent" (change)="
+        connChange.checked ? !connNo.checked
+            ? inputCommand(' cable upstream ' + us + ' connector ' + connText.value, pos+1)
+            : inputCommand(' no cable upstream ' + us + ' connector', pos+1)
+        : inputCommand('', pos+1)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--frequency-->
+    <div class="div__line__pri">
+      <mat-checkbox #freqChange color="primary" (change)="
+        freqChange.checked ? !freqNo.checked
+            ? inputCommand(' cable upstream ' + us + ' frequency ' + freqText.value + '00000', pos+2)
+            : inputCommand(' no cable upstream ' + us + ' frequency', pos+2)
+        : inputCommand('', pos+2)">
+        cable upstream {{us}} frequency
+      </mat-checkbox>&nbsp;
+      <input type="text" #freqText class="shortplus__input" (blur)="
+        freqChange.checked ? !freqNo.checked
+            ? inputCommand(' cable upstream ' + us + ' frequency ' + freqText.value + '00000', pos+2)
+            : inputCommand(' no cable upstream ' + us + ' frequency', pos+2)
+        : inputCommand('', pos+2)">00000&nbsp;
+      <mat-checkbox #freqNo color="accent" (change)="
+        freqChange.checked ? !freqNo.checked
+            ? inputCommand(' cable upstream ' + us + ' frequency ' + freqText.value + '00000', pos+2)
+            : inputCommand(' no cable upstream ' + us + ' frequency', pos+2)
+        : inputCommand('', pos+2)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--channel-width-->
+    <div class="div__line__pri">
+      <mat-checkbox #widthChange color="primary" (change)="
+        widthChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' channel-width ' + startText.value + '00000 ' + endText.value + '00000', pos+3)
+            : inputCommand('', pos+3)">
+        cable upstream {{us}} channel-width
+      </mat-checkbox>&nbsp;
+      <input type="text" #startText class="shortplus__input" (input)="endText.value = startText.value" (blur)="
+        widthChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' channel-width ' + startText.value + '00000 ' + endText.value + '00000', pos+3)
+            : inputCommand('', pos+3)">00000&nbsp;
+      <input type="text" #endText class="shortplus__input" (blur)="
+        widthChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' channel-width ' + startText.value + '00000 ' + endText.value + '00000', pos+3)
+            : inputCommand('', pos+3)">00000&nbsp;
+    </div>
+    <!--threshold snr-profiles-->
+    <div class="div__line__pri">
+      <mat-checkbox #snrChange color="primary" (change)="
+        snrChange.checked ? !snrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold snr-profiles ' + snrText.value, pos+4)
+            : inputCommand(' no cable upstream ' + us + ' threshold snr-profiles', pos+4)
+        : inputCommand('', pos+4)">
+        cable upstream {{us}} threshold snr-profiles
+      </mat-checkbox>&nbsp;
+      <input type="text" #snrText value="24 19" class="midd__input" (blur)="
+        snrChange.checked ? !snrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold snr-profiles ' + snrText.value, pos+4)
+            : inputCommand(' no cable upstream ' + us + ' threshold snr-profiles', pos+4)
+        : inputCommand('', pos+4)">&nbsp;
+      <mat-checkbox #snrNo color="accent" (change)="
+        snrChange.checked ? !snrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold snr-profiles ' + snrText.value, pos+4)
+            : inputCommand(' no cable upstream ' + us + ' threshold snr-profiles', pos+4)
+        : inputCommand('', pos+4)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--threshold corr-fec-->
+    <div class="div__line__pri">
+      <mat-checkbox #corrChange color="primary" (change)="
+        corrChange.checked ? !corrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold corr-fec ' + corrText.value, pos+5)
+            : inputCommand(' no cable upstream ' + us + ' threshold corr-fec', pos+5)
+        : inputCommand('', pos+5)">
+        cable upstream {{us}} threshold corr-fec
+      </mat-checkbox>&nbsp;
+      <input type="text" #corrText value="0" class="short__input" (blur)="
+        corrChange.checked ? !corrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold corr-fec ' + corrText.value, pos+5)
+            : inputCommand(' no cable upstream ' + us + ' threshold corr-fec', pos+5)
+        : inputCommand('', pos+5)">&nbsp;
+      <mat-checkbox #corrNo color="accent" (change)="
+        corrChange.checked ? !corrNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold corr-fec ' + corrText.value, pos+5)
+            : inputCommand(' no cable upstream ' + us + ' threshold corr-fec', pos+5)
+        : inputCommand('', pos+5)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--threshold hysteresis-->
+    <div class="div__line__pri">
+      <mat-checkbox #hystChange color="primary" (change)="
+        hystChange.checked ? !hystNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold hysteresis ' + hystText.value, pos+6)
+            : inputCommand(' no cable upstream ' + us + ' threshold hysteresis', pos+6)
+        : inputCommand('', pos+6)">
+        cable upstream {{us}} threshold hysteresis
+      </mat-checkbox>&nbsp;
+      <input type="text" #hystText value="4" class="short__input" (blur)="
+        hystChange.checked ? !hystNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold hysteresis ' + hystText.value, pos+6)
+            : inputCommand(' no cable upstream ' + us + ' threshold hysteresis', pos+6)
+        : inputCommand('', pos+6)">&nbsp;
+      <mat-checkbox #hystNo color="accent" (change)="
+        hystChange.checked ? !hystNo.checked
+            ? inputCommand(' cable upstream ' + us + ' threshold hysteresis ' + hystText.value, pos+6)
+            : inputCommand(' no cable upstream ' + us + ' threshold hysteresis', pos+6)
+        : inputCommand('', pos+6)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--description-->
+    <div class="div__line__pri">
+      <mat-checkbox #descChange color="primary" (change)="
+        descChange.checked ? !descNo.checked
+            ? inputCommand(' cable upstream ' + us + ' description ' + descText.value, pos+7)
+            : inputCommand(' no cable upstream ' + us + ' description', pos+7)
+        : inputCommand('', pos+7)">
+        cable upstream {{us}} description
+      </mat-checkbox>&nbsp;
+      <input type="text" #descText [value]="desc" (blur)="
+        descChange.checked ? !descNo.checked
+            ? inputCommand(' cable upstream ' + us + ' description ' + descText.value, pos+7)
+            : inputCommand(' no cable upstream ' + us + ' description', pos+7)
+        : inputCommand('', pos+7)">&nbsp;
+      <mat-checkbox #descNo color="accent" (change)="
+        descChange.checked ? !descNo.checked
+            ? inputCommand(' cable upstream ' + us + ' description ' + descText.value, pos+7)
+            : inputCommand(' no cable upstream ' + us + ' description', pos+7)
+        : inputCommand('', pos+7)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--docsis-mode-->
+    <div class="div__line__pri">
+      <mat-checkbox #docsisChange color="primary" (change)="
+        docsisChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' docsis-mode ' + docsisText.value, pos+8)
+            : inputCommand('', pos+8)">
+        cable upstream {{us}} docsis-mode
+      </mat-checkbox>&nbsp;
+      <input type="text" #docsisText class="midd__input" value="atdma" (blur)="
+        docsisChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' docsis-mode ' + docsisText.value, pos+8)
+            : inputCommand('', pos+8)">&nbsp;
+    </div>
+    <!--minislot-size-->
+    <div class="div__line__pri">
+      <mat-checkbox #miniChange color="primary" (change)="
+        miniChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' minislot-size ' + miniText.value, pos+9)
+            : inputCommand('', pos+9)">
+        cable upstream {{us}} minislot-size
+      </mat-checkbox>&nbsp;
+      <input type="text" #miniText class="short__input" value="4" (blur)="
+        miniChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' minislot-size ' + miniText.value, pos+9)
+            : inputCommand('', pos+9)">&nbsp;
+    </div>
+    <!--power-adjust-->
+    <div class="div__line__pri">
+      <mat-checkbox #powerChange color="primary" (change)="
+        powerChange.checked ? !powerNo.checked
+            ? inputCommand(' cable upstream ' + us + ' power-adjust continue ' + powerText.value, pos+10)
+            : inputCommand(' no cable upstream ' + us + ' power-adjust continue', pos+10)
+        : inputCommand('', pos+10)">
+        cable upstream {{us}} power-adjust continue
+      </mat-checkbox>&nbsp;
+      <input type="text" #powerText value="6" class="short__input" (blur)="
+        powerChange.checked ? !powerNo.checked
+            ? inputCommand(' cable upstream ' + us + ' power-adjust continue ' + powerText.value, pos+10)
+            : inputCommand(' no cable upstream ' + us + ' power-adjust continue', pos+10)
+        : inputCommand('', pos+10)">&nbsp;
+      <mat-checkbox #powerNo color="accent" (change)="
+        powerChange.checked ? !powerNo.checked
+            ? inputCommand(' cable upstream ' + us + ' power-adjust continue ' + powerText.value, pos+10)
+            : inputCommand(' no cable upstream ' + us + ' power-adjust continue', pos+10)
+        : inputCommand('', pos+10)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--range-backoff-->
+    <div class="div__line__pri">
+      <mat-checkbox #rangeChange color="primary" (change)="
+        rangeChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' range-backoff ' + rangeText.value, pos+11)
+            : inputCommand('', pos+11)">
+        cable upstream {{us}} range-backoff
+      </mat-checkbox>&nbsp;
+      <input type="text" #rangeText class="shortplus__input" value="3 6" (blur)="
+        rangeChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' range-backoff ' + rangeText.value, pos+11)
+            : inputCommand('', pos+11)">&nbsp;
+    </div>
+    <!--modulation-profile-->
+    <div class="div__line__pri">
+      <mat-checkbox #modulChange color="primary" (change)="
+        modulChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' modulation-profile ' + modulText.value, pos+12)
+            : inputCommand('', pos+12)">
+        cable upstream {{us}} modulation-profile
+      </mat-checkbox>&nbsp;
+      <input type="text" #modulText class="middplus__input" value="224 223 222" (blur)="
+        modulChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' modulation-profile ' + modulText.value, pos+12)
+            : inputCommand('', pos+12)">&nbsp;
+    </div>
+    <!--equalization-coefficient-->
+    <div class="div__line__pri">
+      <mat-checkbox #equalChange color="primary" (change)="
+        equalChange.checked ? !equalNo.checked
+            ? inputCommand(' cable upstream ' + us + ' equalization-coefficient', pos+13)
+            : inputCommand(' no cable upstream ' + us + ' equalization-coefficient', pos+13)
+        : inputCommand('', pos+13)">
+        cable upstream {{us}} equalization-coefficient
+      </mat-checkbox>&nbsp;
+      <mat-checkbox #equalNo color="accent" (change)="
+        equalChange.checked ? !equalNo.checked
+            ? inputCommand(' cable upstream ' + us + ' equalization-coefficient', pos+13)
+            : inputCommand(' no cable upstream ' + us + ' equalization-coefficient', pos+13)
+        : inputCommand('', pos+13)">
+        No
+      </mat-checkbox>
+    </div>
+    <!--attribute-mask-->
+    <div class="div__line__pri">
+      <mat-checkbox #attChange color="primary" (change)="
+        attChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' attribute-mask ' + attText.value, pos+14)
+            : inputCommand('', pos+14)">
+        cable upstream {{us}} attribute-mask
+      </mat-checkbox>&nbsp;
+      <input type="text" #attText class="middplus__input" value="20000000" (blur)="
+        attChange.checked 
+            ? inputCommand(' cable upstream ' + us + ' attribute-mask ' + attText.value, pos+14)
+            : inputCommand('', pos+14)">&nbsp;
+    </div>
+    <!--shutdown-->
+    <div class="div__line__pri">
+      <mat-checkbox #shutEndChange color="primary" (change)="
+        shutEndChange.checked ? !shutEndNo.checked
+            ? inputCommand(' cable upstream ' + us + ' shutdown', pos+15)
+            : inputCommand(' no cable upstream ' + us + ' shutdown', pos+15)
+        : inputCommand('', pos+15)">
+        cable upstream {{us}} shutdown
+      </mat-checkbox>&nbsp;
+      <mat-checkbox #shutEndNo color="accent" (change)="
+        shutEndChange.checked ? !shutEndNo.checked
+            ? inputCommand(' cable upstream ' + us + ' shutdown', pos+15)
+            : inputCommand(' no cable upstream ' + us + ' shutdown', pos+15)
+        : inputCommand('', pos+15)">
+        No
+      </mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

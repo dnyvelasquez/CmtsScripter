@@ -1,0 +1,22 @@
+<!--Script toolbar-->
+<div class="div__line__pri">
+  <mat-toolbar id="script__toolbar">
+    <div class="div__line__pri">
+      <button class="script__button" mat-raised-button id="generate" color="primary" (click)="getScript()">
+        Generate script
+      </button>
+      <button class="script__button" mat-raised-button id="copy" color="primary" *ngIf="script != ''"
+        (click)="copyScript()">
+        <mat-icon>file_copy</mat-icon>
+      </button>
+      <button class="script__button" mat-raised-button id="cancel" color="primary" *ngIf="script != ''"
+        (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+</div>
+<!--Script-->
+<div class="div__line__pri" *ngIf="script != ''">
+  <textarea id="script" #scriptArea (change)="script = scriptArea.value">{{script}}</textarea>
+</div>

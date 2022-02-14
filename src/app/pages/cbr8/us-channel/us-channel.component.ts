@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cbr8Service } from '../../services/cbr8.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-us-channel',
   templateUrl: './us-channel.component.html',
-  styleUrls: ['./us-channel.component.scss']
+  styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
 export class UsChannelComponent implements OnInit {
 
@@ -13,13 +13,13 @@ export class UsChannelComponent implements OnInit {
   @Input() checked!: boolean;
   @Input() description!: string;
 
-  constructor(private cbr8Svc: Cbr8Service) { }
+  constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
   }
 
   inputCommand(command: string, pos: number){
-    this.cbr8Svc.addCommand(command, pos);
+    this.sharedSvc.addCommand(command, pos);
   }
 
 }

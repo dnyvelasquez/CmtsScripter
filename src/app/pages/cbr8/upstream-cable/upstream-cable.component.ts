@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Cbr8Service } from '../../services/cbr8.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
   selector: 'app-upstream-cable',
   templateUrl: './upstream-cable.component.html',
-  styleUrls: ['./upstream-cable.component.scss']
+  styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
 export class UpstreamCableComponent implements OnInit {
 
@@ -13,18 +13,18 @@ export class UpstreamCableComponent implements OnInit {
   @Input() description!: string;
   @Input() pos!: number;
 
-  constructor(private cbr8Svc: Cbr8Service) { }
+  constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
   }
 
   inputCommand(command: string, pos: number){
-    this.cbr8Svc.addCommand(command, pos);
+    this.sharedSvc.addCommand(command, pos);
   }
 
   inputNoUsChan(pos: number){
     for(let i = 0; i < 15; i++){
-      this.cbr8Svc.addCommand('', pos+i);
+      this.sharedSvc.addCommand('', pos+i);
     }
   }
 

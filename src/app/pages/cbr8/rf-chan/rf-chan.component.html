@@ -10,8 +10,8 @@
             ? inputCommand('  type ' + typeText.value, this.pos + 1)
             : inputCommand('', pos + 1);
         freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqText.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqText.value + '000000', pos + 2)
+            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
+            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
         : inputCommand('', pos + 2);
         outputChange.checked 
             ? inputCommand('  rf-output ' + outputText.value, pos + 3)
@@ -63,25 +63,23 @@
 <div class="div__line__thi">
     <mat-checkbox #freqChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
         freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqText.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqText.value + '000000', pos + 2)
+            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
+            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
         : inputCommand('', pos + 2)">
         frequency
     </mat-checkbox>&nbsp;
-    <select class="midd__input">
-        <option value="515"></option>
-        <option value="521"></option>
-    </select>
-    <input type="text" #freqText color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" style="width: 25px;" (blur)="
+    <select class="freq__select" #freqSelect [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
         freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqText.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqText.value + '000000', pos + 2)
+            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
+            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
         : inputCommand('', pos + 2)">
+        <option *ngFor="let freq of freqs">{{freq}}</option>
+    </select>
     <span>000000</span>&nbsp;
     <mat-checkbox #freqNo [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
         freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqText.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqText.value + '000000', pos + 2)
+            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
+            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
         : inputCommand('', pos + 2)">
         No
     </mat-checkbox>&nbsp;

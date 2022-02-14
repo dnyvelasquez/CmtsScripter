@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-bonding-group',
-  templateUrl: './bonding-group.component.html',
+  selector: 'app-bonding-group-mod',
+  templateUrl: './bonding-group-mod.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class BondingGroupComponent implements OnInit {
+export class BondingGroupModComponent implements OnInit {
 
   posBgUps: number[] = [];
   @Input() pos!: number;
@@ -39,4 +39,5 @@ export class BondingGroupComponent implements OnInit {
   subBgUp(){
     this.posBgUps.pop();
   }
+  
 }

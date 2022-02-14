@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { Cbr8Service } from '../services/cbr8.service';
+import { SharedService } from 'src/app/shared/services/shared.service';
+import { Cbr8Service } from '../../services/cbr8.service';
 
 @Component({
   selector: 'app-cbr8',
   templateUrl: './cbr8.component.html',
-  styleUrls: ['./cbr8.component.scss']
+  styleUrls: ['../../shared/styles/generalStyles.scss']
 })
 export class CBR8Component implements OnInit {
 
-  constructor(private cbr8Svc: Cbr8Service) { }
+  constructor(private cbr8Svc: Cbr8Service, private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
   }
 
   interFaces: string[] = ['1', '2', '3', '6', '7', '8', '9'];
   slots: string[] = ['0', '1', '2', '3', '4', '5', '6', '7'];
+  downStreams: number[] = [100];
+  posBgs: number[] = [600];
   upStreams!: string[];
   panelOpenState = false;
-  script: string = "";
-  showScript: boolean = false;
-  interF: string = "";
-  slt: string = "";
+  interF!: number;
+  slt!: number;
   
   inputCommand(command: string, pos: number){
-    this.cbr8Svc.addCommand(command, pos);
+    this.sharedSvc.addCommand(command, pos);
   }
 
   inputPowerAdjust(upstream: string, value: string){
     let us = parseInt(upstream);
-    this.cbr8Svc.addCommand(' cable upstream ' + us + ' power-adjust continue ' +  value, 400 + us);
+    this.sharedSvc.addCommand(' cable upstream ' + us + ' power-adjust continue ' +  value, 400 + us);
   }
 
   powerAdjust(isChecked: boolean){
@@ -37,9 +38,33 @@ export class CBR8Component implements OnInit {
     }
   }
 
-  getScript(){
-    this.script = this.cbr8Svc.getCommands();
+  reload(){
+    window.location.reload();
   }
+
+  newTemplate(){
+
+  }
+
+  parse_Int(value: string): number{
+    return parseInt(value);
+  }
+
+  subDownStream(){
+    this.downStreams.pop();
+  }
+
+  addDownStream(down: number){
+    this.downStreams.push(down);
+  }
+  addBg(pos: number){
+    this.posBgs.push(pos);
+  }
+
+  subBg(){
+    this.posBgs.pop();
+  }
+
 
 }
 

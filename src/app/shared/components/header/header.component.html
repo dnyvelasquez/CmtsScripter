@@ -4,13 +4,13 @@
     <mat-icon>menu</mat-icon>
   </button>
   <a [routerLink]="['/']" id="title">
-    <span>CMTS Scripter</span>
+    <span> CMTS Scripter</span>
   </a>
   <span class="spacer"></span>
   <button mat-icon-button (click)="save()">
     <mat-icon>save</mat-icon>
   </button>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="cancel()">
     <mat-icon>cancel</mat-icon>
   </button>
 </mat-toolbar>
@@ -34,7 +34,9 @@
   <a [routerLink]="['/cbr8']" class="submenu">
     <button mat-menu-item>CBR8</button>
   </a>
-  <button mat-menu-item>UBR 10000</button>
+  <a [routerLink]="['/ubr10000']" class="submenu">
+    <button mat-menu-item>UBR 10000</button>
+  </a>
   </mat-menu>
 
   <mat-menu #menu2="matMenu">

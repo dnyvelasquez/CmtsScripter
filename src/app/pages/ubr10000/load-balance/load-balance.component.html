@@ -1,0 +1,97 @@
+<div class="div__line__pri">
+  <mat-checkbox #loadChange color="primary" (change)="
+    loadChange.checked
+        ? inputCommand('\ncable load-balance docsis-group ' + loadText.value, pos)
+        : inputCommand('', pos)">
+    cable load-balance docsis-group
+  </mat-checkbox>&nbsp;
+  <input type="text" #loadText class="midd__input" (blur)="
+    loadChange.checked
+        ? inputCommand('\ncable load-balance docsis-group ' + loadText.value, pos)
+        : inputCommand('', pos)    ">
+</div>
+<div *ngIf="loadChange.checked">
+  <div *ngFor="let downIF of downInterF; index as i">
+    <div class="div__line__sec">
+      <mat-checkbox #downChange color="primary" (change)="
+        downChange.checked
+        ? inputCommand(' downstream Modular-Cable ' + downIF + '/' + downSubInterF[i] + '/' + downSlt[i] + ' rf-channel ' + downStart[i] + '-' + downEnd[i], pos + 1 + i * 3)
+        : inputCommand('', pos + 1 + i * 3)">
+        downstream Modular-Cable {{downIF}}/{{downSubInterF[i]}}/{{downSlt[i]}} rf-channel
+        {{downStart[i]}}-{{downEnd[i]}}
+      </mat-checkbox>
+    </div>
+    <div class="div__line__sec">
+      <mat-checkbox #noDownChange color="primary" (change)="
+        noDownChange.checked
+            ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+            : inputCommand('', pos + 2 + i * 3)">
+        no downstream Modular-Cable
+        <input type="text" #noDownIf class="short__input" [disabled]="!noDownChange.checked" (blur)="
+            noDownChange.checked
+                ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+                : inputCommand('', pos + 2 + i * 3)">/
+        <input type="text" #noDownSif class="short__input" [disabled]="!noDownChange.checked" (blur)="
+            noDownChange.checked
+                ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+                : inputCommand('', pos + 2 + i * 3)">/
+        <input type="text" #noDownSlot class="short__input" [disabled]="!noDownChange.checked" (blur)="
+            noDownChange.checked
+                ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+                : inputCommand('', pos + 2 + i * 3)">/ rf-channel
+        <input type="text" #noDownStart class="short__input" [disabled]="!noDownChange.checked" (blur)="
+            noDownChange.checked
+                ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+                : inputCommand('', pos + 2 + i * 3)">-
+        <input type="text" #noDownEnd class="short__input" [disabled]="!noDownChange.checked" (blur)="
+            noDownChange.checked
+                ? inputCommand(' no downstream Modular-Cable ' + noDownIf.value + '/' + noDownSif.value + '/' + noDownSlot.value + ' rf-channel ' + noDownStart.value + '-' + noDownEnd.value, pos + 2 + i * 3)
+                : inputCommand('', pos + 2 + i)">
+      </mat-checkbox>
+    </div>
+  </div>
+  <div class="div__line__sec">
+    <mat-checkbox #upChange color="primary" (change)="
+        upChange.checked
+        ? inputCommand(' upstream Cable' + interF + '/' + subInterF + '/' + slt + ' ' + startUp.value + '-' + endUp.value, pos + 50) 
+        : inputCommand('', pos + 50)">
+      upstream Cable{{interF}}/{{subInterF}}/{{slt}}
+    </mat-checkbox>&nbsp;
+    <input type="text" #startUp class="short__input" (blur)="
+    upChange.checked
+        ? inputCommand(' upstream Cable' + interF + '/' + subInterF + '/' + slt + ' ' + startUp.value + '-' + endUp.value, pos + 50) 
+        : inputCommand('', pos + 50)">-
+    <input type="text" #endUp class="short__input" (blur)="
+    upChange.checked
+        ? inputCommand(' upstream Cable' + interF + '/' + subInterF + '/' + slt + ' ' + startUp.value + '-' + endUp.value, pos + 50) 
+        : inputCommand('', pos + 50)">
+  </div>
+  <div class="div__line__sec">
+    <mat-checkbox #noUpChange color="primary" (change)="
+    noUpChange.checked
+        ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+        : inputCommand('', pos + 51)">
+      no upstream Cable
+      <input type="text" #noUpIf class="short__input" [disabled]="!noUpChange.checked" (blur)="
+      noUpChange.checked
+          ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+          : inputCommand('', pos + 51)">/
+      <input type="text" #noUpSif class="short__input" [disabled]="!noUpChange.checked" (blur)="
+      noUpChange.checked
+          ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+          : inputCommand('', pos + 51)">/
+      <input type="text" #noUpSlot class="short__input" [disabled]="!noUpChange.checked" (blur)="
+      noUpChange.checked
+          ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+          : inputCommand('', pos + 51)">&nbsp;
+      <input type="text" #noUpStart class="short__input" [disabled]="!noUpChange.checked" (blur)="
+      noUpChange.checked
+          ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+          : inputCommand('', pos + 51)">-
+      <input type="text" #noUpEnd class="short__input" [disabled]="!noUpChange.checked" (blur)="
+      noUpChange.checked
+          ? inputCommand(' no upstream Cable' + noUpIf.value + '/' + noUpSif.value + '/' + noUpSlot.value + ' ' + noUpStart.value + '-' + noUpEnd.value, pos + 51) 
+          : inputCommand('', pos + 51)">
+    </mat-checkbox>
+  </div>
+</div>

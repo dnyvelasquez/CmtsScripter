@@ -1,18 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
-
 @Component({
-  selector: 'app-integrated-cable',
-  templateUrl: './integrated-cable.component.html',
+  selector: 'app-load-balance',
+  templateUrl: './load-balance.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class IntegratedCableComponent implements OnInit {
+export class LoadBalanceComponent implements OnInit {
 
   @Input() interF!: number;
+  @Input() subInterF!: number;
   @Input() slt!: number;
-  @Input() description!: string;
+  @Input() downInterF: number[] = [];
+  @Input() downSubInterF: number[] = [];
+  @Input() downSlt: number[] = [];
+  @Input() downStart: number[] = [];
+  @Input() downEnd: number[] = [];
   @Input() pos!: number;
+
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -22,11 +27,5 @@ export class IntegratedCableComponent implements OnInit {
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
   }
-
-  inputNoRfChn(pos: number){
-    for(let i = 0; i < 10; i++){
-      this.sharedSvc.addCommand('', pos+i);
-    }
-  }
-
+  
 }

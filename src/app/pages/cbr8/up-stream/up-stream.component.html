@@ -1,10 +1,24 @@
 <div class="div__line__pri">
-  <mat-checkbox #usChange color="primary" (change)="inputCommand(usChange.checked, usNo.checked, upStream.value)">
+  <mat-checkbox #usChange color="primary" (change)="
+    usChange.checked ? usNo.checked
+      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+    : inputCommand('', pos)">
       upstream
   </mat-checkbox>&nbsp;
-  <input type="text" #upStream [value]=us (blur)="inputCommand(usChange.checked, usNo.checked, upStream.value)" class="short__input">&nbsp; 
+  <input type="text" #upStream class="short__input" [value]=us (blur)="
+    usChange.checked ? usNo.checked
+      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+    : inputCommand('', pos)">&nbsp; 
   <span>Upstream-Cable {{interF}}/0/{{slt}} us-channel {{usCh}}</span>&nbsp; 
-  <mat-checkbox #usNo (change)="inputCommand(usChange.checked, usNo.checked, upStream.value)">No |</mat-checkbox>&nbsp;
+  <mat-checkbox #usNo (change)="
+    usChange.checked ? usNo.checked
+      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
+    : inputCommand('', pos)">
+    No |
+  </mat-checkbox>&nbsp;
   <mat-checkbox #usOther>Add upstream</mat-checkbox>
 </div>
 <app-up-stream [interF]="interF" [slt]="slt" [usCh]=usCh+1 [pos]=pos+1 [us]="us+1" *ngIf="usOther.checked; else noCheck"></app-up-stream>

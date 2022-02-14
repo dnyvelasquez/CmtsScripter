@@ -1,0 +1,79 @@
+<!--interface Wideband-Cable-->
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="div__line__pri">
+          <mat-checkbox #wideChange color="primary" (change)="getRfChannels();
+              wideChange.checked ? !wideNo.checked
+                  ? inputCommand('\ninterface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos) 
+                  : inputCommand('\nno interface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos)
+              : inputCommand('', pos)">
+            interface Wideband-Cable{{interF}}/{{subInterF}}/{{slt}}:
+            <input type="text" #wideText [value]="wb" class="short__input" (blur)="
+                  wideChange.checked ? !wideNo.checked
+                      ? inputCommand('\ninterface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos) 
+                      : inputCommand('\nno interface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos)
+              : inputCommand('', pos)">&nbsp;
+          </mat-checkbox>
+          <mat-checkbox #wideNo color="accent" (blur)="
+              wideChange.checked ? !wideNo.checked
+                  ? inputCommand('\ninterface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos) 
+                  : inputCommand('\nno interface Wideband-Cable' + interF + '/' + subInterF + '/' + slt + ':' + wideText.value, pos)
+              : inputCommand('', pos)">
+            No
+          </mat-checkbox>
+        </div>
+      </mat-panel-title>
+      <mat-panel-description>
+        Click to {{panelOpenState ? 'close' : 'open'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!--cable bundle-->
+    <div *ngIf="wideChange.checked">
+      <div class="div__line__sec">
+        <mat-checkbox #bundleChange color="primary" (change)="
+    bundleChange.checked ? !bundleNo.checked
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 1) 
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 1)
+    : inputCommand('', pos + 1)">
+          cable bundle
+          <input type="text" #bundleText class="short__input" value="2" (blur)="
+    bundleChange.checked ? !bundleNo.checked
+        ? inputCommand(' cable bundle ' + bundleText.value, pos + 1) 
+        : inputCommand(' no cable bundle ' + bundleText.value, pos + 1)
+    : inputCommand('', pos + 10)">&nbsp;
+        </mat-checkbox>
+        <mat-checkbox #bundleNo color="accent" (blur)="
+        bundleChange.checked ? !bundleNo.checked
+            ? inputCommand(' cable bundle ' + bundleText.value, pos + 1) 
+            : inputCommand(' no cable bundle ' + bundleText.value, pos + 1)
+        : inputCommand('', pos + 1)">
+          No
+        </mat-checkbox>
+      </div>
+      <!--cable rf-channel-->
+      <div class="div__line__sec" *ngFor="let channel of rfChannels; index as i">
+        <mat-checkbox #rfChChange color="primary" (change)="
+    rfChChange.checked ? !rfChNo.checked
+        ? inputCommand(' cable rf-channel ' + channel + ' bandwidth-percent ' + percentleText.value, pos + i + 2) 
+        : inputCommand(' no cable rf-channel ' + channel, pos + i + 2)
+    : inputCommand('', pos + 1)">
+          cable rf-channel {{channel}} bandwidth-percent
+          <input type="text" #percentleText class="short__input" value="23" (blur)="
+    rfChChange.checked ? !rfChNo.checked
+        ? inputCommand(' cable rf-channel ' + channel + ' bandwidth-percent ' + percentleText.value, pos + i + 2) 
+        : inputCommand(' no cable rf-channel ' + channel, pos + i + 2)
+    : inputCommand('', pos + 1)">&nbsp;
+        </mat-checkbox>
+        <mat-checkbox #rfChNo color="accent" (blur)="
+    rfChChange.checked ? !rfChNo.checked
+        ? inputCommand(' cable rf-channel ' + channel + ' bandwidth-percent ' + percentleText.value, pos + i + 2) 
+        : inputCommand(' no cable rf-channel ' + channel, pos + i + 2)
+    : inputCommand('', pos + 1)">
+          No
+        </mat-checkbox>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
