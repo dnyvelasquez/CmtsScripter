@@ -17,7 +17,8 @@
       <option *ngFor="let slot of slots">{{slot}}</option>
     </select>
     -->
-    <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value)">
+    <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value);
+      outputSupervision(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)">
       <option></option>
       <option *ngFor="let slot of slots">{{slot}}</option>
     </select>
@@ -55,11 +56,19 @@
       <!--cable-mac-->
       <div class="div__line__sec">
         <mat-checkbox #macUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="          
-                macUpdate.checked 
+              macUpdate.checked ? !macNo.checked
                     ? inputCommand(' cable cable-mac ' + mac,  3 + pos + i * 10)
-                    : inputCommand('', 3 + pos + i * 10)">
+                    : inputCommand(' no cable cable-mac' + mac, 3 + pos + i * 10) 
+              : inputCommand('', 3 + pos + i * 10)">
           cable cable-mac {{mac}}
         </mat-checkbox>&nbsp;
+        <mat-checkbox #macNo [disabled]="!ifUpdate.checked" (change)="
+        macUpdate.checked ? !macNo.checked 
+            ? inputCommand(' cable cable-mac ' + mac, 3 + pos + i * 10) 
+            : inputCommand(' no cable cable-mac' + mac, 3 + pos + i * 10) 
+        : inputCommand('', 3 + pos + i * 10)">
+          No
+        </mat-checkbox>
       </div>
       <!--Description-->
       <div class="div__line__sec">
@@ -99,27 +108,27 @@
       <!--frequency-->
       <div class="div__line__sec">
         <mat-checkbox #freqUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="      
+            freqUpdate.checked ? !freqNo.checked 
+                ? inputCommand(' cable frequency ' + freqSelect.value + '000000',  6 + pos + i * 10) 
+                : inputCommand(' no cable frequency', 6 + pos + i * 10) 
+            : inputCommand('', 6 + pos + i * 10)">
+          cable frequency
+          <select #freqSelect class="freq__select" [disabled]="!ifUpdate.checked" (change)="changeFreqs(i, freqSelect.value);    
             freqUpdate.checked ? !descNo.checked 
                 ? inputCommand(' cable frequency ' + freqSelect.value + '000000',  6 + pos + i * 10) 
                 : inputCommand(' no cable frequency', 6 + pos + i * 10) 
             : inputCommand('', 6 + pos + i * 10)">
-            frequency
-        </mat-checkbox>&nbsp;
-        <select #freqSelect class="freq__select" [disabled]="!ifUpdate.checked" (change)="changeFreqs(i, freqSelect.value);    
-        freqUpdate.checked ? !descNo.checked 
-            ? inputCommand(' cable frequency ' + freqSelect.value + '000000',  6 + pos + i * 10) 
-            : inputCommand(' no cable frequency', 6 + pos + i * 10) 
-        : inputCommand('', 6 + pos + i * 10)">
             <option>{{freqs[i]}}</option>
-            <option *ngFor="let frequency of frequencies">{{frequency}}</option>            
-        </select>
-        <span>000000</span>&nbsp;
+            <option *ngFor="let frequency of frequencies">{{frequency}}</option>
+          </select>
+          000000
+        </mat-checkbox>&nbsp;
         <mat-checkbox #freqNo [disabled]="!ifUpdate.checked" (change)="freqNo.checked ? freqSelect.value = '' : false;
             freqUpdate.checked ? !freqNo.checked 
                 ? inputCommand(' cable frequency ' + freqSelect.value + '000000', 6 + pos + i * 10) 
                 : inputCommand(' no cable frequency', 6 + pos + i * 10) 
             : inputCommand('', 6 + pos + i * 10)">
-            No
+          No
         </mat-checkbox>
       </div>
       <!--interleave-depth-->
@@ -129,9 +138,10 @@
                 ? inputCommand(' cable interleave-depth ' + interText.value,  7 + pos + i * 10) 
                 : inputCommand(' no cable interleave-depth', 7 + pos + i * 10) 
             : inputCommand('', 7 + pos + i * 10)">
-            cable interleave-depth
+          cable interleave-depth
         </mat-checkbox>&nbsp;
-        <input type="text" #interText [disabled]="interNo.checked" class="short__input" [disabled]="!ifUpdate.checked" value="32" (blur)="            
+        <input type="text" #interText [disabled]="interNo.checked" class="short__input" [disabled]="!ifUpdate.checked"
+          value="32" (blur)="            
             interUpdate.checked ? !interNo.checked 
                 ? inputCommand(' cable interleave-depth ' + interText.value, 7 + pos + i * 10) 
                 : inputCommand(' no cable interleave-depth', 7 + pos + i * 10) 

@@ -11,6 +11,9 @@ export class E6000V1Component implements OnInit {
   mac: string = '';
   desc: string = '';
   panelOpenStateAtt = false
+  supervision: string = '';
+  secA: string = 'A';
+  secB: string = 'B';
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -28,6 +31,10 @@ export class E6000V1Component implements OnInit {
 
   parse_Int(value: string): number{
     return parseInt(value);
+  }
+
+  setSupervision(value: string){
+    this.supervision = value;
   }
 
 

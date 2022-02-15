@@ -25,7 +25,8 @@ import { LoadBalanceComponent } from './pages/ubr10000/load-balance/load-balance
 import { BondingGroupModComponent } from './pages/ubr10000/bonding-group-mod/bonding-group-mod.component';
 import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-mod.component';
 import { E6000V1Component } from './pages/e6000-v1/e6000-v1.component';
-import { CableDownStremV1Component } from './pages/e6000-v1/cable-down-strem-v1/cable-down-strem-v1.component'
+import { CableDownStremV1Component } from './pages/e6000-v1/cable-down-strem-v1/cable-down-strem-v1.component';
+import { CableUpStremV1Component } from './pages/e6000-v1/cable-up-strem-v1/cable-up-strem-v1.component'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { CableDownStremV1Component } from './pages/e6000-v1/cable-down-strem-v1/
     BondingGroupModComponent,
     WideBandModComponent,
     E6000V1Component,
-    CableDownStremV1Component
+    CableDownStremV1Component,
+    CableUpStremV1Component
   ],
   imports: [
     BrowserModule, 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class CableDownStremV1Component implements OnInit {
   @Input() mac!: string;
   @Input() desc!: string;
   @Input() pos!: number;
+  @Output() supervisionEvent = new EventEmitter<string>();
   panelOpenState = false
   interFaces: number[] = [12, 11, 10, 9, 8, 7, 6, 5];
   subInterFaces: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -60,6 +61,10 @@ export class CableDownStremV1Component implements OnInit {
       this.freqs[i] = this.frequencies[pos];
       pos++;
     }
+  }
+
+  outputSupervision(value: string){
+    this.supervisionEvent.emit(value);
   }
 
 }

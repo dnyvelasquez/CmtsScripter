@@ -81,7 +81,7 @@
                   ? inputCommand(' cable us-freq-range ' + rangeText.value ,  4) 
                   : inputCommand(' no cable us-freq-range', 4) 
                 : inputCommand('', 4)">
-                cable freq-us-max
+                cable us-freq-range
             </mat-checkbox>&nbsp;
             <input type="text" #rangeText class="midd__input" value="Extended" [disabled]="rangeNo.checked" (blur)="            
             rangeUpdate.checked ? !rangeNo.checked 
@@ -274,7 +274,12 @@
         </mat-expansion-panel>
     </mat-accordion>
     <br>
-    <app-cable-down-strem-v1 [mac]="mac" [desc]="desc" [pos]="20"></app-cable-down-strem-v1>
+    <!--interface cable-downstream-->
+    <app-cable-down-strem-v1 [mac]="mac" [desc]="desc" [pos]="20" (supervisionEvent)="setSupervision($event)"></app-cable-down-strem-v1>
+    <!--interface cable-upstream section A-->
+    <app-cable-up-strem-v1 [mac]="mac" [desc]="desc" [pos]="700" [supervision]="supervision" [sec]="secA"></app-cable-up-strem-v1>
+    <!--interface cable-upstream section B-->
+    <app-cable-up-strem-v1 [mac]="mac" [desc]="desc" [pos]="700" [supervision]="supervision" [sec]="secB"></app-cable-up-strem-v1>
 
 
 
