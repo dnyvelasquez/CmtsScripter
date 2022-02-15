@@ -8,7 +8,8 @@ import { SharedService } from 'src/app/shared/services/shared.service';
 })
 export class E6000V1Component implements OnInit {
 
-  mac!: number;
+  mac: string = '';
+  desc: string = '';
   panelOpenStateAtt = false
 
   constructor(private sharedSvc: SharedService) { }

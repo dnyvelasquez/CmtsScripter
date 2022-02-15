@@ -6,7 +6,7 @@
     <div class="div__interface">
       <strong>
         <span>interface cable-mac</span>&nbsp;
-        <input type="text" class="mac__input" #macText (blur)="mac  = parse_Int(macText.value);
+        <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
             inputCommand('interface cable-mac ' + macText.value, 0)">
       </strong>
     </div>
@@ -32,14 +32,14 @@
           </div>
         <!--Description-->
         <div class="div__line__pri">
-            <mat-checkbox #descUpdate color="primary" (change)="          
+            <mat-checkbox #descUpdate color="primary" (change)="      
               descUpdate.checked ? !descNo.checked 
                   ? inputCommandDesc(descText.value ,  2) 
                   : inputCommand(' no description', 2) 
                 : inputCommand('', 2)">
                 description
             </mat-checkbox>&nbsp;
-            <input type="text" #descText [disabled]="descNo.checked" (blur)="            
+            <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
               descUpdate.checked ? !descNo.checked 
                 ? inputCommandDesc(descText.value, 2) 
                 : inputCommand(' no description', 2) 
@@ -270,12 +270,11 @@
                   : inputCommand('', 14)">
                 no cable shutdown
             </mat-checkbox>&nbsp;
-          </div>
-  
+          </div>  
         </mat-expansion-panel>
     </mat-accordion>
     <br>
-
+    <app-cable-down-strem-v1 [mac]="mac" [desc]="desc" [pos]="20"></app-cable-down-strem-v1>
 
 
 
