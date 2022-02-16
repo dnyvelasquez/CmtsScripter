@@ -27,7 +27,8 @@ import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-m
 import { E6000V1Component } from './pages/e6000-v1/e6000-v1.component';
 import { CableDownStremV1Component } from './pages/e6000-v1/cable-down-strem-v1/cable-down-strem-v1.component';
 import { CableUpStremV1Component } from './pages/e6000-v1/cable-up-strem-v1/cable-up-strem-v1.component';
-import { FiberNodeV1Component } from './pages/e6000-v1/fiber-node-v1/fiber-node-v1.component'
+import { FiberNodeV1Component } from './pages/e6000-v1/fiber-node-v1/fiber-node-v1.component';
+import { E6000V2Component } from './pages/e6000-v2/e6000-v2.component'
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FiberNodeV1Component } from './pages/e6000-v1/fiber-node-v1/fiber-node-
     E6000V1Component,
     CableDownStremV1Component,
     CableUpStremV1Component,
-    FiberNodeV1Component
+    FiberNodeV1Component,
+    E6000V2Component
   ],
   imports: [
     BrowserModule, 

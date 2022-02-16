@@ -69,6 +69,14 @@ export class CBR8Component implements OnInit {
     this.posBgs.pop();
   }
 
+  makeRfChannels(start: string, end: string): string{
+    if(end === ''){
+      return start;
+    }else{
+      return start + '-' + end;
+    }
+    
+  }
 
 }
 

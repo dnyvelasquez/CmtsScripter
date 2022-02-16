@@ -4,10 +4,17 @@
     <mat-card-subtitle>Cisco</mat-card-subtitle>
     <!--interface Cable-->
     <div class="div__interface">
+      <mat-checkbox #interFaceUpdate color="primary" (change)="
+        interFaceUpdate.checked
+          ? inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)
+          : inputCommand('', 0)">
+      </mat-checkbox>&nbsp;
       <strong>
         <span>Interface Cable</span>
         <select #iF class="ifPri__select" value='' (change)="interF =  parse_Int(iF.value);
-          inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)">
+        interFaceUpdate.checked
+          ? inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)
+          : inputCommand('', 0)">
           <option></option>
           <option *ngFor="let interFace of interFaces">
             {{ interFace }}
@@ -15,7 +22,9 @@
         </select>
         <span>/</span>
         <select #sIF class="ifPri__select" value='' (change)="subInterF =  parse_Int(sIF.value);
-          inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)">
+        interFaceUpdate.checked
+          ? inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)
+          : inputCommand('', 0)">
           <option></option>
           <option *ngFor="let subInterFace of subInterFaces">
             {{ subInterFace }}
@@ -23,7 +32,9 @@
         </select>
         <span>/</span>
         <select #sl class="ifPri__select" value='' (change)="slt =  parse_Int(sl.value);
-          inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)">
+        interFaceUpdate.checked
+          ? inputCommand('interface Cable' + interF + '/' + subInterF + '/' + slt, 0)
+          : inputCommand('', 0)">
           <option></option>
           <option *ngFor="let slot of slots">
             {{ slot }}

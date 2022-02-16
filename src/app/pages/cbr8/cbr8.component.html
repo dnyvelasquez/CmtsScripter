@@ -4,10 +4,17 @@
     <mat-card-subtitle>Cisco</mat-card-subtitle>
     <!--interface Cable-->
     <div class="div__interface">
+      <mat-checkbox #interFaceUpdate color="primary" (change)="
+        interFaceUpdate.checked
+        ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
+        : inputCommand('', 0)">
+    </mat-checkbox>&nbsp;
       <strong>
         <span>Interface Cable</span>
         <select #iF class="ifPri__select" value='' (change)="interF = parse_Int(iF.value);
-          inputCommand('interface Cable' + interF + '/0/' + slt, 0)">
+          interFaceUpdate.checked
+          ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
+          : inputCommand('', 0)">
           <option></option>
           <option *ngFor="let interFace of interFaces">
             {{ interFace }}
@@ -15,7 +22,9 @@
         </select>
         <span>/0/</span>
         <select #sl class="ifPri__select" value='' (change)="slt =  parse_Int(sl.value);
-          inputCommand('interface Cable' + interF + '/0/' + slt, 0)">
+          interFaceUpdate.checked
+            ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
+            : inputCommand('', 0)">
           <option></option>
           <option *ngFor="let slot of slots">
             {{ slot }}
@@ -82,26 +91,26 @@
         <div class="div__line__pri" *ngFor="let downStream of downStreams">
           <mat-checkbox #dsChange color="primary" (change)="
             dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
+              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
+              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
             : inputCommand('', downStream)">
               downstream Integrated-Cable {{interF}}/0/{{slt}} rf-channel
           </mat-checkbox>&nbsp;
           <input #start type="text" class="short__input" (blur)="
             dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
+              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
+              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
             : inputCommand('', downStream)">
           <span>-</span>
           <input #end type="text" class="short__input" (blur)="
             dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
+              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
+              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
             : inputCommand('', downStream)">&nbsp;
           <mat-checkbox #dsNo (change)="
             dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + start.value + '-' + end.value, downStream)
+              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
+              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
             : inputCommand('', downStream)">
             No |
           </mat-checkbox>&nbsp;
