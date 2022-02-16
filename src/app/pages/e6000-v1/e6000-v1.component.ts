@@ -11,30 +11,36 @@ export class E6000V1Component implements OnInit {
   mac: string = '';
   desc: string = '';
   panelOpenStateAtt = false
-  supervision: string = '';
-  secA: string = 'A';
-  secB: string = 'B';
+  downstream: string = '';
+  upstreamA: string = '';
+  upstreamB: string = '';
+  secA: string = '';
+  secB: string = '';
+  quot: string = '"';
 
   constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
   }
 
-
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
-  }
-
-  inputCommandDesc(command: string, pos: number){
-    this.inputCommand(` description "${command}"` , pos);
   }
 
   parse_Int(value: string): number{
     return parseInt(value);
   }
 
-  setSupervision(value: string){
-    this.supervision = value;
+  setDownstream(value: string){
+    this.downstream = value;
+  }
+
+  setUpstreamA(value: string){
+    this.upstreamA = value;
+  }
+
+  setUpstreamB(value: string){
+    this.upstreamB = value;
   }
 
 

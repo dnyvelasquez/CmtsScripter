@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class CableUpStremV1Component implements OnInit {
   @Input() pos!: number;
   @Input() supervision: string = '';
   @Input() sec!: string;
+  @Output() upstreamEvent = new EventEmitter<string>();
   panelOpenState = false
   interFaces: number[] = [1, 2, 3, 4];
   subInterFaces: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -20,8 +21,7 @@ export class CableUpStremV1Component implements OnInit {
   interFace!: number;
   subInterFace!: number;
   slts: number[] = [];
-
-
+  quot: string = '"';
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -30,11 +30,6 @@ export class CableUpStremV1Component implements OnInit {
 
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
-  }
-
-  inputCommandDesc(command: string, pos: number){
-    this.inputCommand(` description "${command}"` , pos);
-    this.desc = command;
   }
 
   parse_Int(value: string):number{
@@ -46,5 +41,10 @@ export class CableUpStremV1Component implements OnInit {
       this.slts.push(parseInt(start) + i);
     }
   }
+
+  outputUpstream(value: string){
+    this.upstreamEvent.emit(value);
+  }
+
 
 }

@@ -18,7 +18,7 @@
     </select>
     -->
     <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value);
-      outputSupervision(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)">
+      outputDownstream(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)"> 
       <option></option>
       <option *ngFor="let slot of slots">{{slot}}</option>
     </select>
@@ -73,21 +73,21 @@
       <!--Description-->
       <div class="div__line__sec">
         <mat-checkbox #descUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="      
-                    descUpdate.checked ? !descNo.checked 
-                        ? inputCommandDesc(descText.value ,  4 + pos + i * 10) 
-                        : inputCommand(' no description', 4 + pos + i * 10) 
-                      : inputCommand('', 4 + pos + i * 10)">
+          descUpdate.checked ? !descNo.checked 
+            ? inputCommand(' description ' + quot + descText.value + quot,  4 + pos + i * 10) 
+            : inputCommand(' no description', 4 + pos + i * 10) 
+          : inputCommand('', 4 + pos + i * 10)">
           description
         </mat-checkbox>&nbsp;
         <input type="text" #descText [disabled]="descNo.checked" [disabled]="!ifUpdate.checked" [value]="desc" (blur)="            
-                descUpdate.checked ? !descNo.checked 
-                    ? inputCommandDesc(descText.value, 4 + pos + i * 10) 
-                    : inputCommand(' no description', 4 + pos + i * 10) 
-                : inputCommand('', 4 + pos + i * 10)">&nbsp;
+          descUpdate.checked ? !descNo.checked 
+            ? inputCommand(' description ' + quot + descText.value + quot,  4 + pos + i * 10) 
+            : inputCommand(' no description', 4 + pos + i * 10) 
+          : inputCommand('', 4 + pos + i * 10)">&nbsp;
         <mat-checkbox #descNo [disabled]="!ifUpdate.checked" (change)="descNo.checked ? descText.value = '' : false;
                 descUpdate.checked ? !descNo.checked 
-                    ? inputCommandDesc(descText.value, 4 + pos + i * 10) 
-                    : inputCommand(' no description', 4 + pos + i * 10) 
+                ? inputCommand(' description ' + quot + descText.value + quot,  4 + pos + i * 10) 
+                : inputCommand(' no description', 4 + pos + i * 10) 
                 : inputCommand('', 4 + pos + i * 10)">
           No
         </mat-checkbox>

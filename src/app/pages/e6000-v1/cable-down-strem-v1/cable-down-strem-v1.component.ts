@@ -11,7 +11,7 @@ export class CableDownStremV1Component implements OnInit {
   @Input() mac!: string;
   @Input() desc!: string;
   @Input() pos!: number;
-  @Output() supervisionEvent = new EventEmitter<string>();
+  @Output() downstreamEvent = new EventEmitter<string>();
   panelOpenState = false
   interFaces: number[] = [12, 11, 10, 9, 8, 7, 6, 5];
   subInterFaces: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -24,6 +24,7 @@ export class CableDownStremV1Component implements OnInit {
   slts: number[] = [];
   frequencies: number[] = this.sharedSvc.getFrequencies();
   freqs: number[] = this.sharedSvc.getFrequencies();
+  quot: string = '"';
 
 
   constructor(private sharedSvc: SharedService) { }
@@ -33,11 +34,6 @@ export class CableDownStremV1Component implements OnInit {
 
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
-  }
-
-  inputCommandDesc(command: string, pos: number){
-    this.inputCommand(` description "${command}"` , pos);
-    this.desc = command;
   }
 
   parse_Int(value: string):number{
@@ -63,8 +59,8 @@ export class CableDownStremV1Component implements OnInit {
     }
   }
 
-  outputSupervision(value: string){
-    this.supervisionEvent.emit(value);
+  outputDownstream(value: string){
+    this.downstreamEvent.emit(value);
   }
 
 }

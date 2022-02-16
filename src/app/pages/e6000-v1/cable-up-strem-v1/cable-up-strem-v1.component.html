@@ -17,7 +17,8 @@
       <option *ngFor="let slot of slots">{{slot}}</option>
     </select>
     -->
-    <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value)">
+    <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value);
+        outputUpstream(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)">
       <option></option>
       <option *ngFor="let slot of slots">{{slot}}</option>
     </select>
@@ -56,19 +57,19 @@
       <div class="div__line__sec">
         <mat-checkbox #descUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="      
                         descUpdate.checked ? !descNo.checked 
-                            ? inputCommandDesc(descText.value ,  3 + pos + i * 20) 
+                            ? inputCommand(' description ' + quot + descText.value + quot,  3 + pos + i * 20) 
                             : inputCommand(' no description', 3 + pos + i * 20) 
                           : inputCommand('', 3 + pos + i * 20)">
           description
         </mat-checkbox>&nbsp;
         <input type="text" #descText [disabled]="descNo.checked" [disabled]="!ifUpdate.checked" [value]="desc" (blur)="            
                     descUpdate.checked ? !descNo.checked 
-                        ? inputCommandDesc(descText.value, 3 + pos + i * 20) 
+                        ? inputCommand(' description ' + quot + descText.value + quot, 3 + pos + i * 20) 
                         : inputCommand(' no description', 3 + pos + i * 20) 
                     : inputCommand('', 3 + pos + i * 20)">&nbsp;
         <mat-checkbox #descNo [disabled]="!ifUpdate.checked" (change)="descNo.checked ? descText.value = '' : false;
                     descUpdate.checked ? !descNo.checked 
-                        ? inputCommandDesc(descText.value, 3 + pos + i * 20) 
+                        ? inputCommand(' description ' + quot + descText.value + quot, 3 + pos + i * 20) 
                         : inputCommand(' no description', 3 + pos + i * 20) 
                     : inputCommand('', 3 + pos + i * 20)">
           No
