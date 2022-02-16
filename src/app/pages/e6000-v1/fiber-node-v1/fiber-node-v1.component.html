@@ -62,7 +62,7 @@
                 ? inputCommand(' description ' + quot + descText.value + quot, pos + 2) 
                 : inputCommand(' no description', pos + 2)
             : inputCommand('', pos + 2)">&nbsp;
-        <mat-checkbox #descNo color="accent" [disabled]="!fiberUpdate.checked" (change)="          
+        <mat-checkbox #descNo color="accent" [disabled]="!fiberUpdate.checked" (change)="descNo.checked ? descText.value = '' : false;        
             descUpdate.checked ? !descNo.checked
                 ? inputCommand(' description ' + quot + descText.value + quot, pos + 2) 
                 : inputCommand(' no description', pos + 2)
@@ -101,6 +101,50 @@
                 ? inputCommand(' cable-upstream ' + upstream, pos + 4) 
                 : inputCommand(' no cable-upstream ' + upstream, pos + 4)
             : inputCommand('', pos + 4)">
+            No
+        </mat-checkbox>
+      </div>
+      <!--policy-->
+      <div class="div__line__sec">
+        <mat-checkbox #policyUpdate color="primary" [disabled]="!fiberUpdate.checked" (change)="          
+            policyUpdate.checked ? !policyNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance policy ' + policyText.value, pos + 5) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance policy', pos + 5)
+            : inputCommand('', pos + 5)">
+            cable-mac {{mac}} load-balance policy 
+        </mat-checkbox>&nbsp;
+        <input type="text" #policyText class="short__input" [disabled]="!fiberUpdate.checked" value="1" (blur)="
+            policyUpdate.checked ? !policyNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance policy ' + policyText.value, pos + 5) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance policy', pos + 5)
+            : inputCommand('', pos + 5)">&nbsp;
+        <mat-checkbox #policyNo color="accent" [disabled]="!fiberUpdate.checked" (change)="policyNo.checked ? policyText.value = '' : false;        
+            policyUpdate.checked ? !policyNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance policy ' + policyText.value, pos + 5) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance policy', pos + 5)
+            : inputCommand('', pos + 5)">
+            No
+        </mat-checkbox>
+      </div>
+      <!--init-technique-->
+      <div class="div__line__sec">
+        <mat-checkbox #techUpdate color="primary" [disabled]="!fiberUpdate.checked" (change)="          
+            techUpdate.checked ? !techNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance init-technique ' + techText.value, pos + 6) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance init-technique', pos + 6)
+            : inputCommand('', pos + 6)">
+            cable-mac {{mac}} load-balance init-technique 
+        </mat-checkbox>&nbsp;
+        <input type="text" #techText class="midd__input" [disabled]="!fiberUpdate.checked" value="direct" (blur)="
+            techUpdate.checked ? !techNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance init-technique ' + techText.value, pos + 6) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance init-technique', pos + 6)
+            : inputCommand('', pos + 6)">&nbsp;
+        <mat-checkbox #techNo color="accent" [disabled]="!fiberUpdate.checked" (change)="techNo.checked ? techText.value = '' : false;        
+            techUpdate.checked ? !techNo.checked
+                ? inputCommand(' cable-mac ' + mac + ' load-balance init-technique ' + techText.value, pos + 6) 
+                : inputCommand(' no cable-mac ' + mac + ' load-balance init-technique', pos + 6)
+            : inputCommand('', pos + 6)">
             No
         </mat-checkbox>
       </div>

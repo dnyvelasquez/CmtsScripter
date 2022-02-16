@@ -51,7 +51,7 @@
                   ? inputCommand(' description ' + quot + descText.value + quot, 2) 
                   : inputCommand(' no description', 2) 
                 : inputCommand('', 2)">&nbsp;
-            <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false" (change)="
+            <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
                 descUpdate.checked ? !descNo.checked 
                   ? inputCommand(' description ' + quot + descText.value + quot, 2) 
                   : inputCommand(' no description', 2) 
@@ -269,12 +269,21 @@
               No
             </mat-checkbox>
           </div>
+          <!--generate-pool-->
+          <div class="div__line__pri">
+            <mat-checkbox #genUpdate color="primary" (change)="          
+              genUpdate.checked 
+                ? inputCommand(' cable downstream-bonding-group static generate-pool',  14) 
+                : inputCommand('', 14)">
+              cable downstream-bonding-group static generate-pool
+            </mat-checkbox>&nbsp;
+          </div>
           <!--shutdown-->
           <div class="div__line__pri">
             <mat-checkbox #shutEndtUpdate color="primary" (change)="          
               shutEndtUpdate.checked 
-                    ? inputCommand(' no cable shutdown',  14) 
-                    : inputCommand('', 14)">
+                    ? inputCommand(' no cable shutdown',  15) 
+                    : inputCommand('', 15)">
               no cable shutdown
             </mat-checkbox>&nbsp;
           </div>
@@ -282,12 +291,15 @@
       </mat-accordion>
       <br>
       <!--interface cable-downstream-->
-      <app-cable-down-strem-v1 [mac]="mac" [desc]="desc" [pos]="20" (downstreamEvent)="setDownstream($event)">
-      </app-cable-down-strem-v1>
+      <app-cable-down-stream-v2 [mac]="mac" [desc]="desc" [pos]="20" (downstreamEvent)="setDownstream($event)">
+      </app-cable-down-stream-v2>
+
+
+
       <!--interface cable-upstream section A-->
-      <app-cable-up-strem-v1 [mac]="mac" [desc]="desc" [pos]="700" [supervision]="downstream" [sec]="secA"
+      <app-cable-up-stream-v1 [mac]="mac" [desc]="desc" [pos]="700" [supervision]="downstream" [sec]="secA"
         (upstreamEvent)="setUpstreamA($event)">
-      </app-cable-up-strem-v1>
+      </app-cable-up-stream-v1>
       <!--interface cable-upstream section B-->
       <div class="div__line__pri">
         <mat-checkbox #addUpstream color="primary" (change)="          
@@ -296,9 +308,9 @@
         </mat-checkbox>&nbsp;
       </div>
       <div *ngIf="secB === 'B'">
-        <app-cable-up-strem-v1 [mac]="mac" [desc]="desc" [pos]="900" [supervision]="downstream" [sec]="secB"
+        <app-cable-up-stream-v1 [mac]="mac" [desc]="desc" [pos]="900" [supervision]="downstream" [sec]="secB"
           (upstreamEvent)="setUpstreamB($event)">
-        </app-cable-up-strem-v1>
+        </app-cable-up-stream-v1>
       </div>
       <!--interface cable fiber-node section A-->
       <app-fiber-node-v1 [mac]="mac" [desc]="desc" [pos]="1100" [downstream]="downstream" [upstream]="upstreamA"

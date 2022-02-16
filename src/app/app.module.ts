@@ -25,10 +25,11 @@ import { LoadBalanceComponent } from './pages/ubr10000/load-balance/load-balance
 import { BondingGroupModComponent } from './pages/ubr10000/bonding-group-mod/bonding-group-mod.component';
 import { WideBandModComponent } from './pages/ubr10000/wide-band-mod/wide-band-mod.component';
 import { E6000V1Component } from './pages/e6000-v1/e6000-v1.component';
-import { CableDownStremV1Component } from './pages/e6000-v1/cable-down-strem-v1/cable-down-strem-v1.component';
-import { CableUpStremV1Component } from './pages/e6000-v1/cable-up-strem-v1/cable-up-strem-v1.component';
+import { CableDownStreamV1Component } from './pages/e6000-v1/cable-down-stream-v1/cable-down-stream-v1.component';
+import { CableUpStreamV1Component } from './pages/e6000-v1/cable-up-stream-v1/cable-up-stream-v1.component';
 import { FiberNodeV1Component } from './pages/e6000-v1/fiber-node-v1/fiber-node-v1.component';
-import { E6000V2Component } from './pages/e6000-v2/e6000-v2.component'
+import { E6000V2Component } from './pages/e6000-v2/e6000-v2.component';
+import { CableDownStreamV2Component } from './pages/e6000-v2/cable-down-stream-v2/cable-down-stream-v2.component'
 
 @NgModule({
   declarations: [
@@ -51,10 +52,11 @@ import { E6000V2Component } from './pages/e6000-v2/e6000-v2.component'
     BondingGroupModComponent,
     WideBandModComponent,
     E6000V1Component,
-    CableDownStremV1Component,
-    CableUpStremV1Component,
+    CableDownStreamV1Component,
+    CableUpStreamV1Component,
     FiberNodeV1Component,
-    E6000V2Component
+    E6000V2Component,
+    CableDownStreamV2Component
   ],
   imports: [
     BrowserModule, 
