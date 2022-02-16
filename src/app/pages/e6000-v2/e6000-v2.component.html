@@ -312,14 +312,14 @@
 
 
       <!--interface cable fiber-node section A-->
-      <app-fiber-node-v1 [mac]="mac" [desc]="desc" [pos]="1100" [downstream]="downstream" [upstream]="upstreamA"
+      <app-fiber-node-v2 [mac]="mac" [desc]="desc" [pos]="1100" [downstream]="downstream" [upstream]="upstreamA"
         [sec]="secA">
-      </app-fiber-node-v1>
+      </app-fiber-node-v2>
       <!--interface cable fiber-node section B-->
       <div *ngIf="secB === 'B'">
-        <app-fiber-node-v1 [mac]="mac" [desc]="desc" [pos]="1110" [downstream]="downstream" [upstream]="upstreamB"
+        <app-fiber-node-v2 [mac]="mac" [desc]="desc" [pos]="1110" [downstream]="downstream" [upstream]="upstreamB"
           [sec]="secB">
-        </app-fiber-node-v1>
+        </app-fiber-node-v2>
       </div>
       <!--Generate script-->
       <app-script></app-script>

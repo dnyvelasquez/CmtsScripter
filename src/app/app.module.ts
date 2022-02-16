@@ -30,7 +30,8 @@ import { CableUpStreamV1Component } from './pages/e6000-v1/cable-up-stream-v1/ca
 import { FiberNodeV1Component } from './pages/e6000-v1/fiber-node-v1/fiber-node-v1.component';
 import { E6000V2Component } from './pages/e6000-v2/e6000-v2.component';
 import { CableDownStreamV2Component } from './pages/e6000-v2/cable-down-stream-v2/cable-down-stream-v2.component';
-import { CableUpStreamV2Component } from './pages/e6000-v2/cable-up-stream-v2/cable-up-stream-v2.component'
+import { CableUpStreamV2Component } from './pages/e6000-v2/cable-up-stream-v2/cable-up-stream-v2.component';
+import { FiberNodeV2Component } from './pages/e6000-v2/fiber-node-v2/fiber-node-v2.component'
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CableUpStreamV2Component } from './pages/e6000-v2/cable-up-stream-v2/ca
     FiberNodeV1Component,
     E6000V2Component,
     CableDownStreamV2Component,
-    CableUpStreamV2Component
+    CableUpStreamV2Component,
+    FiberNodeV2Component
   ],
   imports: [
     BrowserModule, 
