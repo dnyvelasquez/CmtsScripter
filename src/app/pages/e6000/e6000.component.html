@@ -297,14 +297,17 @@
               genUpdate.checked 
                 ? inputCommand(' cable downstream-bonding-group static generate-pool',  15) 
                 : inputCommand('', 15)">
-              cable downstream-bonding-group static generate-pool (Only V2)
+              cable downstream-bonding-group static generate-pool
             </mat-checkbox>&nbsp;
           </div>
+          <!--bonding groups correction-->
+          <app-bonding-group-e6000 *ngIf="genUpdate.checked" [pos]="16" [downIf]="downIf" [downSif]="downSif">
+          </app-bonding-group-e6000>
           <!--shutdown-->
           <div class="div__line__pri">
             <mat-checkbox #shutEndtUpdate color="primary" (change)="          
               shutEndtUpdate.checked 
-                    ? inputCommand(' no cable shutdown',  16) 
+                    ? inputCommand(' no cable shutdown',  19) 
                     : inputCommand('', 16)">
               no cable shutdown
             </mat-checkbox>&nbsp;
@@ -342,8 +345,6 @@
           [sec]="secB">
         </app-fiber-node>
       </div>
-      <!--bonding groups correction-->
-      <app-bonding-group-e6000 [pos]="1120" [downIf]="downIf" [downSif]="downSif"></app-bonding-group-e6000>
       <!--Generate script-->
       <app-script></app-script>
     </mat-card>

@@ -1,14 +1,9 @@
 <!--fiber node-->
-<div class="div__subinterface">
-    <strong>
-        static bonding-groups correction (Only V2)
-    </strong>
-</div>
 <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-            static bonding-groups correction atrributes
+            static bonding-groups correction
         </mat-panel-title>
         <mat-panel-description>
           Click to {{panelOpenState ? 'close' : 'open'}}
@@ -27,8 +22,8 @@
         <!--32 carriers-->
         <div class="div__line__pri">
             <mat-radio-button class="bonding__radio" value="2" (change)="
-                inputCommand('no cable downstream-bonding-group 65015', pos);
-                inputCommand('cable downstream-bonding-group 65015 cable-downstream ' + downIf + '/' + downSif + '/8-31', pos + 1);
+                inputCommand(' no cable downstream-bonding-group 65015', pos);
+                inputCommand(' cable downstream-bonding-group 65015 cable-downstream ' + downIf + '/' + downSif + '/8-31', pos + 1);
                 inputCommand('', pos + 2)">
                 32 carriers
             </mat-radio-button>
@@ -40,9 +35,9 @@
         <!--40 carriers-->
         <div class="div__line__pri">
             <mat-radio-button class="bonding__radio" value="3" (change)="
-            inputCommand('no cable downstream-bonding-group 65018', pos);
-            inputCommand('no cable downstream-bonding-group 65019', pos + 1);
-            inputCommand('cable downstream-bonding-group 65018 cable-downstream ' + downIf + '/' + downSif + '/16-39', pos + 2)">
+            inputCommand(' no cable downstream-bonding-group 65018', pos);
+            inputCommand(' no cable downstream-bonding-group 65019', pos + 1);
+            inputCommand(' cable downstream-bonding-group 65018 cable-downstream ' + downIf + '/' + downSif + '/16-39', pos + 2)">
                 40 carriers
             </mat-radio-button>
         </div>
@@ -54,8 +49,8 @@
         <!--48 carriers-->
         <div class="div__line__pri">
             <mat-radio-button class="bonding__radio" value="4" (change)="
-            inputCommand('no cable downstream-bonding-group 65023', pos);
-            inputCommand('no cable downstream-bonding-group 65024', pos + 1);
+            inputCommand(' no cable downstream-bonding-group 65023', pos);
+            inputCommand(' no cable downstream-bonding-group 65024', pos + 1);
             inputCommand('', pos + 2)">
                 48 carriers
             </mat-radio-button>
