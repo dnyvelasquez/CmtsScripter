@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-e6000-v1',
-  templateUrl: './e6000-v1.component.html',
+  selector: 'app-e6000',
+  templateUrl: './e6000.component.html',
   styleUrls: ['../../shared/styles/generalStyles.scss']
 })
-export class E6000V1Component implements OnInit {
+export class E6000Component implements OnInit {
 
   mac: string = '';
   desc: string = '';
@@ -17,6 +17,8 @@ export class E6000V1Component implements OnInit {
   secA: string = '';
   secB: string = '';
   quot: string = '"';
+  downIf: string = '';
+  downSif: string = '';
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -42,5 +44,13 @@ export class E6000V1Component implements OnInit {
   setUpstreamB(value: string){
     this.upstreamB = value;
   }
-
+  
+  setDownIf(value: string){
+    this.downIf = value;
+  }
+  
+  setDownSif(value: string){
+    this.downSif = value;
+  }
+  
 }

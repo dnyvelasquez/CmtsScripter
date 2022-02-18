@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-fiber-node-v2',
-  templateUrl: './fiber-node-v2.component.html',
+  selector: 'app-fiber-node',
+  templateUrl: './fiber-node.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class FiberNodeV2Component implements OnInit {
+export class FiberNodeComponent implements OnInit {
 
   @Input() mac: string = '';
   @Input() downstream: string = '';

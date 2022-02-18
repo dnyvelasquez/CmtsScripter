@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-cable-up-stream-v1',
-  templateUrl: './cable-up-stream-v1.component.html',
+  selector: 'app-cable-up-stream',
+  templateUrl: './cable-up-stream.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class CableUpStreamV1Component implements OnInit {
+export class CableUpStreamComponent implements OnInit {
 
   @Input() mac!: string;
   @Input() desc!: string;
@@ -45,6 +45,5 @@ export class CableUpStreamV1Component implements OnInit {
   outputUpstream(value: string){
     this.upstreamEvent.emit(value);
   }
-
 
 }

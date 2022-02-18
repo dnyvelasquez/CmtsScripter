@@ -2,12 +2,12 @@
 <div class="div__subinterface">
     <strong>
       interfaces cable-downstream
-      <select #ifSelect class="ifPri__select" (change)="interFace = parse_Int(ifSelect.value)">
+      <select #ifSelect class="ifPri__select" (change)="interFace = parse_Int(ifSelect.value); outputInterFace(ifSelect.value)">
         <option></option>
         <option *ngFor="let interFace of interFaces">{{interFace}}</option>
       </select>
       /
-      <select #sifSelect class="ifPri__select" (change)="subInterFace = parse_Int(sifSelect.value)">
+      <select #sifSelect class="ifPri__select" (change)="subInterFace = parse_Int(sifSelect.value); outputSubInterFace(sifSelect.value)">
         <option></option>
         <option *ngFor="let subInterFace of subInterFaces">{{subInterFace}}</option>
       </select>
@@ -173,7 +173,7 @@
                     ? inputCommand(' cable modulation ' + modText.value, 8 + pos + i * 10) 
                     : inputCommand(' no cable modulation', 8 + pos + i * 10) 
                 : inputCommand('', 8 + pos + i * 10)">
-              No
+              No (Only V2)
             </mat-checkbox>
           </div>
         <!--primary-capable-->
@@ -190,7 +190,7 @@
                     ? inputCommand(' cable primary-capable', 9 + pos + i * 10) 
                     : inputCommand(' no cable primary-capable', 9 + pos + i * 10) 
                 : inputCommand('', 9 + pos + i * 10)">
-              No
+              No (Only V2)
             </mat-checkbox>
           </div>
           <!--shutdown-->

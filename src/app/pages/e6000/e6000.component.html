@@ -1,6 +1,6 @@
 <div class="container">
     <mat-card>
-      <mat-card-title>E6000 V2</mat-card-title>
+      <mat-card-title>E6000</mat-card-title>
       <mat-card-subtitle>Arris</mat-card-subtitle>
       <!--interface cable-mac-->
       <div class="div__interface">
@@ -103,20 +103,42 @@
               No
             </mat-checkbox>
           </div>
+        <!--cm-tcs-max-size-->
+        <div class="div__line__pri">
+          <mat-checkbox #tcsUpdate color="primary" (change)="          
+            tcsUpdate.checked ? !tcsNo.checked 
+                  ? inputCommand(' cable cm-tcs-max-size ' + tcsText.value ,  5) 
+                  : inputCommand(' no cable cm-tcs-max-size', 5) 
+                : inputCommand('', 5)">
+                cable cm-tcs-max-size
+          </mat-checkbox>&nbsp;
+          <input type="text" #tcsText class="short__input" value="2" [disabled]="tcsNo.checked" (blur)="            
+            tcsUpdate.checked ? !tcsNo.checked 
+                ? inputCommand(' cable cm-tcs-max-size ' + tcsText.value, 5) 
+                : inputCommand(' no cable cm-tcs-max-size', 5) 
+              : inputCommand('', 5)">&nbsp;
+          <mat-checkbox #tcsNo (change)="tcsNo.checked ? tcsText.value = '' : false;
+            tcsUpdate.checked ? !tcsNo.checked 
+                ? inputCommand(' cable cm-tcs-max-size ' + tcsText.value, 5) 
+                : inputCommand(' no cable cm-tcs-max-size', 5) 
+              : inputCommand('', 5)">
+            No (Only V1)
+          </mat-checkbox>
+        </div>
           <!--tftp-enforce-->
           <div class="div__line__pri">
             <mat-checkbox #tftpUpdate color="primary" (change)="          
               tftpUpdate.checked ? !tftpNo.checked 
-                    ? inputCommand(' cable tftp-enforce',  5) 
-                    : inputCommand(' no cable tftp-enforce', 5) 
-                  : inputCommand('', 5)">
+                    ? inputCommand(' cable tftp-enforce',  6) 
+                    : inputCommand(' no cable tftp-enforce', 6) 
+                  : inputCommand('', 6)">
               cable tftp-enforce
             </mat-checkbox>&nbsp;
             <mat-checkbox #tftpNo (change)="
               tftpUpdate.checked ? !tftpNo.checked 
-                  ? inputCommand(' cable tftp-enforce', 45) 
-                  : inputCommand(' no cable tftp-enforce', 5) 
-                : inputCommand('', 5)">
+                  ? inputCommand(' cable tftp-enforce', 6) 
+                  : inputCommand(' no cable tftp-enforce', 6) 
+                : inputCommand('', 6)">
               No
             </mat-checkbox>
           </div>
@@ -124,21 +146,21 @@
           <div class="div__line__pri">
             <mat-checkbox #dynamicUpdate color="primary" (change)="          
               dynamicUpdate.checked ? !dynamicNo.checked 
-                    ? inputCommand(' cable dynamic-secret ' + dynamicText.value ,  6) 
-                    : inputCommand(' no cable dynamic-secret', 6) 
-                  : inputCommand('', 6)">
+                    ? inputCommand(' cable dynamic-secret ' + dynamicText.value ,  7) 
+                    : inputCommand(' no cable dynamic-secret', 7) 
+                  : inputCommand('', 7)">
               cable dynamic-secret
             </mat-checkbox>&nbsp;
             <input type="text" #dynamicText class="shortplus__input" value="mark" [disabled]="dynamicNo.checked" (blur)="            
               dynamicUpdate.checked ? !dynamicNo.checked 
-                  ? inputCommand(' cable dynamic-secret ' + dynamicText.value, 6) 
-                  : inputCommand(' no cable dynamic-secret', 6) 
-                : inputCommand('', 6)">&nbsp;
+                  ? inputCommand(' cable dynamic-secret ' + dynamicText.value, 7) 
+                  : inputCommand(' no cable dynamic-secret', 7) 
+                : inputCommand('', 7)">&nbsp;
             <mat-checkbox #dynamicNo (change)="dynamicNo.checked ? dynamicText.value = '' : false;
               dynamicUpdate.checked ? !dynamicNo.checked 
-                  ? inputCommand(' cable dynamic-secret ' + dynamicText.value, 6) 
-                  : inputCommand(' no cable dynamic-secret', 6) 
-                : inputCommand('', 6)">
+                  ? inputCommand(' cable dynamic-secret ' + dynamicText.value, 7) 
+                  : inputCommand(' no cable dynamic-secret', 7) 
+                : inputCommand('', 7)">
               No
             </mat-checkbox>
           </div>
@@ -146,21 +168,21 @@
           <div class="div__line__pri">
             <mat-checkbox #modeUpdate color="primary" (change)="          
               modeUpdate.checked ? !modeNo.checked 
-                    ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value ,  7) 
-                    : inputCommand(' no cable cm-ip-prov-mode', 7) 
-                  : inputCommand('', 7)">
+                    ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value ,  8) 
+                    : inputCommand(' no cable cm-ip-prov-mode', 8) 
+                  : inputCommand('', 8)">
               cable cm-ip-prov-mode
             </mat-checkbox>&nbsp;
             <input type="text" #modeText class="midd__input" value="ipv4only" [disabled]="modeNo.checked" (blur)="            
               modeUpdate.checked ? !modeNo.checked 
-                  ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value, 7) 
-                  : inputCommand(' no cm-ip-prov-mode', 7) 
-                : inputCommand('', 7)">&nbsp;
+                  ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value, 8) 
+                  : inputCommand(' no cm-ip-prov-mode', 8) 
+                : inputCommand('', 8)">&nbsp;
             <mat-checkbox #modeNo (change)="modeNo.checked ? modeText.value = '' : false;
               modeUpdate.checked ? !modeNo.checked 
-                  ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value, 7) 
-                  : inputCommand(' no cable cm-ip-prov-mode', 7) 
-                : inputCommand('', 7)">
+                  ? inputCommand(' cable cm-ip-prov-mode ' + modeText.value, 8) 
+                  : inputCommand(' no cable cm-ip-prov-mode', 8) 
+                : inputCommand('', 8)">
               No
             </mat-checkbox>
           </div>
@@ -168,16 +190,16 @@
           <div class="div__line__pri">
             <mat-checkbox #rcpUpdate color="primary" (change)="          
               rcpUpdate.checked ? !rcpNo.checked 
-                    ? inputCommand(' cable verbose-cm-rcp',  8) 
-                    : inputCommand(' no cable verbose-cm-rcp', 8) 
-                  : inputCommand('', 8)">
+                    ? inputCommand(' cable verbose-cm-rcp',  9) 
+                    : inputCommand(' no cable verbose-cm-rcp', 9) 
+                  : inputCommand('', 9)">
               cable verbose-cm-rcp
             </mat-checkbox>&nbsp;
             <mat-checkbox #rcpNo (change)="
               rcpUpdate.checked ? !rcpNo.checked 
-                  ? inputCommand(' cable verbose-cm-rcp', 8) 
-                  : inputCommand(' no cable verbose-cm-rcp', 8) 
-                : inputCommand('', 8)">
+                  ? inputCommand(' cable verbose-cm-rcp', 9) 
+                  : inputCommand(' no cable verbose-cm-rcp', 9) 
+                : inputCommand('', 9)">
               No
             </mat-checkbox>
           </div>
@@ -185,16 +207,16 @@
           <div class="div__line__pri">
             <mat-checkbox #rccUpdate color="primary" (change)="          
               rccUpdate.checked ? !rccNo.checked 
-                    ? inputCommand(' cable dynamic-rcc',  9) 
-                    : inputCommand(' no cable dynamic-rcc', 9) 
-                  : inputCommand('', 9)">
+                    ? inputCommand(' cable dynamic-rcc',  10) 
+                    : inputCommand(' no cable dynamic-rcc', 10) 
+                  : inputCommand('', 10)">
               cable dynamic-rcc
             </mat-checkbox>&nbsp;
             <mat-checkbox #rccNo (change)="
               rccUpdate.checked ? !rccNo.checked 
-                  ? inputCommand(' cable dynamic-rcc', 9) 
-                  : inputCommand(' no cable dynamic-rcc', 9) 
-                : inputCommand('', 9)">
+                  ? inputCommand(' cable dynamic-rcc', 10) 
+                  : inputCommand(' no cable dynamic-rcc', 10) 
+                : inputCommand('', 10)">
               No
             </mat-checkbox>
           </div>
@@ -202,14 +224,14 @@
           <div class="div__line__pri">
             <mat-checkbox #downbgUpdate color="primary" (change)="          
               downbgUpdate.checked 
-                  ? inputCommand(' cable downstream-bonding-group dynamic ' + downbgSelect.value ,  10) 
-                  : inputCommand('', 10)">
+                  ? inputCommand(' cable downstream-bonding-group dynamic ' + downbgSelect.value ,  11) 
+                  : inputCommand('', 1)">
               cable downstream-bonding-group dynamic
             </mat-checkbox>&nbsp;
             <select #downbgSelect (change)="          
               downbgUpdate.checked 
-                  ? inputCommand(' cable downstream-bonding-group dynamic ' + downbgSelect.value ,  10) 
-                  : inputCommand('', 10)">
+                  ? inputCommand(' cable downstream-bonding-group dynamic ' + downbgSelect.value ,  1) 
+                  : inputCommand('', 1)">
               <option>enable</option>
               <option>disable</option>
             </select>
@@ -218,14 +240,14 @@
           <div class="div__line__pri">
             <mat-checkbox #upbgUpdate color="primary" (change)="          
               upbgUpdate.checked 
-                  ? inputCommand(' cable upstream-bonding-group dynamic ' + upbgSelect.value ,  11) 
-                  : inputCommand('', 11)">
+                  ? inputCommand(' cable upstream-bonding-group dynamic ' + upbgSelect.value ,  12) 
+                  : inputCommand('', 12)">
               cable upstream-bonding-group dynamic
             </mat-checkbox>&nbsp;
             <select #upbgSelect (change)="          
               upbgUpdate.checked 
-                  ? inputCommand(' cable upstream-bonding-group dynamic ' + upbgSelect.value ,  11) 
-                  : inputCommand('', 11)">
+                  ? inputCommand(' cable upstream-bonding-group dynamic ' + upbgSelect.value ,  12) 
+                  : inputCommand('', 12)">
               <option>enable</option>
               <option>disable</option>
             </select>
@@ -234,16 +256,16 @@
           <div class="div__line__pri">
             <mat-checkbox #multUpdate color="primary" (change)="          
               multUpdate.checked ? !multNo.checked 
-                    ? inputCommand(' cable mult-tx-chl-mode',  12) 
-                    : inputCommand(' no cable mult-tx-chl-mode', 12) 
-                  : inputCommand('', 12)">
+                    ? inputCommand(' cable mult-tx-chl-mode',  13) 
+                    : inputCommand(' no cable mult-tx-chl-mode', 13) 
+                  : inputCommand('', 13)">
               cable mult-tx-chl-mode
             </mat-checkbox>&nbsp;
             <mat-checkbox #multNo (change)="
               multUpdate.checked ? !multNo.checked 
-                  ? inputCommand(' cable mult-tx-chl-mode', 12) 
-                  : inputCommand(' no cable mult-tx-chl-mode', 12) 
-                : inputCommand('', 12)">
+                  ? inputCommand(' cable mult-tx-chl-mode', 13) 
+                  : inputCommand(' no cable mult-tx-chl-mode', 13) 
+                : inputCommand('', 13)">
               No
             </mat-checkbox>
           </div>
@@ -251,21 +273,21 @@
           <div class="div__line__pri">
             <mat-checkbox #privacyUpdate color="primary" (change)="          
               privacyUpdate.checked ? !privacyNo.checked 
-                    ? inputCommand(' cable privacy mandatory ' + privacyText.value ,  13) 
-                    : inputCommand(' no cable privacy mandatory', 13) 
-                  : inputCommand('', 13)">
+                    ? inputCommand(' cable privacy mandatory ' + privacyText.value ,  14) 
+                    : inputCommand(' no cable privacy mandatory', 14) 
+                  : inputCommand('', 14)">
               cable privacy mandatory
             </mat-checkbox>&nbsp;
             <input type="text" #privacyText class="midd__input" value="bpi-plus" [disabled]="privacyNo.checked" (blur)="            
               privacyUpdate.checked ? !privacyNo.checked 
-                  ? inputCommand(' cable privacy mandatory ' + privacyText.value, 13) 
-                  : inputCommand(' no cable privacy mandatory', 713) 
+                  ? inputCommand(' cable privacy mandatory ' + privacyText.value, 14) 
+                  : inputCommand(' no cable privacy mandatory', 14) 
                 : inputCommand('', 13)">&nbsp;
             <mat-checkbox #privacyNo (change)="privacyNo.checked ? privacyText.value = '' : false;
               privacyUpdate.checked ? !privacyNo.checked 
-                  ? inputCommand(' cable privacy mandatory ' + privacyText.value, 13) 
-                  : inputCommand(' no cable privacy mandatory', 13) 
-                : inputCommand('', 13)">
+                  ? inputCommand(' cable privacy mandatory ' + privacyText.value, 14) 
+                  : inputCommand(' no cable privacy mandatory', 14) 
+                : inputCommand('', 14)">
               No
             </mat-checkbox>
           </div>
@@ -273,17 +295,17 @@
           <div class="div__line__pri">
             <mat-checkbox #genUpdate color="primary" (change)="          
               genUpdate.checked 
-                ? inputCommand(' cable downstream-bonding-group static generate-pool',  14) 
-                : inputCommand('', 14)">
-              cable downstream-bonding-group static generate-pool
+                ? inputCommand(' cable downstream-bonding-group static generate-pool',  15) 
+                : inputCommand('', 15)">
+              cable downstream-bonding-group static generate-pool (Only V2)
             </mat-checkbox>&nbsp;
           </div>
           <!--shutdown-->
           <div class="div__line__pri">
             <mat-checkbox #shutEndtUpdate color="primary" (change)="          
               shutEndtUpdate.checked 
-                    ? inputCommand(' no cable shutdown',  15) 
-                    : inputCommand('', 15)">
+                    ? inputCommand(' no cable shutdown',  16) 
+                    : inputCommand('', 16)">
               no cable shutdown
             </mat-checkbox>&nbsp;
           </div>
@@ -291,12 +313,13 @@
       </mat-accordion>
       <br>
       <!--interface cable-downstream-->
-      <app-cable-down-stream-v2 [mac]="mac" [desc]="desc" [pos]="20" (downstreamEvent)="setDownstream($event)">
-      </app-cable-down-stream-v2>
+      <app-cable-down-stream [mac]="mac" [desc]="desc" [pos]="20" 
+      (downstreamEvent)="setDownstream($event)" (interFaceEvent)="setDownIf($event)" (subInterFaceEvent)="setDownSif($event)">
+      </app-cable-down-stream>
       <!--interface cable-upstream section A-->
-      <app-cable-up-stream-v2 [mac]="mac" [desc]="desc" [pos]="700" [supervision]="downstream" [sec]="secA"
+      <app-cable-up-stream [mac]="mac" [desc]="desc" [pos]="700" [supervision]="downstream" [sec]="secA"
         (upstreamEvent)="setUpstreamA($event)">
-      </app-cable-up-stream-v2>
+      </app-cable-up-stream>
       <!--interface cable-upstream section B-->
       <div class="div__line__pri">
         <mat-checkbox #addUpstream color="primary" (change)="          
@@ -305,22 +328,22 @@
         </mat-checkbox>&nbsp;
       </div>
       <div *ngIf="secB === 'B'">
-        <app-cable-up-stream-v2 [mac]="mac" [desc]="desc" [pos]="900" [supervision]="downstream" [sec]="secB"
+        <app-cable-up-stream [mac]="mac" [desc]="desc" [pos]="900" [supervision]="downstream" [sec]="secB"
           (upstreamEvent)="setUpstreamB($event)">
-        </app-cable-up-stream-v2>
+        </app-cable-up-stream>
       </div>
-
-
       <!--interface cable fiber-node section A-->
-      <app-fiber-node-v2 [mac]="mac" [desc]="desc" [pos]="1100" [downstream]="downstream" [upstream]="upstreamA"
+      <app-fiber-node [mac]="mac" [desc]="desc" [pos]="1100" [downstream]="downstream" [upstream]="upstreamA"
         [sec]="secA">
-      </app-fiber-node-v2>
+      </app-fiber-node>
       <!--interface cable fiber-node section B-->
       <div *ngIf="secB === 'B'">
-        <app-fiber-node-v2 [mac]="mac" [desc]="desc" [pos]="1110" [downstream]="downstream" [upstream]="upstreamB"
+        <app-fiber-node [mac]="mac" [desc]="desc" [pos]="1110" [downstream]="downstream" [upstream]="upstreamB"
           [sec]="secB">
-        </app-fiber-node-v2>
+        </app-fiber-node>
       </div>
+      <!--bonding groups correction-->
+      <app-bonding-group-e6000 [pos]="1120" [downIf]="downIf" [downSif]="downSif"></app-bonding-group-e6000>
       <!--Generate script-->
       <app-script></app-script>
     </mat-card>

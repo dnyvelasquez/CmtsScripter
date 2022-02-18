@@ -2,20 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-fiber-node-v1',
-  templateUrl: './fiber-node-v1.component.html',
+  selector: 'app-bonding-group-e6000',
+  templateUrl: './bonding-group-e6000.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class FiberNodeV1Component implements OnInit {
+export class BondingGroupE6000Component implements OnInit {
 
-  @Input() mac: string = '';
-  @Input() downstream: string = '';
-  @Input() upstream: string = '';
-  @Input() desc: string = '';
   @Input() pos!: number;
-  @Input() sec: string = '';
+  @Input() downIf: string = '';
+  @Input() downSif: string = '';
   panelOpenState = false
-  quot: string = '"';
 
   constructor(private sharedSvc: SharedService) { }
 

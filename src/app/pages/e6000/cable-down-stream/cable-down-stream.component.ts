@@ -2,16 +2,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
-  selector: 'app-cable-down-stream-v2',
-  templateUrl: './cable-down-stream-v2.component.html',
+  selector: 'app-cable-down-stream',
+  templateUrl: './cable-down-stream.component.html',
   styleUrls: ['../../../shared/styles/generalStyles.scss']
 })
-export class CableDownStreamV2Component implements OnInit {
+export class CableDownStreamComponent implements OnInit {
 
   @Input() mac!: string;
   @Input() desc!: string;
   @Input() pos!: number;
   @Output() downstreamEvent = new EventEmitter<string>();
+  @Output() interFaceEvent = new EventEmitter<string>();
+  @Output() subInterFaceEvent = new EventEmitter<string>();
   panelOpenState = false
   interFaces: number[] = [12, 11, 10, 9, 8, 7, 6, 5];
   subInterFaces: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
@@ -62,4 +64,13 @@ export class CableDownStreamV2Component implements OnInit {
   outputDownstream(value: string){
     this.downstreamEvent.emit(value);
   }
+
+  outputInterFace(value: string){
+    this.interFaceEvent.emit(value);
+  }
+
+  outputSubInterFace(value: string){
+    this.subInterFaceEvent.emit(value);
+  }
+
 }
