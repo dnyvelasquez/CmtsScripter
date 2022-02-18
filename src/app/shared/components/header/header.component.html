@@ -24,7 +24,7 @@
     <mat-icon>domain</mat-icon>
     <span>Arris CMTS</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item [matMenuTriggerFor]="menu3">
     <mat-icon>domain</mat-icon>
     <span>Casa CMTS</span>
   </button>
@@ -35,12 +35,18 @@
     <button mat-menu-item>CBR8</button>
   </a>
   <a [routerLink]="['/ubr10000']" class="submenu">
-    <button mat-menu-item>UBR 10000</button>
+    <button mat-menu-item>UBR10000</button>
   </a>
   </mat-menu>
 
   <mat-menu #menu2="matMenu">
     <a [routerLink]="['/e6000']" class="submenu">
-      <button mat-menu-item>E6000 V1</button>
+      <button mat-menu-item>E6000</button>
+    </a>
+  </mat-menu>
+
+  <mat-menu #menu3="matMenu">
+    <a [routerLink]="['/c100g']" class="submenu">
+      <button mat-menu-item>C100G</button>
     </a>
   </mat-menu>
