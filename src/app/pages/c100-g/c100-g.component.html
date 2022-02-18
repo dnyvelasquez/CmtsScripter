@@ -1,1 +1,205 @@
-<p>c100-g works!</p>
+<div class="container">
+    <mat-card>
+      <mat-card-title>C100G</mat-card-title>
+      <mat-card-subtitle>Casa</mat-card-subtitle>
+      <!--interface docsis-mac-->
+      <div class="div__interface">
+        <mat-checkbox #interFaceUpdate color="primary" (change)="
+              interFaceUpdate.checked
+                  ? inputCommand('interface docsis-mac ' + macText.value, 0)
+                  : inputCommand('', 0)">
+        </mat-checkbox>&nbsp;
+        <strong>
+          <span>interface docsis-mac</span>&nbsp;
+          <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
+          interFaceUpdate.checked
+          ? inputCommand('interface docsis-mac ' + macText.value, 0)
+          : inputCommand('', 0)">
+        </strong>
+      </div>
+      <!--interface cable-mac attributes-->
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenStateAtt = true" (closed)="panelOpenStateAtt = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+                interface docsis-mac attributes
+            </mat-panel-title>
+            <mat-panel-description>
+              Click to {{panelOpenStateAtt ? 'close' : 'open'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <!--shutdown-->
+          <div class="div__line__pri">
+            <mat-checkbox #shutStartUpdate color="primary" (change)="
+              shutStartUpdate.checked 
+                    ? inputCommand(' shutdown',  1) 
+                    : inputCommand('', 1)">
+              cable shutdown
+            </mat-checkbox>&nbsp;
+          </div>
+          <!--Description-->
+          <div class="div__line__pri">
+            <mat-checkbox #descUpdate color="primary" (change)="      
+                descUpdate.checked ? !descNo.checked 
+                    ? inputCommand(' description ' + quot + descText.value + quot,  2) 
+                    : inputCommand(' no description', 2) 
+                  : inputCommand('', 2)">
+              description
+            </mat-checkbox>&nbsp;
+            <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
+                descUpdate.checked ? !descNo.checked 
+                  ? inputCommand(' description ' + quot + descText.value + quot, 2) 
+                  : inputCommand(' no description', 2) 
+                : inputCommand('', 2)">&nbsp;
+            <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
+                descUpdate.checked ? !descNo.checked 
+                  ? inputCommand(' description ' + quot + descText.value + quot, 2) 
+                  : inputCommand(' no description', 2) 
+                : inputCommand('', 2)">
+              No
+            </mat-checkbox>
+          </div>
+          <!--initial-tech-->
+          <div class="div__line__pri">
+            <mat-checkbox #initialUpdate color="primary" (change)="      
+            initialUpdate.checked
+                    ? inputCommand(' initial-tech ' + initialText.value,  3) 
+                    : inputCommand('', 3)">
+                    initial-tech
+            </mat-checkbox>&nbsp;
+            <input type="text" #initialText value="period-ranging" class="middplus__input" (blur)="        
+            initialUpdate.checked
+                  ? inputCommand(' initial-tech ' + initialText.value, 3) 
+                  : inputCommand('', 3)">
+          </div>
+          <!--early-authentication-encryption-->
+          <div class="div__line__pri">
+            <mat-checkbox #earlyUpdate color="primary" (change)="      
+            earlyUpdate.checked ? !earlyNo.checked 
+                    ? inputCommand(' early-authentication-encryption',  4) 
+                    : inputCommand(' no early-authentication-encryption', 4) 
+                  : inputCommand('', 4)">
+                  early-authentication-encryption
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #earlyNo (change)="
+            earlyUpdate.checked ? !earlyNo.checked 
+                  ? inputCommand(' early-authentication-encryption', 4) 
+                  : inputCommand(' no early-authentication-encryption', 4) 
+                : inputCommand('', 4)">
+              No
+            </mat-checkbox>
+          </div>
+          <!--multicast-dsid-forward-->
+          <div class="div__line__pri">
+            <mat-checkbox #multicastUpdate color="primary" (change)="      
+            multicastUpdate.checked ? !multicastNo.checked 
+                    ? inputCommand(' multicast-dsid-forward',  5) 
+                    : inputCommand(' no multicast-dsid-forward', 5) 
+                  : inputCommand('', 5)">
+                  multicast-dsid-forward
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #multicastNo (change)="
+            multicastUpdate.checked ? !multicastNo.checked 
+                  ? inputCommand(' multicast-dsid-forward', 5) 
+                  : inputCommand(' no multicast-dsid-forward', 5) 
+                : inputCommand('', 5)">
+              No
+            </mat-checkbox>
+          </div>
+          <!--tftp-proxy-->
+          <div class="div__line__pri">
+            <mat-checkbox #tftpUpdate color="primary" (change)="      
+            tftpUpdate.checked ? !tftpNo.checked 
+                    ? inputCommand(' tftp-proxy',  6) 
+                    : inputCommand(' no tftp-proxy', 6) 
+                  : inputCommand('', 6)">
+                  tftp-proxy
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #tftpNo (change)="
+            tftpUpdate.checked ? !tftpNo.checked 
+                  ? inputCommand(' tftp-proxy', 6) 
+                  : inputCommand(' no tftp-proxy', 6) 
+                : inputCommand('', 6)">
+              No
+            </mat-checkbox>
+          </div>
+          <!--ip bundle-->
+          <div class="div__line__pri">
+            <mat-checkbox #bundleUpdate color="primary" (change)="      
+            bundleUpdate.checked ? !bundleNo.checked 
+                    ? inputCommand(' ip bundle ' + bundleText.value,  7) 
+                    : inputCommand(' no ip bundle', 7) 
+                  : inputCommand('', 7)">
+                  ip bundle
+            </mat-checkbox>&nbsp;
+            <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="desc = bundleText.value;        
+            bundleUpdate.checked ? !bundleNo.checked 
+                  ? inputCommand(' ip bundle ' + bundleText.value, 7) 
+                  : inputCommand(' no ip bundle', 7) 
+                : inputCommand('', 7)">&nbsp;
+            <mat-checkbox #bundleNo (change)="bundleNo.checked ? bundleText.value = '' : false;
+            bundleUpdate.checked ? !bundleNo.checked 
+                  ? inputCommand(' ip bundle ' + bundleText.value, 7) 
+                  : inputCommand(' no ip bundle', 7) 
+                : inputCommand('', 7)">
+              No
+            </mat-checkbox>
+          </div>
+        <!--upstreams-->
+        <div class="div__line__pri" *ngFor="let upStream of upStreams; index as i">
+            <mat-checkbox #usChange color="primary" (change)="
+              usChange.checked ? !usNo.checked
+                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
+                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
+              : inputCommand('', upStream)">
+              upstream {{i+1}} interface upstream  
+            </mat-checkbox>&nbsp;
+            <select #selectIfUp type="text" class="mod__select" (blur)="
+              usChange.checked ? !usNo.checked
+                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
+                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
+              : inputCommand('', upStream)">
+                <option></option>
+                <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
+            </select>
+            <span>/</span>
+            <select #selectSifUp type="text" class="mod__select" (blur)="
+              usChange.checked ? !usNo.checked
+                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
+                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
+              : inputCommand('', upStream)">
+                <option></option>
+                <option *ngFor="let ifUpstream of sifUpstreams">{{ifUpstream}}</option>
+            </select>
+            <span>.</span>
+            <select #selectSltUp type="text" class="mod__select" (blur)="
+              usChange.checked ? !usNo.checked
+                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
+                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
+              : inputCommand('', upStream)">
+                <option></option>
+                <option *ngFor="let sltUpstream of sltUpstreams">{{sltUpstream}}</option>
+            </select>
+            <span>/0</span>&nbsp;
+            <mat-checkbox #usNo (change)="
+              usChange.checked ? !usNo.checked
+                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
+                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
+              : inputCommand('', upStream)">
+              No |
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #dsOther (change)="dsOther.checked ? addUpStream(upStream + 1) : subUpStream()">
+              Add downstream
+            </mat-checkbox>&nbsp;
+          </div>
+  
+
+
+
+        </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <app-script></app-script>
+</mat-card>
+</div>
+
