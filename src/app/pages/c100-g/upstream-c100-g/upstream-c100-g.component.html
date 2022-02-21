@@ -1,0 +1,23 @@
+<div class="div__line__pri">
+    <mat-checkbox #usChange color="primary" (change)="
+      usChange.checked ? !usNo.checked
+        ? inputCommand(' upstream ' + up + ' interface upstream ' + interface + '/' + subinterface + '.' + slot + '/0', pos)
+        : inputCommand(' no upstream ' + up, pos)
+      : inputCommand('', pos)">
+      upstream {{up}} interface upstream {{interface}}/{{subinterface}}.{{slot}}/0
+    </mat-checkbox>&nbsp;
+    <mat-checkbox #usNo (change)="
+        usChange.checked ? !usNo.checked
+            ? inputCommand(' upstream ' + up + ' interface upstream ' + interface + '/' + subinterface + '.' + slot + '/0', pos)
+            : inputCommand(' no upstream ' + up, pos)
+        : inputCommand('', pos)">
+    No
+    <span #usOther *ngIf="slot === slts - 1">
+        |
+        <mat-checkbox #add (change)="add.checked ? addUpstream(slot + 1) : false">
+            Add upstream
+        </mat-checkbox> 
+    </span>
+  </mat-checkbox>&nbsp;
+</div>
+

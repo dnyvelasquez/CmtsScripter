@@ -29,7 +29,8 @@ import { CableDownStreamComponent } from './pages/e6000/cable-down-stream/cable-
 import { CableUpStreamComponent } from './pages/e6000/cable-up-stream/cable-up-stream.component';
 import { FiberNodeComponent } from './pages/e6000/fiber-node/fiber-node.component';
 import { BondingGroupE6000Component } from './pages/e6000/bonding-group-e6000/bonding-group-e6000.component';
-import { C100GComponent } from './pages/c100-g/c100-g.component'
+import { C100GComponent } from './pages/c100-g/c100-g.component';
+import { UpstreamC100GComponent } from './pages/c100-g/upstream-c100-g/upstream-c100-g.component'
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { C100GComponent } from './pages/c100-g/c100-g.component'
     CableUpStreamComponent,
     FiberNodeComponent,
     BondingGroupE6000Component,
-    C100GComponent
+    C100GComponent,
+    UpstreamC100GComponent
   ],
   imports: [
     BrowserModule, 

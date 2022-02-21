@@ -146,55 +146,28 @@
             </mat-checkbox>
           </div>
         <!--upstreams-->
-        <div class="div__line__pri" *ngFor="let upStream of upStreams; index as i">
-            <mat-checkbox #usChange color="primary" (change)="
-              usChange.checked ? !usNo.checked
-                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
-                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
-              : inputCommand('', upStream)">
-              upstream {{i+1}} interface upstream  
-            </mat-checkbox>&nbsp;
-            <select #selectIfUp type="text" class="mod__select" (blur)="
-              usChange.checked ? !usNo.checked
-                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
-                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
-              : inputCommand('', upStream)">
-                <option></option>
-                <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
-            </select>
-            <span>/</span>
-            <select #selectSifUp type="text" class="mod__select" (blur)="
-              usChange.checked ? !usNo.checked
-                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
-                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
-              : inputCommand('', upStream)">
-                <option></option>
-                <option *ngFor="let ifUpstream of sifUpstreams">{{ifUpstream}}</option>
-            </select>
-            <span>.</span>
-            <select #selectSltUp type="text" class="mod__select" (blur)="
-              usChange.checked ? !usNo.checked
-                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
-                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
-              : inputCommand('', upStream)">
-                <option></option>
-                <option *ngFor="let sltUpstream of sltUpstreams">{{sltUpstream}}</option>
-            </select>
-            <span>/0</span>&nbsp;
-            <mat-checkbox #usNo (change)="
-              usChange.checked ? !usNo.checked
-                ? inputCommand(' upstream ' + (i + 1) + ' interface upstream ' + selectIfUp.value + '/' + selectSifUp.value + '.' + selectSltUp.value + '/0', upStream)
-                : inputCommand(' no upstream ' + (i + 1) + ' interface upstream', upStream)
-              : inputCommand('', upStream)">
-              No |
-            </mat-checkbox>&nbsp;
-            <mat-checkbox #dsOther (change)="dsOther.checked ? addUpStream(upStream + 1) : subUpStream()">
-              Add downstream
-            </mat-checkbox>&nbsp;
-          </div>
-  
-
-
+        <div class="div__line__pri">
+          <strong>interfaces upstream</strong>
+          <select #selectIfUp class="mod__select" (change)="interfaceUp = parse_Int(selectIfUp.value)">
+            <option></option>
+            <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
+          </select>
+          <span>/</span>
+          <select #selectSifUp type="text" class="mod__select" (change)="sifStartUp = parse_Int(selectSifUp.value); sifEndUp = parse_Int(selectSifUp.value) + 1">
+            <option></option>
+            <option *ngFor="let sifUpstream of sifUpstreams">{{sifUpstream}}</option>
+          </select>
+          <span>--> {{sifEndUp}}</span>
+        </div>
+        <div *ngFor="let upstream of upstreamsA; index as i">
+          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i" [slts]="upstreamsA.length" [pos]="10" (addUpstreamEvent)="addUpstreamA($event)">
+          </app-upstream-c100-g>
+        </div>
+        <div *ngFor="let upstream of upstreamsB; index as i">
+          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i" [slts]="upstreamsB.length" [pos]="20" (addUpstreamEvent)="addUpstreamB($event)">
+          </app-upstream-c100-g>
+        </div>
+    
 
         </mat-expansion-panel>
     </mat-accordion>

@@ -12,10 +12,15 @@ export class C100GComponent implements OnInit {
   desc: string = '';
   panelOpenStateAtt = false
   quot: string = '"';
-  upStreams: number[] = [8];
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
   sifUpstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   sltUpstreams: number[] = [0, 1, 2, 3];
+  interfaceUp!: number;
+  sifStartUp!: number;
+  sifEndUp!: number;
+  upstreamsA: number[] = [1, 2, 3, 4];
+  upstreamsB: number[] = [5, 6, 7, 8];
+
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -26,12 +31,16 @@ export class C100GComponent implements OnInit {
     this.sharedSvc.addCommand(command, pos);
   }
 
-  addUpStream(up: number){
-    this.upStreams.push(up);
+  parse_Int(value: string): number{
+    return parseInt(value);
   }
-  
-  subUpStream(){
-    this.upStreams.pop();
+
+  addUpstreamA(value: number){
+    this.upstreamsA.push(value);
+  }
+
+  addUpstreamB(value: number){
+    this.upstreamsB.push(value);
   }
 
 
