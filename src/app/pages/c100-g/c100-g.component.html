@@ -160,11 +160,11 @@
           <span>--> {{sifEndUp}}</span>
         </div>
         <div *ngFor="let upstream of upstreamsA; index as i">
-          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i" [slts]="upstreamsA.length" [pos]="10" (addUpstreamEvent)="addUpstreamA($event)">
+          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i" [slts]="upstreamsA.length" [pos]="10 + i" (addUpstreamEvent)="addUpstreamA($event)">
           </app-upstream-c100-g>
         </div>
         <div *ngFor="let upstream of upstreamsB; index as i">
-          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i" [slts]="upstreamsB.length" [pos]="20" (addUpstreamEvent)="addUpstreamB($event)">
+          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i" [slts]="upstreamsB.length" [pos]="20 + i" (addUpstreamEvent)="addUpstreamB($event)">
           </app-upstream-c100-g>
         </div>
     

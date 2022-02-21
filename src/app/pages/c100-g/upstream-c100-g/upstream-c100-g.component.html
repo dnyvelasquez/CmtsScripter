@@ -14,7 +14,7 @@
     No
     <span #usOther *ngIf="slot === slts - 1">
         |
-        <mat-checkbox #add (change)="add.checked ? addUpstream(slot + 1) : false">
+        <mat-checkbox #add (change)="add.checked ? addUpstream(up + 1) : false">
             Add upstream
         </mat-checkbox> 
     </span>
