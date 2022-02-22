@@ -1,150 +1,150 @@
 <div class="container">
-    <mat-card>
-      <mat-card-title>C100G</mat-card-title>
-      <mat-card-subtitle>Casa</mat-card-subtitle>
-      <!--interface docsis-mac-->
-      <div class="div__interface">
-        <mat-checkbox #interFaceUpdate color="primary" (change)="
+  <mat-card>
+    <mat-card-title>C100G</mat-card-title>
+    <mat-card-subtitle>Casa</mat-card-subtitle>
+    <!--interface docsis-mac-->
+    <div class="div__interface">
+      <mat-checkbox #interFaceUpdate color="primary" (change)="
               interFaceUpdate.checked
                   ? inputCommand('interface docsis-mac ' + macText.value, 0)
                   : inputCommand('', 0)">
-        </mat-checkbox>&nbsp;
-        <strong>
-          <span>interface docsis-mac</span>&nbsp;
-          <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
+      </mat-checkbox>&nbsp;
+      <strong>
+        <span>interface docsis-mac</span>&nbsp;
+        <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
           interFaceUpdate.checked
           ? inputCommand('interface docsis-mac ' + macText.value, 0)
           : inputCommand('', 0)">
-        </strong>
-      </div>
-      <!--interface cable-mac attributes-->
-      <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenStateAtt = true" (closed)="panelOpenStateAtt = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-                interface docsis-mac attributes
-            </mat-panel-title>
-            <mat-panel-description>
-              Click to {{panelOpenStateAtt ? 'close' : 'open'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <!--shutdown-->
-          <div class="div__line__pri">
-            <mat-checkbox #shutStartUpdate color="primary" (change)="
+      </strong>
+    </div>
+    <!--interface cable-mac attributes-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateAtt = true" (closed)="panelOpenStateAtt = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            interface docsis-mac attributes
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateAtt ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--shutdown-->
+        <div class="div__line__pri">
+          <mat-checkbox #shutStartUpdate color="primary" (change)="
               shutStartUpdate.checked 
                     ? inputCommand(' shutdown',  1) 
                     : inputCommand('', 1)">
-              cable shutdown
-            </mat-checkbox>&nbsp;
-          </div>
-          <!--Description-->
-          <div class="div__line__pri">
-            <mat-checkbox #descUpdate color="primary" (change)="      
+            cable shutdown
+          </mat-checkbox>&nbsp;
+        </div>
+        <!--Description-->
+        <div class="div__line__pri">
+          <mat-checkbox #descUpdate color="primary" (change)="      
                 descUpdate.checked ? !descNo.checked 
                     ? inputCommand(' description ' + quot + descText.value + quot,  2) 
                     : inputCommand(' no description', 2) 
                   : inputCommand('', 2)">
-              description
-            </mat-checkbox>&nbsp;
-            <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
+            description
+          </mat-checkbox>&nbsp;
+          <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
                 descUpdate.checked ? !descNo.checked 
                   ? inputCommand(' description ' + quot + descText.value + quot, 2) 
                   : inputCommand(' no description', 2) 
                 : inputCommand('', 2)">&nbsp;
-            <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
+          <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
                 descUpdate.checked ? !descNo.checked 
                   ? inputCommand(' description ' + quot + descText.value + quot, 2) 
                   : inputCommand(' no description', 2) 
                 : inputCommand('', 2)">
-              No
-            </mat-checkbox>
-          </div>
-          <!--initial-tech-->
-          <div class="div__line__pri">
-            <mat-checkbox #initialUpdate color="primary" (change)="      
+            No
+          </mat-checkbox>
+        </div>
+        <!--initial-tech-->
+        <div class="div__line__pri">
+          <mat-checkbox #initialUpdate color="primary" (change)="      
             initialUpdate.checked
                     ? inputCommand(' initial-tech ' + initialText.value,  3) 
                     : inputCommand('', 3)">
-                    initial-tech
-            </mat-checkbox>&nbsp;
-            <input type="text" #initialText value="period-ranging" class="middplus__input" (blur)="        
+            initial-tech
+          </mat-checkbox>&nbsp;
+          <input type="text" #initialText value="period-ranging" class="middplus__input" (blur)="        
             initialUpdate.checked
                   ? inputCommand(' initial-tech ' + initialText.value, 3) 
                   : inputCommand('', 3)">
-          </div>
-          <!--early-authentication-encryption-->
-          <div class="div__line__pri">
-            <mat-checkbox #earlyUpdate color="primary" (change)="      
+        </div>
+        <!--early-authentication-encryption-->
+        <div class="div__line__pri">
+          <mat-checkbox #earlyUpdate color="primary" (change)="      
             earlyUpdate.checked ? !earlyNo.checked 
                     ? inputCommand(' early-authentication-encryption',  4) 
                     : inputCommand(' no early-authentication-encryption', 4) 
                   : inputCommand('', 4)">
-                  early-authentication-encryption
-            </mat-checkbox>&nbsp;
-            <mat-checkbox #earlyNo (change)="
+            early-authentication-encryption
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #earlyNo (change)="
             earlyUpdate.checked ? !earlyNo.checked 
                   ? inputCommand(' early-authentication-encryption', 4) 
                   : inputCommand(' no early-authentication-encryption', 4) 
                 : inputCommand('', 4)">
-              No
-            </mat-checkbox>
-          </div>
-          <!--multicast-dsid-forward-->
-          <div class="div__line__pri">
-            <mat-checkbox #multicastUpdate color="primary" (change)="      
+            No
+          </mat-checkbox>
+        </div>
+        <!--multicast-dsid-forward-->
+        <div class="div__line__pri">
+          <mat-checkbox #multicastUpdate color="primary" (change)="      
             multicastUpdate.checked ? !multicastNo.checked 
                     ? inputCommand(' multicast-dsid-forward',  5) 
                     : inputCommand(' no multicast-dsid-forward', 5) 
                   : inputCommand('', 5)">
-                  multicast-dsid-forward
-            </mat-checkbox>&nbsp;
-            <mat-checkbox #multicastNo (change)="
+            multicast-dsid-forward
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #multicastNo (change)="
             multicastUpdate.checked ? !multicastNo.checked 
                   ? inputCommand(' multicast-dsid-forward', 5) 
                   : inputCommand(' no multicast-dsid-forward', 5) 
                 : inputCommand('', 5)">
-              No
-            </mat-checkbox>
-          </div>
-          <!--tftp-proxy-->
-          <div class="div__line__pri">
-            <mat-checkbox #tftpUpdate color="primary" (change)="      
+            No
+          </mat-checkbox>
+        </div>
+        <!--tftp-proxy-->
+        <div class="div__line__pri">
+          <mat-checkbox #tftpUpdate color="primary" (change)="      
             tftpUpdate.checked ? !tftpNo.checked 
                     ? inputCommand(' tftp-proxy',  6) 
                     : inputCommand(' no tftp-proxy', 6) 
                   : inputCommand('', 6)">
-                  tftp-proxy
-            </mat-checkbox>&nbsp;
-            <mat-checkbox #tftpNo (change)="
+            tftp-proxy
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #tftpNo (change)="
             tftpUpdate.checked ? !tftpNo.checked 
                   ? inputCommand(' tftp-proxy', 6) 
                   : inputCommand(' no tftp-proxy', 6) 
                 : inputCommand('', 6)">
-              No
-            </mat-checkbox>
-          </div>
-          <!--ip bundle-->
-          <div class="div__line__pri">
-            <mat-checkbox #bundleUpdate color="primary" (change)="      
+            No
+          </mat-checkbox>
+        </div>
+        <!--ip bundle-->
+        <div class="div__line__pri">
+          <mat-checkbox #bundleUpdate color="primary" (change)="      
             bundleUpdate.checked ? !bundleNo.checked 
                     ? inputCommand(' ip bundle ' + bundleText.value,  7) 
                     : inputCommand(' no ip bundle', 7) 
                   : inputCommand('', 7)">
-                  ip bundle
-            </mat-checkbox>&nbsp;
-            <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="desc = bundleText.value;        
+            ip bundle
+          </mat-checkbox>&nbsp;
+          <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="desc = bundleText.value;        
             bundleUpdate.checked ? !bundleNo.checked 
                   ? inputCommand(' ip bundle ' + bundleText.value, 7) 
                   : inputCommand(' no ip bundle', 7) 
                 : inputCommand('', 7)">&nbsp;
-            <mat-checkbox #bundleNo (change)="bundleNo.checked ? bundleText.value = '' : false;
+          <mat-checkbox #bundleNo (change)="bundleNo.checked ? bundleText.value = '' : false;
             bundleUpdate.checked ? !bundleNo.checked 
                   ? inputCommand(' ip bundle ' + bundleText.value, 7) 
                   : inputCommand(' no ip bundle', 7) 
                 : inputCommand('', 7)">
-              No
-            </mat-checkbox>
-          </div>
+            No
+          </mat-checkbox>
+        </div>
         <!--upstreams-->
         <div class="div__line__pri">
           <strong>interfaces upstream</strong>
@@ -153,26 +153,114 @@
             <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
           </select>
           <span>/</span>
-          <select #selectSifUp type="text" class="mod__select" (change)="sifStartUp = parse_Int(selectSifUp.value); sifEndUp = parse_Int(selectSifUp.value) + 1">
+          <select #selectSifUp class="mod__select"
+            (change)="sifStartUp = parse_Int(selectSifUp.value); sifEndUp = parse_Int(selectSifUp.value) + 1">
             <option></option>
             <option *ngFor="let sifUpstream of sifUpstreams">{{sifUpstream}}</option>
           </select>
           <span>--> {{sifEndUp}}</span>
         </div>
-        <div *ngFor="let upstream of upstreamsA; index as i">
-          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i" [slts]="upstreamsA.length" [pos]="10 + i" (addUpstreamEvent)="addUpstreamA($event)">
-          </app-upstream-c100-g>
+        <mat-accordion *ngIf="selectSifUp.value !== ''">
+          <mat-expansion-panel (opened)="panelOpenStateUs = true" (closed)="panelOpenStateUs = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                interfaces upstream attributes
+              </mat-panel-title>
+              <mat-panel-description>
+                Click to {{panelOpenStateUs ? 'close' : 'open'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let upstream of upstreamsA; index as i">
+              <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i"
+                [slts]="upstreamsA.length" [pos]="10 + i" (addUpstreamEvent)="addUpstreamA($event)">
+              </app-upstream-c100-g>
+            </div>
+            <div *ngFor="let upstream of upstreamsB; index as i">
+              <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i"
+                [slts]="upstreamsB.length" [pos]="20 + i" (addUpstreamEvent)="addUpstreamB($event)">
+              </app-upstream-c100-g>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!--downstreams-->
+        <div class="div__line__pri">
+          <strong>interfaces downstream</strong>
+          <select #selectIfDown class="mod__select" (change)="interfaceDown = parse_Int(selectIfDown.value)">
+            <option></option>
+            <option *ngFor="let ifDownstream of ifDownstreams">{{ifDownstream}}</option>
+          </select>
+          <span>/</span>
+          <select #selectSifDown class="mod__select" (change)="sifDown = parse_Int(selectSifDown.value)">
+            <option></option>
+            <option *ngFor="let sifDownstream of sifDownstreams">{{sifDownstream}}</option>
+          </select>
+          <span>/</span>
+          <span>0 --> </span>
+          <select #selectChDownEnd class="mod__select" (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
+            <option></option>
+            <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
+          </select>
         </div>
-        <div *ngFor="let upstream of upstreamsB; index as i">
-          <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i" [slts]="upstreamsB.length" [pos]="20 + i" (addUpstreamEvent)="addUpstreamB($event)">
-          </app-upstream-c100-g>
-        </div>
-    
+        <mat-accordion *ngIf="selectChDownEnd.value !== ''">
+          <mat-expansion-panel (opened)="panelOpenStateDs = true" (closed)="panelOpenStateDs = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                interfaces downstream attributes
+              </mat-panel-title>
+              <mat-panel-description>
+                Click to {{panelOpenStateDs ? 'close' : 'open'}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngFor="let downstream of downstreams; index as i">
+              <mat-checkbox #downUpdate color="primary" (change)="
+                downUpdate.checked 
+                  ? !NoDownUpdate.checked
+                    ? secUpdate.checked
+                      ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
+                      :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
+                    : inputCommand(' no downstream ' + downstream, 30 + i)
+                  : inputCommand('', 30 + i)">
+                downstream {{downstream}} interface qam {{interfaceDown}}/{{sifDown}}/ 
+              </mat-checkbox>
+              <select #dsSelect class="mod__select" (change)="
+              downUpdate.checked 
+                ? !NoDownUpdate.checked
+                  ? secUpdate.checked
+                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
+                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
+                  : inputCommand(' no downstream ' + downstream, 30 + i)
+                : inputCommand('', 30 + i)">
+                <option>{{chDownstreams[i]}}</option>
+                <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
+              </select>
+              <mat-checkbox #secUpdate (change)="
+              downUpdate.checked 
+                ? !NoDownUpdate.checked
+                  ? secUpdate.checked
+                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
+                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
+                  : inputCommand(' no downstream ' + downstream, 30 + i)
+                : inputCommand('', 30 + i)">
+                secondary |
+              </mat-checkbox>&nbsp;          
+              <mat-checkbox #NoDownUpdate (change)="
+              downUpdate.checked 
+                ? !NoDownUpdate.checked
+                  ? secUpdate.checked
+                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
+                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
+                  : inputCommand(' no downstream ' + downstream, 30 + i)
+                : inputCommand('', 30 + i)">
+                No
+              </mat-checkbox>             
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
 
-        </mat-expansion-panel>
+
+      </mat-expansion-panel>
     </mat-accordion>
     <br>
     <app-script></app-script>
-</mat-card>
+  </mat-card>
 </div>
-
