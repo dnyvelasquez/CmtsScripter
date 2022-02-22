@@ -132,7 +132,7 @@
                   : inputCommand('', 7)">
             ip bundle
           </mat-checkbox>&nbsp;
-          <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="desc = bundleText.value;        
+          <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="        
             bundleUpdate.checked ? !bundleNo.checked 
                   ? inputCommand(' ip bundle ' + bundleText.value, 7) 
                   : inputCommand(' no ip bundle', 7) 
@@ -196,7 +196,8 @@
           </select>
           <span>/</span>
           <span>0 --> </span>
-          <select #selectChDownEnd class="mod__select" (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
+          <select #selectChDownEnd class="mod__select"
+            (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
             <option></option>
             <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
           </select>
@@ -220,7 +221,7 @@
                       :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
                     : inputCommand(' no downstream ' + downstream, 30 + i)
                   : inputCommand('', 30 + i)">
-                downstream {{downstream}} interface qam {{interfaceDown}}/{{sifDown}}/ 
+                downstream {{downstream}} interface qam {{interfaceDown}}/{{sifDown}}/
               </mat-checkbox>
               <select #dsSelect class="mod__select" (change)="
               downUpdate.checked 
@@ -242,7 +243,7 @@
                   : inputCommand(' no downstream ' + downstream, 30 + i)
                 : inputCommand('', 30 + i)">
                 secondary |
-              </mat-checkbox>&nbsp;          
+              </mat-checkbox>&nbsp;
               <mat-checkbox #NoDownUpdate (change)="
               downUpdate.checked 
                 ? !NoDownUpdate.checked
@@ -252,12 +253,88 @@
                   : inputCommand(' no downstream ' + downstream, 30 + i)
                 : inputCommand('', 30 + i)">
                 No
-              </mat-checkbox>             
+              </mat-checkbox>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
-
-
+        <!--mgmd ipv4-->
+        <div class="div__line__pri">
+          <mat-checkbox #mgmdUpdate color="primary" (change)="      
+          mgmdUpdate.checked ? !mgmdNo.checked 
+                    ? inputCommand(' mgmd ipv4 shutdown',  40) 
+                    : inputCommand(' no mgmd ipv4 shutdown', 40) 
+                  : inputCommand('', 40)">
+                  mgmd ipv4 shutdown
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #mgmdNo (change)="
+          mgmdUpdate.checked ? !mgmdNo.checked 
+                  ? inputCommand(' mgmd ipv4 shutdown', 40) 
+                  : inputCommand(' no mgmd ipv4 shutdown', 40) 
+                : inputCommand('', 40)">
+            No
+          </mat-checkbox>
+        </div>
+        <!--cm-status report event-list -->
+        <div class="div__line__pri">
+          <mat-checkbox #reportUpdate color="primary" (change)="      
+          reportUpdate.checked ? !reportNo.checked 
+                    ? inputCommand(' cable cm-status report event-list ' + reportText.value,  41) 
+                    : inputCommand(' no cable cm-status report event-list', 41) 
+                  : inputCommand('', 41)">
+                  cable cm-status report event-list
+          </mat-checkbox>&nbsp;
+          <input type="text" #reportText [disabled]="reportNo.checked" style="width: 200px" value="1,2,3,4,5,6,7,8,9,10,11,17,26,27" (blur)="        
+          reportUpdate.checked ? !reportNo.checked 
+                  ? inputCommand(' cable cm-status report event-list ' + reportText.value, 41) 
+                  : inputCommand(' no cable cm-status report event-list', 41) 
+                : inputCommand('', 41)">&nbsp;
+          <mat-checkbox #reportNo (change)="reportNo.checked ? reportText.value = '' : false;
+          reportUpdate.checked ? !reportNo.checked 
+                  ? inputCommand(' cable cm-status report event-list ' + reportText.value, 41) 
+                  : inputCommand(' no cable cm-status report event-list', 41) 
+                : inputCommand('', 41)">
+            No
+          </mat-checkbox>
+        </div>
+        <!--cm trap online-offline-only-->
+        <div class="div__line__pri">
+          <mat-checkbox #trapoUpdate color="primary" (change)="      
+          trapoUpdate.checked ? trapoNo.checked 
+                    ? inputCommand(' cm trap online-offline-only',  42) 
+                    : inputCommand(' no cm trap online-offline-only', 42) 
+                  : inputCommand('', 42)">
+                  cm trap online-offline-only
+          </mat-checkbox>&nbsp;
+          <mat-checkbox #trapoNo (change)="
+          trapoUpdate.checked ? !trapoNo.checked 
+                  ? inputCommand(' cm trap online-offline-only', 42) 
+                  : inputCommand(' no cm trap online-offline-only', 42) 
+                : inputCommand('', 42)">
+            No
+          </mat-checkbox>
+        </div>
+        <!--cm trap interval-->
+        <div class="div__line__pri">
+          <mat-checkbox #trapiUpdate color="primary" (change)="      
+          trapiUpdate.checked ? !trapiNo.checked 
+                    ? inputCommand(' cm trap interval ' + trapiText.value,  43) 
+                    : inputCommand(' no cm trap interval', 43) 
+                  : inputCommand('', 43)">
+                  cm trap interval
+          </mat-checkbox>&nbsp;
+          <input type="text" #trapiText [disabled]="trapiNo.checked" class="shortplus__input" value="1200" (blur)="        
+          trapiUpdate.checked ? !trapiNo.checked 
+                  ? inputCommand(' cm trap interval ' + trapiText.value, 43) 
+                  : inputCommand(' no cm trap interval', 43) 
+                : inputCommand('', 43)">&nbsp;
+          <mat-checkbox #trapiNo (change)="trapiNo.checked ? trapiText.value = '' : false;
+          trapiUpdate.checked ? !trapiNo.checked 
+                  ? inputCommand(' cable cm trap interval ' + trapiText.value, 43) 
+                  : inputCommand(' no cm trap interval', 43) 
+                : inputCommand('', 43)">
+            No
+          </mat-checkbox>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
     <br>
