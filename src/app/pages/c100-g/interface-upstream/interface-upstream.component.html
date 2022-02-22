@@ -1,0 +1,164 @@
+<!--interface upstream-->
+<div class="div__line__pri">
+  <mat-checkbox #ifUpdate color="primary" (change)="
+    addCommand('ifUpdate', ifUpdate.checked, false, '')">
+    interface upstream {{interface}}/{{subinterface}}.{{slot}}
+  </mat-checkbox>
+</div>
+<div *ngIf="ifUpdate.checked">
+  <!--shutdown start-->
+  <div class="div__line__sec">
+    <mat-checkbox #shutStartUpdate color="primary" (change)="
+        addCommand('shutStartUpdate',shutStartUpdate.checked, false, '')">
+        shutdown
+    </mat-checkbox>&nbsp;
+  </div>
+  <!--description-->
+  <div class="div__line__sec">
+    <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
+      description
+    </mat-checkbox>&nbsp;
+    <input type="text" #descText [value]="desc" [disabled]="descNo.checked" (blur)="       
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">&nbsp;
+    <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
+        No
+    </mat-checkbox>
+  </div>
+  <!--spectrum-rule-->
+  <div class="div__line__sec">
+    <mat-checkbox #spectrumUpdate color="primary" (change)="spectrumUpdate.checked ? false : spectrumNo.checked = false;
+        addCommand('spectrumUpdate', spectrumUpdate.checked, spectrumNo.checked, spectrumText.value)">
+        spectrum-rule
+    </mat-checkbox>&nbsp;
+    <input type="text" #spectrumText class="short__input" value="1" [disabled]="spectrumNo.checked" (blur)="        
+        addCommand('spectrumUpdate', spectrumUpdate.checked, spectrumNo.checked, spectrumText.value)">&nbsp;
+    <mat-checkbox #spectrumNo (change)="spectrumNo.checked ? spectrumText.value = '' : false;
+        addCommand('spectrumUpdate', spectrumUpdate.checked, spectrumNo.checked, spectrumText.value)">
+      No
+    </mat-checkbox>
+  </div>
+  <!--frequency-->
+  <div class="div__line__sec">
+    <mat-checkbox #freqUpdate color="primary" (change)="
+        addCommand('freqUpdate', freqUpdate.checked, false, freqText.value)">
+        frequency
+    </mat-checkbox>&nbsp;
+    <input type="text" #freqText class="shortplus__input" (blur)="        
+        addCommand('freqUpdate', freqUpdate.checked, false, freqText.value)">
+        00000&nbsp;
+  </div>
+  <!--channel-width-->
+  <div class="div__line__sec">
+    <mat-checkbox #channelUpdate color="primary" (change)="
+        addCommand('channelUpdate', channelUpdate.checked, false, channelText.value)">
+        channel-width
+    </mat-checkbox>&nbsp;
+    <input type="text" #channelText class="short__input" (blur)="        
+        addCommand('channelUpdate', channelUpdate.checked, false, channelText.value)">
+        000000&nbsp;
+  </div>
+  <!--map-advance dynamic-->
+  <div class="div__line__sec">
+    <mat-checkbox #mapUpdate color="primary" (change)="mapUpdate.checked ? false : mapNo.checked = false;
+        addCommand('mapUpdate', mapUpdate.checked, mapNo.checked, mapText.value)">
+        map-advance dynamic
+    </mat-checkbox>&nbsp;
+    <input type="text" #mapText class="shortplus__input" value="400" [disabled]="mapNo.checked"(blur)="
+        addCommand('mapUpdate', mapUpdate.checked, mapNo.checked, mapText.value)">&nbsp;
+    <mat-checkbox #mapNo (change)="mapNo.checked ? mapText.value = '' : false;
+        addCommand('mapUpdate', mapUpdate.checked, mapNo.checked, mapText.value)">
+      No
+    </mat-checkbox>
+  </div>
+  <!--ingress-cancellation-->
+  <div class="div__line__sec">
+    <mat-checkbox #ingressUpdate color="primary" (change)="ingressUpdate.checked ? false : ingressNo.checked = false;
+        addCommand('ingressUpdate',ingressUpdate.checked, ingressNo.checked, '')">
+        ingress-cancellation
+    </mat-checkbox>&nbsp;
+    <mat-checkbox #ingressNo (change)="
+        addCommand('ingressUpdate', ingressUpdate.checked, ingressNo.checked, '')">
+      No
+    </mat-checkbox>
+  </div>
+  <!--logical-channel 0 shutdown start-->
+  <div class="div__line__sec">
+    <mat-checkbox #shut0StartUpdate color="primary" (change)="
+        addCommand('shut0StartUpdate',shut0StartUpdate.checked, false, '')">
+        logical-channel 0 shutdown
+    </mat-checkbox>&nbsp;
+  </div>
+  <!--logical-channel 0 description-->
+  <div class="div__line__sec">
+    <mat-checkbox #desc0Update color="primary" (change)="desc0Update.checked ? false : desc0No.checked = false;
+        addCommand('desc0Update', desc0Update.checked, desc0No.checked, desc0Text.value)">
+        logical-channel 0 description
+    </mat-checkbox>&nbsp;
+    <input type="text" #desc0Text [disabled]="desc0No.checked" [value]="descText.value" (blur)="       
+        addCommand('desc0Update', desc0Update.checked, desc0No.checked, desc0Text.value)">&nbsp;
+    <mat-checkbox #desc0No (change)="desc0No.checked ? desc0Text.value = '' : false;
+        addCommand('desc0Update', desc0Update.checked, desc0No.checked, desc0Text.value)">
+        No
+    </mat-checkbox>
+  </div>
+  <!--logical-channel 0 profile-->
+  <div class="div__line__sec">
+    <mat-checkbox #profile0Update color="primary" (change)="
+        addCommand('profile0Update', profile0Update.checked, false, profile0Text.value)">
+        logical-channel 0 profile
+    </mat-checkbox>&nbsp;
+    <input type="text" #profile0Text style="width: 200px" value="224 secondary-profile 223,222" (blur)="       
+        addCommand('profile0Update', profile0Update.checked, false, profile0Text.value)">&nbsp;
+  </div>
+  <!--logical-channel 0 minislot-->
+  <div class="div__line__sec">
+    <mat-checkbox #minislot0Update color="primary" (change)="
+        addCommand('minislot0Update', minislot0Update.checked, false, minislot0Text.value)">
+        logical-channel 0 minislot
+    </mat-checkbox>&nbsp;
+    <input type="text" #minislot0Text value="2" class="short__input" (blur)="       
+        addCommand('minislot0Update', minislot0Update.checked, false, minislot0Text.value)">&nbsp;
+  </div>
+  <!--logical-channel 0 ranging-backoff-->
+  <div class="div__line__sec">
+    <mat-checkbox #ranging0Update color="primary" (change)="ranging0Update.checked ? false : ranging0No.checked = false;
+        addCommand('ranging0Update', ranging0Update.checked, ranging0No.checked, ranging0Text.value)">
+        logical-channel 0 ranging-backoff
+    </mat-checkbox>&nbsp;
+    <input type="text" #ranging0Text class="shortplus__input" value="3 7" [disabled]="ranging0No.checked" (blur)="       
+        addCommand('ranging0Update', ranging0Update.checked, ranging0No.checked, ranging0Text.value)">&nbsp;
+    <mat-checkbox #ranging0No (change)="ranging0No.checked ? ranging0Text.value = '' : false;
+        addCommand('ranging0Update', ranging0Update.checked, ranging0No.checked, ranging0Text.value)">
+        No
+    </mat-checkbox>
+  </div>
+  <!--logical-channel 0 pre-equalization-->
+  <div class="div__line__sec">
+    <mat-checkbox #pre0Update color="primary" (change)="pre0Update.checked ? false : pre0No.checked = false;
+        addCommand('pre0Update', pre0Update.checked, pre0No.checked, pre0Text.value)">
+        logical-channel 0 pre-equalization
+    </mat-checkbox>&nbsp;
+    <input type="text" #pre0Text class="midd__input" value="auto-reset" [disabled]="pre0No.checked" (blur)="       
+        addCommand('pre0Update', pre0Update.checked, pre0No.checked, pre0Text.value)">&nbsp;
+    <mat-checkbox #pre0No (change)="pre0No.checked ? pre0Text.value = '' : false;
+        addCommand('pre0Update', pre0Update.checked, pre0No.checked, pre0Text.value)">
+        No
+    </mat-checkbox>
+  </div>
+  <!--logical-channel 0 shutdown end-->
+  <div class="div__line__sec">
+    <mat-checkbox #shut0EndUpdate color="primary" (change)="
+        addCommand('shut0EndUpdate',shut0EndUpdate.checked, false, '')">
+        no logical-channel 0 shutdown
+    </mat-checkbox>&nbsp;
+  </div>
+  <!--shutdown end-->
+  <div class="div__line__sec">
+    <mat-checkbox #shutEndUpdate color="primary" (change)="
+        addCommand('shutEndUpdate',shutEndUpdate.checked, false, '')">
+        no shutdown
+    </mat-checkbox>&nbsp;
+  </div>
+</div>

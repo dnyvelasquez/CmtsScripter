@@ -13,6 +13,8 @@ export class C100GComponent implements OnInit {
   panelOpenStateAtt = false
   panelOpenStateUs = false
   panelOpenStateDs = false
+  panelOpenStateUpA = false
+  panelOpenStateUpB = false
   quot: string = '"';
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
   sifUpstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];

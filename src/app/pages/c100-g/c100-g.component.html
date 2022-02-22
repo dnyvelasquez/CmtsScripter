@@ -338,6 +338,49 @@
       </mat-expansion-panel>
     </mat-accordion>
     <br>
+    <!--interfaces upstream A-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateUpA = true" (closed)="panelOpenStateUpA = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            interfaces upstream A
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateUpA ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="selectIfUp.value !==''">
+        <div *ngFor="let sltUpstream of sltUpstreams; index as i">
+          <app-interface-upstream [pos]="50 + i * 20" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="sltUpstream" [desc]="desc">
+          </app-interface-upstream>
+        </div>
+      </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    <!--interfaces upstream B-->
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenStateUpB = true" (closed)="panelOpenStateUpB = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              interfaces upstream B
+            </mat-panel-title>
+            <mat-panel-description>
+              Click to {{panelOpenStateUpB ? 'close' : 'open'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="selectIfUp.value !==''">
+            <div *ngFor="let sltUpstream of sltUpstreams; index as i">
+            <app-interface-upstream [pos]="150 + i * 20" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="sltUpstream" [desc]="desc">
+            </app-interface-upstream>
+          </div>
+        </div>
+      </mat-expansion-panel>
+        </mat-accordion>
+  
+
+
+    <br>
     <app-script></app-script>
   </mat-card>
 </div>
