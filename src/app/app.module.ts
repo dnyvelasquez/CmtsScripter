@@ -32,7 +32,8 @@ import { BondingGroupE6000Component } from './pages/e6000/bonding-group-e6000/bo
 import { C100GComponent } from './pages/c100-g/c100-g.component';
 import { UpstreamC100GComponent } from './pages/c100-g/upstream-c100-g/upstream-c100-g.component';
 import { InterfaceUpstreamComponent } from './pages/c100-g/interface-upstream/interface-upstream.component';
-import { DownstreamC100GComponent } from './pages/c100-g/downstream-c100-g/downstream-c100-g.component'
+import { DownstreamC100GComponent } from './pages/c100-g/downstream-c100-g/downstream-c100-g.component';
+import { InterfaceDownstreamComponent } from './pages/c100-g/interface-downstream/interface-downstream.component'
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { DownstreamC100GComponent } from './pages/c100-g/downstream-c100-g/downs
     C100GComponent,
     UpstreamC100GComponent,
     InterfaceUpstreamComponent,
-    DownstreamC100GComponent
+    DownstreamC100GComponent,
+    InterfaceDownstreamComponent
   ],
   imports: [
     BrowserModule, 

@@ -22,13 +22,20 @@ export class UpstreamC100GComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
-  }
-
   addUpstream(value: number){
     this.addUpstreamEvent.emit(value);
   }
 
+  addCommand(update: boolean, no: boolean){
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` upstream ${this.up} interface qam ${this.interface}/${this.subinterface}/${this.slot}`, this.pos);
+      }else{
+        this.sharedSvc.addCommand(` no upstream ${this.up}`, this.pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, this.pos);
+    }
+}
 
 }

@@ -15,6 +15,7 @@ export class C100GComponent implements OnInit {
   panelOpenStateDs = false
   panelOpenStateUpA = false
   panelOpenStateUpB = false
+  panelOpenStateDown = false
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
   sifUpstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
   sltUpstreams: number[] = [0, 1, 2, 3];
@@ -173,9 +174,6 @@ export class C100GComponent implements OnInit {
         }
       }
     }
-
-
-
     //mgmd ipv4
     if(id === 'mgmdUpdate'){
       let pos = 40;

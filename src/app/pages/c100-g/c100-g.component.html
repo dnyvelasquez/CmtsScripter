@@ -169,8 +169,6 @@
               <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown" [slotDown]="i"
                 [pos]="30 + i">
               </app-downstream-c100-g>
-              
-
             </div>
           </mat-expansion-panel>
         </mat-accordion>
@@ -229,8 +227,6 @@
             no cable shutdown
           </mat-checkbox>&nbsp;
         </div>
-
-
       </mat-expansion-panel>
     </mat-accordion>
     <br>
@@ -239,7 +235,7 @@
       <mat-expansion-panel (opened)="panelOpenStateUpA = true" (closed)="panelOpenStateUpA = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            interfaces upstream A
+            <strong>interfaces upstream A</strong> 
           </mat-panel-title>
           <mat-panel-description>
             Click to {{panelOpenStateUpA ? 'close' : 'open'}}
@@ -259,7 +255,7 @@
         <mat-expansion-panel (opened)="panelOpenStateUpB = true" (closed)="panelOpenStateUpB = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              interfaces upstream B
+              <strong>interfaces upstream B</strong> 
             </mat-panel-title>
             <mat-panel-description>
               Click to {{panelOpenStateUpB ? 'close' : 'open'}}
@@ -273,7 +269,25 @@
         </div>
       </mat-expansion-panel>
         </mat-accordion>
-  
+        <br>
+    <!--interface qam-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateDown = true" (closed)="panelOpenStateDown = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>interface qam</strong> 
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateDown ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="selectSifDown.value !==''">
+          <app-interface-downstream [pos]="250" [interface]="interfaceDown" [subinterface]="sifDown" [desc]="desc">
+          </app-interface-downstream>
+      </div>
+    </mat-expansion-panel>
+      </mat-accordion>
+
 
 
     <br>
