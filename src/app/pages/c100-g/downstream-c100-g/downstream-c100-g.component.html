@@ -1,0 +1,19 @@
+<mat-checkbox #downUpdate color="primary" (change)="downUpdate.checked ? false : NoDownUpdate.checked = false;
+    downUpdate.checked ? false : secUpdate.checked = false;
+    addCommand(downUpdate.checked, NoDownUpdate.checked, secUpdate.checked)">
+    downstream {{downstream}} interface qam {{interfaceDown}}/{{sifDown}}/
+</mat-checkbox>
+<select #dsSelect class="mod__select" (change)="slotDown = parse_Int(dsSelect.value);
+    addCommand(downUpdate.checked, NoDownUpdate.checked, secUpdate.checked)">
+  <option>{{slotDown}}</option>
+  <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
+</select>
+<!--cambiar-->
+<mat-checkbox #secUpdate color="primary" (change)="
+    addCommand(downUpdate.checked, NoDownUpdate.checked, secUpdate.checked)">
+    secondary |
+</mat-checkbox>&nbsp;
+<mat-checkbox #NoDownUpdate (change)="NoDownUpdate.checked ? secUpdate.checked = false : false;
+    addCommand(downUpdate.checked, NoDownUpdate.checked, secUpdate.checked)">
+    No
+</mat-checkbox>

@@ -5,16 +5,12 @@
     <!--interface docsis-mac-->
     <div class="div__interface">
       <mat-checkbox #interFaceUpdate color="primary" (change)="
-              interFaceUpdate.checked
-                  ? inputCommand('interface docsis-mac ' + macText.value, 0)
-                  : inputCommand('', 0)">
+        addCommand('interFaceUpdate', interFaceUpdate.checked, false, '')">
       </mat-checkbox>&nbsp;
       <strong>
         <span>interface docsis-mac</span>&nbsp;
         <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
-          interFaceUpdate.checked
-          ? inputCommand('interface docsis-mac ' + macText.value, 0)
-          : inputCommand('', 0)">
+          addCommand('interFaceUpdate', interFaceUpdate.checked, false, '')">
       </strong>
     </div>
     <!--interface cable-mac attributes-->
@@ -28,120 +24,78 @@
             Click to {{panelOpenStateAtt ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <!--shutdown-->
+        <!--shutdown start-->
         <div class="div__line__pri">
           <mat-checkbox #shutStartUpdate color="primary" (change)="
-              shutStartUpdate.checked 
-                    ? inputCommand(' shutdown',  1) 
-                    : inputCommand('', 1)">
+            addCommand('shutStartUpdate', shutStartUpdate.checked, false, '')">
             cable shutdown
           </mat-checkbox>&nbsp;
         </div>
-        <!--Description-->
+        <!--description-->
         <div class="div__line__pri">
-          <mat-checkbox #descUpdate color="primary" (change)="      
-                descUpdate.checked ? !descNo.checked 
-                    ? inputCommand(' description ' + quot + descText.value + quot,  2) 
-                    : inputCommand(' no description', 2) 
-                  : inputCommand('', 2)">
+          <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+            addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
             description
           </mat-checkbox>&nbsp;
           <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
-                descUpdate.checked ? !descNo.checked 
-                  ? inputCommand(' description ' + quot + descText.value + quot, 2) 
-                  : inputCommand(' no description', 2) 
-                : inputCommand('', 2)">&nbsp;
+            addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">&nbsp;
           <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
-                descUpdate.checked ? !descNo.checked 
-                  ? inputCommand(' description ' + quot + descText.value + quot, 2) 
-                  : inputCommand(' no description', 2) 
-                : inputCommand('', 2)">
+            addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
             No
           </mat-checkbox>
         </div>
         <!--initial-tech-->
         <div class="div__line__pri">
-          <mat-checkbox #initialUpdate color="primary" (change)="      
-            initialUpdate.checked
-                    ? inputCommand(' initial-tech ' + initialText.value,  3) 
-                    : inputCommand('', 3)">
+          <mat-checkbox #initialUpdate color="primary" (change)="
+            addCommand('initialUpdate', initialUpdate.checked, false, initialText.value)">
             initial-tech
           </mat-checkbox>&nbsp;
           <input type="text" #initialText value="period-ranging" class="middplus__input" (blur)="        
-            initialUpdate.checked
-                  ? inputCommand(' initial-tech ' + initialText.value, 3) 
-                  : inputCommand('', 3)">
+            addCommand('initialUpdate', initialUpdate.checked, false, initialText.value)">
         </div>
         <!--early-authentication-encryption-->
         <div class="div__line__pri">
-          <mat-checkbox #earlyUpdate color="primary" (change)="      
-            earlyUpdate.checked ? !earlyNo.checked 
-                    ? inputCommand(' early-authentication-encryption',  4) 
-                    : inputCommand(' no early-authentication-encryption', 4) 
-                  : inputCommand('', 4)">
+          <mat-checkbox #earlyUpdate color="primary" (change)="earlyUpdate.checked ? false : earlyNo.checked = false;    
+            addCommand('earlyUpdate', earlyUpdate.checked, earlyNo.checked, '')">
             early-authentication-encryption
           </mat-checkbox>&nbsp;
           <mat-checkbox #earlyNo (change)="
-            earlyUpdate.checked ? !earlyNo.checked 
-                  ? inputCommand(' early-authentication-encryption', 4) 
-                  : inputCommand(' no early-authentication-encryption', 4) 
-                : inputCommand('', 4)">
+            addCommand('earlyUpdate', earlyUpdate.checked, earlyNo.checked, '')">
             No
           </mat-checkbox>
         </div>
         <!--multicast-dsid-forward-->
         <div class="div__line__pri">
-          <mat-checkbox #multicastUpdate color="primary" (change)="      
-            multicastUpdate.checked ? !multicastNo.checked 
-                    ? inputCommand(' multicast-dsid-forward',  5) 
-                    : inputCommand(' no multicast-dsid-forward', 5) 
-                  : inputCommand('', 5)">
+          <mat-checkbox #multicastUpdate color="primary" (change)="multicastUpdate.checked ? false : multicastNo.checked = false;    
+            addCommand('multicastUpdate', multicastUpdate.checked, multicastNo.checked, '')">
             multicast-dsid-forward
           </mat-checkbox>&nbsp;
           <mat-checkbox #multicastNo (change)="
-            multicastUpdate.checked ? !multicastNo.checked 
-                  ? inputCommand(' multicast-dsid-forward', 5) 
-                  : inputCommand(' no multicast-dsid-forward', 5) 
-                : inputCommand('', 5)">
+            addCommand('multicastUpdate', multicastUpdate.checked, multicastNo.checked, '')">
             No
           </mat-checkbox>
         </div>
         <!--tftp-proxy-->
         <div class="div__line__pri">
-          <mat-checkbox #tftpUpdate color="primary" (change)="      
-            tftpUpdate.checked ? !tftpNo.checked 
-                    ? inputCommand(' tftp-proxy',  6) 
-                    : inputCommand(' no tftp-proxy', 6) 
-                  : inputCommand('', 6)">
+          <mat-checkbox #tftpUpdate color="primary" (change)="tftpUpdate.checked ? false : tftpNo.checked = false;
+            addCommand('tftpUpdate', tftpUpdate.checked, tftpNo.checked, '')">
             tftp-proxy
           </mat-checkbox>&nbsp;
           <mat-checkbox #tftpNo (change)="
-            tftpUpdate.checked ? !tftpNo.checked 
-                  ? inputCommand(' tftp-proxy', 6) 
-                  : inputCommand(' no tftp-proxy', 6) 
-                : inputCommand('', 6)">
+            addCommand('tftpUpdate', tftpUpdate.checked, tftpNo.checked, '')">
             No
           </mat-checkbox>
         </div>
         <!--ip bundle-->
         <div class="div__line__pri">
-          <mat-checkbox #bundleUpdate color="primary" (change)="      
-            bundleUpdate.checked ? !bundleNo.checked 
-                    ? inputCommand(' ip bundle ' + bundleText.value,  7) 
-                    : inputCommand(' no ip bundle', 7) 
-                  : inputCommand('', 7)">
+          <mat-checkbox #bundleUpdate color="primary" (change)="bundleUpdate.checked ? false : bundleNo.checked = false;
+            addCommand('bundleUpdate', bundleUpdate.checked, bundleNo.checked, bundleText.value)">
             ip bundle
           </mat-checkbox>&nbsp;
           <input type="text" #bundleText [disabled]="bundleNo.checked" class="short__input" value="2" (blur)="        
-            bundleUpdate.checked ? !bundleNo.checked 
-                  ? inputCommand(' ip bundle ' + bundleText.value, 7) 
-                  : inputCommand(' no ip bundle', 7) 
-                : inputCommand('', 7)">&nbsp;
+            addCommand('bundleUpdate', bundleUpdate.checked, bundleNo.checked, bundleText.value)">&nbsp;
           <mat-checkbox #bundleNo (change)="bundleNo.checked ? bundleText.value = '' : false;
-            bundleUpdate.checked ? !bundleNo.checked 
-                  ? inputCommand(' ip bundle ' + bundleText.value, 7) 
-                  : inputCommand(' no ip bundle', 7) 
-                : inputCommand('', 7)">
+            addCommand('bundleUpdate', bundleUpdate.checked, bundleNo.checked, bundleText.value)">
             No
           </mat-checkbox>
         </div>
@@ -196,8 +150,7 @@
           </select>
           <span>/</span>
           <span>0 --> </span>
-          <select #selectChDownEnd class="mod__select"
-            (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
+          <select #selectChDownEnd class="mod__select" (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
             <option></option>
             <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
           </select>
@@ -213,128 +166,71 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div *ngFor="let downstream of downstreams; index as i">
-              <mat-checkbox #downUpdate color="primary" (change)="
-                downUpdate.checked 
-                  ? !NoDownUpdate.checked
-                    ? secUpdate.checked
-                      ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
-                      :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
-                    : inputCommand(' no downstream ' + downstream, 30 + i)
-                  : inputCommand('', 30 + i)">
-                downstream {{downstream}} interface qam {{interfaceDown}}/{{sifDown}}/
-              </mat-checkbox>
-              <select #dsSelect class="mod__select" (change)="
-              downUpdate.checked 
-                ? !NoDownUpdate.checked
-                  ? secUpdate.checked
-                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
-                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
-                  : inputCommand(' no downstream ' + downstream, 30 + i)
-                : inputCommand('', 30 + i)">
-                <option>{{chDownstreams[i]}}</option>
-                <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
-              </select>
-              <mat-checkbox #secUpdate (change)="
-              downUpdate.checked 
-                ? !NoDownUpdate.checked
-                  ? secUpdate.checked
-                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
-                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
-                  : inputCommand(' no downstream ' + downstream, 30 + i)
-                : inputCommand('', 30 + i)">
-                secondary |
-              </mat-checkbox>&nbsp;
-              <mat-checkbox #NoDownUpdate (change)="
-              downUpdate.checked 
-                ? !NoDownUpdate.checked
-                  ? secUpdate.checked
-                    ? inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value + ' secondary', 30 + i)
-                    :inputCommand(' downstream ' + downstream + ' interface qam ' + interfaceDown + '/' + sifDown + '/' + dsSelect.value, 30 + i)
-                  : inputCommand(' no downstream ' + downstream, 30 + i)
-                : inputCommand('', 30 + i)">
-                No
-              </mat-checkbox>
+              <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown" [slotDown]="i"
+                [pos]="30 + i">
+              </app-downstream-c100-g>
+              
+
             </div>
           </mat-expansion-panel>
         </mat-accordion>
         <!--mgmd ipv4-->
         <div class="div__line__pri">
-          <mat-checkbox #mgmdUpdate color="primary" (change)="      
-          mgmdUpdate.checked ? !mgmdNo.checked 
-                    ? inputCommand(' mgmd ipv4 shutdown',  40) 
-                    : inputCommand(' no mgmd ipv4 shutdown', 40) 
-                  : inputCommand('', 40)">
+          <mat-checkbox #mgmdUpdate color="primary" (change)="mgmdUpdate.checked ? false : mgmdNo.checked = false;
+            addCommand('mgmdUpdate', mgmdUpdate.checked, mgmdNo.checked, '')">
                   mgmd ipv4 shutdown
           </mat-checkbox>&nbsp;
           <mat-checkbox #mgmdNo (change)="
-          mgmdUpdate.checked ? !mgmdNo.checked 
-                  ? inputCommand(' mgmd ipv4 shutdown', 40) 
-                  : inputCommand(' no mgmd ipv4 shutdown', 40) 
-                : inputCommand('', 40)">
+            addCommand('mgmdUpdate', mgmdUpdate.checked, mgmdNo.checked, '')">
             No
           </mat-checkbox>
         </div>
-        <!--cm-status report event-list -->
+        <!--cm-status report event-list-->
         <div class="div__line__pri">
-          <mat-checkbox #reportUpdate color="primary" (change)="      
-          reportUpdate.checked ? !reportNo.checked 
-                    ? inputCommand(' cable cm-status report event-list ' + reportText.value,  41) 
-                    : inputCommand(' no cable cm-status report event-list', 41) 
-                  : inputCommand('', 41)">
-                  cable cm-status report event-list
+          <mat-checkbox #reportUpdate color="primary" (change)="reportUpdate.checked ? false : reportNo.checked = false;
+            addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">
+            cable cm-status report event-list
           </mat-checkbox>&nbsp;
           <input type="text" #reportText [disabled]="reportNo.checked" style="width: 200px" value="1,2,3,4,5,6,7,8,9,10,11,17,26,27" (blur)="        
-          reportUpdate.checked ? !reportNo.checked 
-                  ? inputCommand(' cable cm-status report event-list ' + reportText.value, 41) 
-                  : inputCommand(' no cable cm-status report event-list', 41) 
-                : inputCommand('', 41)">&nbsp;
+            addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">&nbsp;
           <mat-checkbox #reportNo (change)="reportNo.checked ? reportText.value = '' : false;
-          reportUpdate.checked ? !reportNo.checked 
-                  ? inputCommand(' cable cm-status report event-list ' + reportText.value, 41) 
-                  : inputCommand(' no cable cm-status report event-list', 41) 
-                : inputCommand('', 41)">
+            addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">
             No
           </mat-checkbox>
         </div>
         <!--cm trap online-offline-only-->
         <div class="div__line__pri">
-          <mat-checkbox #trapoUpdate color="primary" (change)="      
-          trapoUpdate.checked ? trapoNo.checked 
-                    ? inputCommand(' cm trap online-offline-only',  42) 
-                    : inputCommand(' no cm trap online-offline-only', 42) 
-                  : inputCommand('', 42)">
-                  cm trap online-offline-only
+          <mat-checkbox #trapoUpdate color="primary" (change)="trapoUpdate.checked ? false : trapoNo.checked = false;  
+            addCommand('trapoUpdate', trapoUpdate.checked, trapoNo.checked, '')">
+            cm trap online-offline-only
           </mat-checkbox>&nbsp;
           <mat-checkbox #trapoNo (change)="
-          trapoUpdate.checked ? !trapoNo.checked 
-                  ? inputCommand(' cm trap online-offline-only', 42) 
-                  : inputCommand(' no cm trap online-offline-only', 42) 
-                : inputCommand('', 42)">
+            addCommand('trapoUpdate', trapoUpdate.checked, trapoNo.checked, '')">
             No
           </mat-checkbox>
         </div>
         <!--cm trap interval-->
         <div class="div__line__pri">
-          <mat-checkbox #trapiUpdate color="primary" (change)="      
-          trapiUpdate.checked ? !trapiNo.checked 
-                    ? inputCommand(' cm trap interval ' + trapiText.value,  43) 
-                    : inputCommand(' no cm trap interval', 43) 
-                  : inputCommand('', 43)">
-                  cm trap interval
+          <mat-checkbox #trapiUpdate color="primary" (change)="trapiUpdate.checked ? false : trapiNo.checked = false;
+            addCommand('trapiUpdate', trapiUpdate.checked, trapiNo.checked, trapiText.value)">
+            cm trap interval
           </mat-checkbox>&nbsp;
           <input type="text" #trapiText [disabled]="trapiNo.checked" class="shortplus__input" value="1200" (blur)="        
-          trapiUpdate.checked ? !trapiNo.checked 
-                  ? inputCommand(' cm trap interval ' + trapiText.value, 43) 
-                  : inputCommand(' no cm trap interval', 43) 
-                : inputCommand('', 43)">&nbsp;
+            addCommand('trapiUpdate', trapiUpdate.checked, trapiNo.checked, trapiText.value)">&nbsp;
           <mat-checkbox #trapiNo (change)="trapiNo.checked ? trapiText.value = '' : false;
-          trapiUpdate.checked ? !trapiNo.checked 
-                  ? inputCommand(' cable cm trap interval ' + trapiText.value, 43) 
-                  : inputCommand(' no cm trap interval', 43) 
-                : inputCommand('', 43)">
+            addCommand('trapiUpdate', trapiUpdate.checked, trapiNo.checked, trapiText.value)">
             No
           </mat-checkbox>
         </div>
+        <!--shutdown end-->
+        <div class="div__line__pri">
+          <mat-checkbox #shutEndUpdate color="primary" (change)="
+            addCommand('shutEndUpdate', shutEndUpdate.checked, false, '')">
+            no cable shutdown
+          </mat-checkbox>&nbsp;
+        </div>
+
+
       </mat-expansion-panel>
     </mat-accordion>
     <br>
