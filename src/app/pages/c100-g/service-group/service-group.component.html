@@ -20,15 +20,17 @@
     </mat-checkbox>
   </div>
   <!--quams-->
-  <div class="div__line__sec" *ngFor="let channel of channels">
-    <mat-checkbox #qamUpdate color="primary" (change)="qamUpdate.checked ? false : qamNo.checked = false;
+  <div class="scroll__div">
+    <div class="div__line__sec" *ngFor="let channel of channels">
+      <mat-checkbox #qamUpdate color="primary" (change)="qamUpdate.checked ? false : qamNo.checked = false;
         addServCommand('qamUpdate', qamUpdate.checked, qamNo.checked, channel)">
-      qam {{ifDown}}/{{sifDown}}/{{channel}}
-    </mat-checkbox>&nbsp;
-    <mat-checkbox #qamNo (change)="
+        qam {{ifDown}}/{{sifDown}}/{{channel}}
+      </mat-checkbox>&nbsp;
+      <mat-checkbox #qamNo (change)="
         addServCommand('qamUpdate', qamUpdate.checked, qamNo.checked, channel)">
-      No
-    </mat-checkbox>
+        No
+      </mat-checkbox>
+    </div>
   </div>
   <!--ups-->
   <div class="div__line__sec" *ngFor="let up of ups">
@@ -43,16 +45,3 @@
   </div>
 
 </div>
-
-
-
-<!--
-
- 
-  upstream 13/3.0
-  upstream 13/3.1
-  upstream 13/3.2
-  upstream 13/3.3
-
-
--->

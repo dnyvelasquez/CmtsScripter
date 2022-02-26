@@ -45,74 +45,76 @@
     </mat-checkbox>
   </div>
   <!--channels-->
-  <div *ngFor="let channel of channels">
-    <!--shutdown Start Channel-->
-    <div class="div__line__sec">
-      <mat-checkbox #shutStartChUpdate color="primary" (change)="
+  <div class="scroll__div">
+    <div *ngFor="let channel of channels">
+      <!--shutdown Start Channel-->
+      <div class="div__line__sec">
+        <mat-checkbox #shutStartChUpdate color="primary" (change)="
                 addChannelCommand('shutStartChUpdate', shutStartChUpdate.checked, false, '', channel)">
-        channel {{channel}} shutdown
-      </mat-checkbox>&nbsp;
-    </div>
-    <!--description-->
-    <div class="div__line__sec">
-      <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+          channel {{channel}} shutdown
+        </mat-checkbox>&nbsp;
+      </div>
+      <!--description-->
+      <div class="div__line__sec">
+        <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
-        channel {{channel}} description
-      </mat-checkbox>&nbsp;
-      <input type="text" #descText [disabled]="descNo.checked" [value]="desc" (blur)="desc = descText.value;        
+          channel {{channel}} description
+        </mat-checkbox>&nbsp;
+        <input type="text" #descText [disabled]="descNo.checked" [value]="desc" (blur)="desc = descText.value;        
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">&nbsp;
-      <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
+        <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
-        No
-      </mat-checkbox>
-    </div>
-    <!--frequency-->
-    <div class="div__line__sec">
-      <mat-checkbox #freqUpdate color="primary" (change)="freqUpdate.checked ? false : freqNo.checked = false;
+          No
+        </mat-checkbox>
+      </div>
+      <!--frequency-->
+      <div class="div__line__sec">
+        <mat-checkbox #freqUpdate color="primary" (change)="freqUpdate.checked ? false : freqNo.checked = false;
                 addChannelCommand('freqUpdate', freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
-        channel {{channel}} frequency
-      </mat-checkbox>&nbsp;
-      <select #freqSelect class="freq__select" (change)="
+          channel {{channel}} frequency
+        </mat-checkbox>&nbsp;
+        <select #freqSelect class="freq__select" (change)="
                 addChannelCommand('freqUpdate', freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
-        <option></option>
-        <option *ngFor="let freq of freqs">{{freq}}</option>
-      </select>000000
-      <mat-checkbox #freqNo (change)="freqNo.checked ? freqSelect.value = '' : false;
+          <option></option>
+          <option *ngFor="let freq of freqs">{{freq}}</option>
+        </select>000000
+        <mat-checkbox #freqNo (change)="freqNo.checked ? freqSelect.value = '' : false;
                 addChannelCommand('freqUpdate', freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
-        No
-      </mat-checkbox>
-    </div>
-    <!--shutdown End Channel-->
-    <div class="div__line__sec">
-      <mat-checkbox #shutEndChUpdate color="primary" (change)="
+          No
+        </mat-checkbox>
+      </div>
+      <!--shutdown End Channel-->
+      <div class="div__line__sec">
+        <mat-checkbox #shutEndChUpdate color="primary" (change)="
             addChannelCommand('shutEndChUpdate', shutEndChUpdate.checked, false, '', channel)">
-        no channel {{channel}} shutdown
-      </mat-checkbox>&nbsp;
-    </div>
-    <div class="div__line__sec" *ngIf="channels.length -1 === channel">
-      <button (click)="addDownstream(channel + 1)">Add downstream</button>
+          no channel {{channel}} shutdown
+        </mat-checkbox>&nbsp;
+      </div>
+      <div class="div__line__sec" *ngIf="channels.length -1 === channel">
+        <button (click)="addDownstream(channel + 1)">Add downstream</button>
+      </div>
     </div>
   </div>
   <!--shutdown odfm 0-->
   <div class="div__line__sec">
     <mat-checkbox #shutOdfm0Update color="primary" (change)="shutOdfm0Update.checked ? false : shutOdfm0No.checked = false;
           addCommand('shutOdfm0Update',shutOdfm0Update.checked, shutOdfm0No.checked, '')">
-          ofdm-channel 0 shutdown
+      ofdm-channel 0 shutdown
     </mat-checkbox>&nbsp;
     <mat-checkbox #shutOdfm0No (change)="
           addCommand('shutOdfm0Update',shutOdfm0Update.checked, shutOdfm0No.checked, '')">
-          No
+      No
     </mat-checkbox>&nbsp;
   </div>
   <!--shutdown odfm 1-->
   <div class="div__line__sec">
     <mat-checkbox #shutOdfm1Update color="primary" (change)="shutOdfm1Update.checked ? false : shutOdfm1No.checked = false;
           addCommand('shutOdfm1Update',shutOdfm1Update.checked, shutOdfm1No.checked, '')">
-          ofdm-channel 1 shutdown
+      ofdm-channel 1 shutdown
     </mat-checkbox>&nbsp;
     <mat-checkbox #shutOdfm1No (change)="
           addCommand('shutOdfm1Update',shutOdfm1Update.checked, shutOdfm1No.checked, '')">
-          No
+      No
     </mat-checkbox>&nbsp;
   </div>
   <!--shutdown end-->
@@ -123,5 +125,3 @@
     </mat-checkbox>&nbsp;
   </div>
 </div>
-
-
