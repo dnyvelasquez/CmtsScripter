@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/shared/services/shared.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-interface-downstream',
@@ -12,15 +13,13 @@ export class InterfaceDownstreamComponent implements OnInit {
   @Input() interface!: number;
   @Input() subinterface!: number;
   @Input() desc!: string;
+  @Input() channels: number[] = [];
+  @Output() addChannelEvent = new EventEmitter<number>();
   freqs: number[] = this.sharedSvc.getFrequencies();
-  channels: number[] = [];
 
   constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
-    for(let i = 0; i < 80; i++){
-      this.channels.push(i);
-    }
   }
 
   addCommand(id: string, update: boolean, no: boolean, text: string){
@@ -160,5 +159,8 @@ export class InterfaceDownstreamComponent implements OnInit {
     }
   }
 
+  addDownstream(value: number) {
+    this.addChannelEvent.emit(value);
+  }
 
 }

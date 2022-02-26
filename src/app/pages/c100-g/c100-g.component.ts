@@ -11,36 +11,45 @@ export class C100GComponent implements OnInit {
   mac: string = '';
   desc: string = '';
   panelOpenStateAtt = false
-  panelOpenStateUs = false
+  panelOpenStateUsA = false
+  panelOpenStateUsB = false
   panelOpenStateDs = false
   panelOpenStateUpA = false
   panelOpenStateUpB = false
   panelOpenStateDown = false
+  panelOpenStateServiceA = false
+  panelOpenStateServiceB = false
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
-  sifUpstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-  sltUpstreams: number[] = [0, 1, 2, 3];
+  sifUpstreams: number[] = [];
   interfaceUp!: number;
-  sifStartUp!: number;
-  sifEndUp!: number;
-  upstreamsA: number[] = [1, 2, 3, 4];
-  upstreamsB: number[] = [5, 6, 7, 8];
+  sifAUp!: number;
+  sifBUp!: number;
+  upstreamsA: number[] = [0, 1, 2, 3];
+  upstreamsB: number[] = [0, 1, 2, 3];
   ifDownstreams: number[] = [0, 1, 2, 3, 4];
   sifDownstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
-  chDownstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-                            24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
+  chDownstreams: number[] = [];
+  channels: number[] = [];
   chDownEnd!: number;
   interfaceDown!: number;
   sifDown!: number;
   slotDown!: number;
   downstreams: number[] = [];
+  upA: string = '';
+  upB: string = '';
 
   constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
-  }
-
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
+    for(let i = 0; i <= 47; i ++){
+      this.chDownstreams.push(i);
+    }
+    for(let i = 0; i <= 15; i ++){
+      this.sifUpstreams.push(i);
+    }
+    for(let i = 0; i < 54; i++){
+      this.channels.push(i);
+    }
   }
 
   parse_Int(value: string): number{
@@ -242,4 +251,8 @@ export class C100GComponent implements OnInit {
 
   }
 
+  addChannel(ch: number) {
+    this.channels.push(ch);
+  }
+  
 }

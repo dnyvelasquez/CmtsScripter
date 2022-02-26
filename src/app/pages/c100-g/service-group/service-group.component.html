@@ -1,0 +1,58 @@
+<!--service group-->
+<div class="div__line__pri">
+  <mat-checkbox #sgUpdate color="primary" (change)="
+      addCommand('sgUpdate', sgUpdate.checked, false, '')">
+    service group {{mac}}{{sec}}
+  </mat-checkbox>
+</div>
+<div *ngIf="sgUpdate.checked">
+  <!--description-->
+  <div class="div__line__sec">
+    <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
+      description
+    </mat-checkbox>&nbsp;
+    <input type="text" #descText [value]="desc" [disabled]="descNo.checked" (blur)="       
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">&nbsp;
+    <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
+        addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
+      No
+    </mat-checkbox>
+  </div>
+  <!--quams-->
+  <div class="div__line__sec" *ngFor="let channel of channels">
+    <mat-checkbox #qamUpdate color="primary" (change)="qamUpdate.checked ? false : qamNo.checked = false;
+        addServCommand('qamUpdate', qamUpdate.checked, qamNo.checked, channel)">
+      qam {{ifDown}}/{{sifDown}}/{{channel}}
+    </mat-checkbox>&nbsp;
+    <mat-checkbox #qamNo (change)="
+        addServCommand('qamUpdate', qamUpdate.checked, qamNo.checked, channel)">
+      No
+    </mat-checkbox>
+  </div>
+  <!--ups-->
+  <div class="div__line__sec" *ngFor="let up of ups">
+    <mat-checkbox #upUpdate color="primary" (change)="upUpdate.checked ? false : upNo.checked = false;
+        addServCommand('upUpdate', upUpdate.checked, upNo.checked, up)">
+      upstream {{ifUp}}/{{sifUp}}/{{up}}
+    </mat-checkbox>&nbsp;
+    <mat-checkbox #upNo (change)="
+        addServCommand('upUpdate', upUpdate.checked, upNo.checked, up)">
+      No
+    </mat-checkbox>
+  </div>
+
+</div>
+
+
+
+<!--
+
+ 
+  upstream 13/3.0
+  upstream 13/3.1
+  upstream 13/3.2
+  upstream 13/3.3
+
+
+-->

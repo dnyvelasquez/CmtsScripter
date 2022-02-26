@@ -6,12 +6,7 @@
     <mat-checkbox #usNo (change)="
       addCommand(usChange.checked, usNo.checked)">
     No
-    <span #usOther *ngIf="slot === slts - 1">
-        |
-        <mat-checkbox #add (change)="add.checked ? addUpstream(up + 1) : false">
-            Add upstream
-        </mat-checkbox> 
-    </span>
   </mat-checkbox>&nbsp;
+  <button *ngIf="slot === slts - 1" (click)="addUpstream(up + 1)">Add upstream</button>
 </div>
 

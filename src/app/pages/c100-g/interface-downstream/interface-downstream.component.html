@@ -2,7 +2,7 @@
 <div class="div__line__pri">
   <mat-checkbox #ifQamUpdate color="primary" (change)="
       addCommand('ifQamUpdate', ifQamUpdate.checked, false, '')">
-    interface qam {{interface}}/{{subinterface}}/0
+    interface qam {{interface}}/{{subinterface}}
   </mat-checkbox>
 </div>
 <div *ngIf="ifQamUpdate.checked">
@@ -59,7 +59,7 @@
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
         channel {{channel}} description
       </mat-checkbox>&nbsp;
-      <input type="text" #descText [disabled]="descNo.checked" (blur)="desc = descText.value;        
+      <input type="text" #descText [disabled]="descNo.checked" [value]="desc" (blur)="desc = descText.value;        
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">&nbsp;
       <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false;
               addCommand('descUpdate', descUpdate.checked, descNo.checked, descText.value)">
@@ -88,6 +88,9 @@
             addChannelCommand('shutEndChUpdate', shutEndChUpdate.checked, false, '', channel)">
         no channel {{channel}} shutdown
       </mat-checkbox>&nbsp;
+    </div>
+    <div class="div__line__sec" *ngIf="channels.length -1 === channel">
+      <button (click)="addDownstream(channel + 1)">Add downstream</button>
     </div>
   </div>
   <!--shutdown odfm 0-->

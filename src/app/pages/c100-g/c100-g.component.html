@@ -99,63 +99,96 @@
             No
           </mat-checkbox>
         </div>
-        <!--upstreams-->
+        <!--upstreams A-->
         <div class="div__line__pri">
-          <strong>interfaces upstream</strong>
-          <select #selectIfUp class="mod__select" (change)="interfaceUp = parse_Int(selectIfUp.value)">
-            <option></option>
-            <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
-          </select>
-          <span>/</span>
-          <select #selectSifUp class="mod__select"
-            (change)="sifStartUp = parse_Int(selectSifUp.value); sifEndUp = parse_Int(selectSifUp.value) + 1">
-            <option></option>
-            <option *ngFor="let sifUpstream of sifUpstreams">{{sifUpstream}}</option>
-          </select>
-          <span>--> {{sifEndUp}}</span>
+          <strong>
+            <mat-checkbox #upstreamAUpdate color="primary">
+              interface upstream {{upA}}
+            </mat-checkbox>
+            <select #selectIfUp class="mod__select" (change)="interfaceUp = parse_Int(selectIfUp.value)">
+              <option></option>
+              <option *ngFor="let ifUpstream of ifUpstreams">{{ifUpstream}}</option>
+            </select>
+            <span>/</span>
+            <select #selectSifUp class="mod__select"
+              (change)="sifAUp = parse_Int(selectSifUp.value); sifBUp = parse_Int(selectSifUp.value) + 1">
+              <option></option>
+              <option *ngFor="let sifUpstream of sifUpstreams">{{sifUpstream}}</option>
+            </select>&nbsp;
+          </strong>
+          <mat-checkbox #addUp color="primary"
+            (change)="addUp.checked ? upA = 'A' : upA = ''; addUp.checked ? upB = 'B' : upB = ''">
+            Add upstream
+          </mat-checkbox>
         </div>
-        <mat-accordion *ngIf="selectSifUp.value !== ''">
-          <mat-expansion-panel (opened)="panelOpenStateUs = true" (closed)="panelOpenStateUs = false">
+        <mat-accordion *ngIf="upstreamAUpdate.checked">
+          <mat-expansion-panel (opened)="panelOpenStateUsA = true" (closed)="panelOpenStateUsA = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
-                interfaces upstream attributes
+                interface upstream {{upA}} attributes
               </mat-panel-title>
               <mat-panel-description>
-                Click to {{panelOpenStateUs ? 'close' : 'open'}}
+                Click to {{panelOpenStateUsA ? 'close' : 'open'}}
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div *ngFor="let upstream of upstreamsA; index as i">
-              <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="i"
+              <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifAUp" [slot]="i"
                 [slts]="upstreamsA.length" [pos]="10 + i" (addUpstreamEvent)="addUpstreamA($event)">
-              </app-upstream-c100-g>
-            </div>
-            <div *ngFor="let upstream of upstreamsB; index as i">
-              <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="i"
-                [slts]="upstreamsB.length" [pos]="20 + i" (addUpstreamEvent)="addUpstreamB($event)">
               </app-upstream-c100-g>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
+        <!--upstreams B-->
+        <div *ngIf="addUp.checked">
+          <div class="div__line__pri">
+            <mat-checkbox #upstreamBUpdate color="primary">
+              <strong>interface upstream B</strong>
+            </mat-checkbox>&nbsp;
+            <strong>{{interfaceUp}}/{{sifBUp}}</strong>
+          </div>
+          <mat-accordion *ngIf="upstreamBUpdate.checked">
+            <mat-expansion-panel (opened)="panelOpenStateUsB = true" (closed)="panelOpenStateUsB = false">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  interface upstream B attributes
+                </mat-panel-title>
+                <mat-panel-description>
+                  Click to {{panelOpenStateUsB ? 'close' : 'open'}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div *ngFor="let upstream of upstreamsB; index as i">
+                <app-upstream-c100-g [up]="upstream" [interface]="interfaceUp" [subinterface]="sifBUp" [slot]="i"
+                  [slts]="upstreamsB.length" [pos]="20 + i" (addUpstreamEvent)="addUpstreamB($event)">
+                </app-upstream-c100-g>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
         <!--downstreams-->
         <div class="div__line__pri">
-          <strong>interfaces downstream</strong>
-          <select #selectIfDown class="mod__select" (change)="interfaceDown = parse_Int(selectIfDown.value)">
-            <option></option>
-            <option *ngFor="let ifDownstream of ifDownstreams">{{ifDownstream}}</option>
-          </select>
-          <span>/</span>
-          <select #selectSifDown class="mod__select" (change)="sifDown = parse_Int(selectSifDown.value)">
-            <option></option>
-            <option *ngFor="let sifDownstream of sifDownstreams">{{sifDownstream}}</option>
-          </select>
-          <span>/</span>
-          <span>0 --> </span>
-          <select #selectChDownEnd class="mod__select" (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
-            <option></option>
-            <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
-          </select>
+          <strong>
+            <mat-checkbox #downstreamUpdate color="primary">
+              interfaces downstream
+            </mat-checkbox>
+            <select #selectIfDown class="mod__select" (change)="interfaceDown = parse_Int(selectIfDown.value)">
+              <option></option>
+              <option *ngFor="let ifDownstream of ifDownstreams">{{ifDownstream}}</option>
+            </select>
+            <span>/</span>
+            <select #selectSifDown class="mod__select" (change)="sifDown = parse_Int(selectSifDown.value)">
+              <option></option>
+              <option *ngFor="let sifDownstream of sifDownstreams">{{sifDownstream}}</option>
+            </select>
+            <span>/</span>
+            <span>0 --> </span>
+            <select #selectChDownEnd class="mod__select"
+              (change)="chDownEnd = parse_Int(selectChDownEnd.value); makeDownstreams()">
+              <option></option>
+              <option *ngFor="let chDownstream of chDownstreams">{{chDownstream}}</option>
+            </select>
+          </strong>
         </div>
-        <mat-accordion *ngIf="selectChDownEnd.value !== ''">
+        <mat-accordion *ngIf="downstreamUpdate.checked">
           <mat-expansion-panel (opened)="panelOpenStateDs = true" (closed)="panelOpenStateDs = false">
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -166,8 +199,8 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <div *ngFor="let downstream of downstreams; index as i">
-              <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown" [slotDown]="i"
-                [pos]="30 + i">
+              <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown"
+                [slotDown]="i" [pos]="30 + i">
               </app-downstream-c100-g>
             </div>
           </mat-expansion-panel>
@@ -176,7 +209,7 @@
         <div class="div__line__pri">
           <mat-checkbox #mgmdUpdate color="primary" (change)="mgmdUpdate.checked ? false : mgmdNo.checked = false;
             addCommand('mgmdUpdate', mgmdUpdate.checked, mgmdNo.checked, '')">
-                  mgmd ipv4 shutdown
+            mgmd ipv4 shutdown
           </mat-checkbox>&nbsp;
           <mat-checkbox #mgmdNo (change)="
             addCommand('mgmdUpdate', mgmdUpdate.checked, mgmdNo.checked, '')">
@@ -189,7 +222,8 @@
             addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">
             cable cm-status report event-list
           </mat-checkbox>&nbsp;
-          <input type="text" #reportText [disabled]="reportNo.checked" style="width: 200px" value="1,2,3,4,5,6,7,8,9,10,11,17,26,27" (blur)="        
+          <input type="text" #reportText [disabled]="reportNo.checked" style="width: 200px"
+            value="1,2,3,4,5,6,7,8,9,10,11,17,26,27" (blur)="        
             addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">&nbsp;
           <mat-checkbox #reportNo (change)="reportNo.checked ? reportText.value = '' : false;
             addCommand('reportUpdate', reportUpdate.checked, reportNo.checked, reportText.value)">
@@ -235,62 +269,104 @@
       <mat-expansion-panel (opened)="panelOpenStateUpA = true" (closed)="panelOpenStateUpA = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <strong>interfaces upstream A</strong> 
+            <strong>interface upstream {{upA}}</strong>
           </mat-panel-title>
           <mat-panel-description>
             Click to {{panelOpenStateUpA ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="selectIfUp.value !==''">
-        <div *ngFor="let sltUpstream of sltUpstreams; index as i">
-          <app-interface-upstream [pos]="50 + i * 20" [interface]="interfaceUp" [subinterface]="sifStartUp" [slot]="sltUpstream" [desc]="desc">
-          </app-interface-upstream>
+          <div *ngFor="let upstream of upstreamsA; index as i">
+            <app-interface-upstream [pos]="50 + i * 20" [interface]="interfaceUp" [subinterface]="sifAUp"
+              [slot]="upstream" [desc]="desc">
+            </app-interface-upstream>
+          </div>
         </div>
-      </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <br>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
     <!--interfaces upstream B-->
-    <mat-accordion>
+    <div *ngIf="addUp.checked">
+      <mat-accordion>
         <mat-expansion-panel (opened)="panelOpenStateUpB = true" (closed)="panelOpenStateUpB = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              <strong>interfaces upstream B</strong> 
+              <strong>interface upstream B</strong>
             </mat-panel-title>
             <mat-panel-description>
               Click to {{panelOpenStateUpB ? 'close' : 'open'}}
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div *ngIf="selectIfUp.value !==''">
-            <div *ngFor="let sltUpstream of sltUpstreams; index as i">
-            <app-interface-upstream [pos]="150 + i * 20" [interface]="interfaceUp" [subinterface]="sifEndUp" [slot]="sltUpstream" [desc]="desc">
-            </app-interface-upstream>
+            <div *ngFor="let upstream of upstreamsB; index as i">
+              <app-interface-upstream [pos]="150 + i * 20" [interface]="interfaceUp" [subinterface]="sifBUp"
+                [slot]="upstream" [desc]="desc">
+              </app-interface-upstream>
+            </div>
           </div>
-        </div>
-      </mat-expansion-panel>
-        </mat-accordion>
-        <br>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    </div>
     <!--interface qam-->
     <mat-accordion>
       <mat-expansion-panel (opened)="panelOpenStateDown = true" (closed)="panelOpenStateDown = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <strong>interface qam</strong> 
+            <strong>interface qam</strong>
           </mat-panel-title>
           <mat-panel-description>
             Click to {{panelOpenStateDown ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="selectSifDown.value !==''">
-          <app-interface-downstream [pos]="250" [interface]="interfaceDown" [subinterface]="sifDown" [desc]="desc">
+          <app-interface-downstream [pos]="250" [interface]="interfaceDown" [subinterface]="sifDown" [desc]="desc"
+            [channels]="channels" (addChannelEvent)="addChannel($event)">
           </app-interface-downstream>
-      </div>
-    </mat-expansion-panel>
-      </mat-accordion>
-
-
-
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
     <br>
+    <!--service group A-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateServiceA = true" (closed)="panelOpenStateServiceA = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>service group {{upA}}</strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateServiceA ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="selectSifUp.value !==''">
+          <app-service-group [pos]="600" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
+            [sifUp]="sifAUp" [desc]="desc" [mac]="mac" [sec]="upA" [ups]="upstreamsA" [channels]="channels">
+          </app-service-group>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <!--service group B-->
+    <div *ngIf="addUp.checked">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenStateServiceB = true" (closed)="panelOpenStateServiceB = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <strong>service group B</strong>
+            </mat-panel-title>
+            <mat-panel-description>
+              Click to {{panelOpenStateServiceB ? 'close' : 'open'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngIf="selectSifUp.value !==''">
+            <app-service-group [pos]="700" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
+              [sifUp]="sifBUp" [desc]="desc" [mac]="mac" [sec]="upB" [ups]="upstreamsB" [channels]="channels">
+            </app-service-group>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <br>
+    </div>
     <app-script></app-script>
   </mat-card>
 </div>

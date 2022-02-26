@@ -8,6 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatRippleModule} from '@angular/material/core';
+
 
 @NgModule({
     exports:[
@@ -19,7 +22,9 @@ import { MatRadioModule } from '@angular/material/radio';
         MatSelectModule,
         MatCheckboxModule,
         MatExpansionModule,
-        MatRadioModule
+        MatRadioModule,
+        MatChipsModule,
+        MatRippleModule,
     ]
 })
 
