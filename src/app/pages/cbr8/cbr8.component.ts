@@ -27,10 +27,6 @@ export class CBR8Component implements OnInit {
   interF: any = '';
   slt: any = '';
   
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
-  }
-
   inputPowerAdjust(upstream: string, value: string){
     let us = parseInt(upstream);
     this.sharedSvc.addCommand(' cable upstream ' + us + ' power-adjust continue ' +  value, 400 + us);
