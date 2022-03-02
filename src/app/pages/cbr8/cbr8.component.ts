@@ -24,8 +24,8 @@ export class CBR8Component implements OnInit {
   panelOpenStateDown = false;
   panelOpenStateUpA = false;
   panelOpenStateUpB = false;
-  interF!: number;
-  slt!: number;
+  interF: any = '';
+  slt: any = '';
   
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
@@ -48,10 +48,6 @@ export class CBR8Component implements OnInit {
 
   newTemplate(){
 
-  }
-
-  parse_Int(value: string): number{
-    return parseInt(value);
   }
 
   subDownStream(){
@@ -78,6 +74,208 @@ export class CBR8Component implements OnInit {
     
   }
 
+  addInterfaceCommand(update: boolean){
+    let pos = 0;
+    if(update){
+      this.sharedSvc.addCommand(`interface Cable  ${this.interF} '/0/' ${this.slt}`, pos);
+    }else{
+      this.sharedSvc.addCommand('', pos);
+    }
+  }
+
+  addShutStartCommand(update: boolean){
+    let pos = 1;
+    if(update){
+      this.sharedSvc.addCommand(` shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addDescCommand(update: boolean, text: string, no: boolean){
+    let pos = 2;
+    let command = 'description';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addLoadCommand(update: boolean, text: string){
+    let pos = 3;
+    if(update){
+      this.sharedSvc.addCommand(` load interval ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addDownStreamCommand(update: boolean, text: string, no: boolean, pos: number){
+    let command = 'downstream Integrated-Cable';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${this.interF}/0/${this.slt} rf-channel ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command} ${this.interF}/0/${this.slt} rf-channel ${text}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addBalanceCommand(update: boolean, no: boolean){
+    let pos = 500;
+    let command = 'cable upstream balance-scheduling';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addBundleCommand(update: boolean, text: string, no: boolean){
+    let pos = 900;
+    let command = 'bundle';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command} ${text}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addDynamicCommand(update: boolean, text: string, no: boolean){
+    let pos = 901;
+    let command = 'cable dynamic-secret';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTrapCommand(update: boolean, text: string, no: boolean){
+    let pos = 902;
+    let command = 'cable enable-trap';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTrapiCommand(update: boolean, text: string, no: boolean){
+    let pos = 903;
+    let command = 'cable enable-trap cmonoff-interval';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTimeoutCommand(update: boolean, text: string, no: boolean){
+    let pos = 904;
+    let command = 'cable registration-timeout';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addMandatoryCommand(update: boolean, no: boolean){
+    let pos = 905;
+    let command = 'cable privacy mandatory';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addBpiCommand(update: boolean, text: string, no: boolean){
+    let pos = 906;
+    let command = 'cable privacy bpi-plus-policy';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addHoldInCommand(update: boolean, text: string, no: boolean){
+    let pos = 907;
+    let command = 'hold-queue';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text} in`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command} in`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addHoldOutCommand(update: boolean, text: string, no: boolean){
+    let pos = 908;
+    let command = 'hold-queue';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text} out`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command} out`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addShutEndCommand(update: boolean){
+    let pos = 909;
+    if(update){
+      this.sharedSvc.addCommand(` no shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
 }
 
 

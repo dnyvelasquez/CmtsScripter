@@ -26,13 +26,81 @@ export class RfChanComponent implements OnInit {
     }
   }
 
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
-  }
-
   inputNoRfChn(pos: number){
     for(let i = 0; i < 10; i++){
       this.sharedSvc.addCommand('', pos+i);
+    }
+  }
+
+  addRfChannelCommand(update: boolean, text: string, no: boolean){
+    let pos = this.pos;
+    let command = 'rf-chan';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(`  ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(`  no ${command} ${text}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTypeCommand(update: boolean, text: string){
+    let pos = this.pos + 1;
+    if(update){
+        this.sharedSvc.addCommand(`  type ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addFreqCommand(update: boolean, text: string, no: boolean){
+    let pos = this.pos + 2;
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(`  frequency ${text}000000`, pos);
+      }else{
+        this.sharedSvc.addCommand(`  no frequency`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addOutputCommand(update: boolean, text: string){
+    let pos = this.pos + 3;
+    if(update){
+        this.sharedSvc.addCommand(`  rf-output ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addPowerCommand(update: boolean, text: string){
+    let pos = this.pos + 4;
+    if(update){
+        this.sharedSvc.addCommand(`  power-adjust ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addQamCommand(update: boolean, text: string){
+    let pos = this.pos + 5;
+    if(update){
+        this.sharedSvc.addCommand(`  qam-profile ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addIdCommand(update: boolean, text: string){
+    let pos = this.pos + 6;
+    if(update){
+        this.sharedSvc.addCommand(`  docsis-channel-id ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
     }
   }
 

@@ -8,8 +8,8 @@ import { SharedService } from 'src/app/shared/services/shared.service';
 })
 export class UpstreamCableComponent implements OnInit {
 
-  @Input() interF!: number;
-  @Input() slt!: number;
+  @Input() interF!: any;
+  @Input() slt!: any;
   @Input() description!: string;
   @Input() pos!: number;
 
@@ -18,13 +18,17 @@ export class UpstreamCableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
-  }
-
   inputNoUsChan(pos: number){
     for(let i = 0; i < 15; i++){
       this.sharedSvc.addCommand('', pos+i);
+    }
+  }
+
+  addCommand(update: boolean){
+    if(update){
+      this.sharedSvc.addCommand(` \ncontroller Upstream-Cable ${this,this.interF}/0/${this.slt}`, this.pos);
+    }else{
+      this.sharedSvc.addCommand(``, this.pos);
     }
   }
 

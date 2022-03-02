@@ -167,7 +167,8 @@
   
   .scroll__div{
     overflow-y: scroll;
-    height: 600px;
+    max-height: 600px;
+    //height: 600px;
     border-top : solid 1px lightgray;
     border-bottom : solid 1px lightgray;
   }

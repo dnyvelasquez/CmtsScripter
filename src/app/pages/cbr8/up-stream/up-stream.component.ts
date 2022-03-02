@@ -24,8 +24,16 @@ export class UpStreamComponent implements OnInit {
     this.sbr8Svc.addPowerAdjust(upStream);
   }
 
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
+  addCommand(update: boolean, no: boolean, pos: number){
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` upstream ${this.us} Upstream-Cable ${this.interF}/0/${this.slt} us-channel ${this.usCh}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no upstream ${this.us}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
   }
 
 

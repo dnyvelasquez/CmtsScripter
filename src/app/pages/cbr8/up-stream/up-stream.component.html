@@ -1,22 +1,13 @@
 <div class="div__line__pri">
-  <mat-checkbox #usChange color="primary" (change)="
-    usChange.checked ? usNo.checked
-      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-    : inputCommand('', pos)">
-      upstream
+  <mat-checkbox #usChange color="primary" (change)="usChange.checked ? false : usNo.checked = false;
+    addCommand(usChange.checked, usNo.checked, pos)">
+    upstream
   </mat-checkbox>&nbsp;
   <input type="text" #upStream class="short__input" [value]=us (blur)="
-    usChange.checked ? usNo.checked
-      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-    : inputCommand('', pos)">&nbsp; 
+    addCommand(usChange.checked, usNo.checked, pos)">&nbsp; 
   <span>Upstream-Cable {{interF}}/0/{{slt}} us-channel {{usCh}}</span>&nbsp; 
   <mat-checkbox #usNo (change)="
-    usChange.checked ? usNo.checked
-      ? inputCommand('upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-      : inputCommand('no upstream ' + us + ' Upstream-Cable ' + interF + '/0/' + slt + ' us-channel ' + usCh, pos)
-    : inputCommand('', pos)">
+    addCommand(usChange.checked, usNo.checked, pos)">
     No |
   </mat-checkbox>&nbsp;
   <mat-checkbox #usOther>Add upstream</mat-checkbox>

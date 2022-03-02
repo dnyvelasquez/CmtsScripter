@@ -5,26 +5,20 @@
     <!--interface Cable-->
     <div class="div__interface">
       <mat-checkbox #interFaceUpdate color="primary" (change)="
-        interFaceUpdate.checked
-        ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
-        : inputCommand('', 0)">
-    </mat-checkbox>&nbsp;
+        addInterfaceCommand(interFaceUpdate.checked)">
+      </mat-checkbox>&nbsp;
       <strong>
         <span>Interface Cable</span>
-        <select #iF class="ifPri__select" value='' (change)="interF = parse_Int(iF.value);
-          interFaceUpdate.checked
-          ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
-          : inputCommand('', 0)">
+        <select #iF class="ifPri__select" value='' (change)="interF = iF.value;
+          addInterfaceCommand(interFaceUpdate.checked)">
           <option></option>
           <option *ngFor="let interFace of interFaces">
             {{ interFace }}
           </option>
         </select>
         <span>/0/</span>
-        <select #sl class="ifPri__select" value='' (change)="slt =  parse_Int(sl.value);
-          interFaceUpdate.checked
-            ? inputCommand('interface Cable' + interF + '/0/' + slt, 0)
-            : inputCommand('', 0)">
+        <select #sl class="ifPri__select" value='' (change)="slt = sl.value;
+          addInterfaceCommand(interFaceUpdate.checked)">
           <option></option>
           <option *ngFor="let slot of slots">
             {{ slot }}
@@ -46,72 +40,45 @@
         <!--shutdown-->
         <div class="div__line__pri">
           <mat-checkbox #shutStart color="primary" (change)="
-            shutStart.checked  
-              ? inputCommand(' shutdown', 1) 
-              : inputCommand('', 1)">
+            addShutStartCommand(shutStart.checked)">
             shutdown
           </mat-checkbox>
         </div>
         <!--Description-->
         <div class="div__line__pri">
-          <mat-checkbox #descUpdate color="primary" (change)="          
-            descUpdate.checked ? !descNo.checked 
-                ? inputCommand(' description ' + descText.value, 2) 
-                : inputCommand(' no description', 2) 
-              : inputCommand('', 2)">
-              description
+          <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+            addDescCommand(descUpdate.checked, descText.value, false)">
+            description
           </mat-checkbox>&nbsp;
           <input type="text" #descText [disabled]="descNo.checked" (blur)="            
-            descUpdate.checked ? !descNo.checked 
-              ? inputCommand(' description ' + descText.value, 2) 
-              : inputCommand(' no description', 2) 
-            : inputCommand('', 2)">&nbsp;
+            addDescCommand(descUpdate.checked, descText.value, false)">&nbsp;
           <mat-checkbox #descNo (change)="descNo.checked ? descText.value = '' : false" (change)="
-            descUpdate.checked ? !descNo.checked 
-              ? inputCommand(' description ' + descText.value, 2) 
-              : inputCommand(' no description', 2) 
-            : inputCommand('', 2)">
+            addDescCommand(descUpdate.checked, descText.value, false)">
             No
           </mat-checkbox>
         </div>
         <!--Load-interval-->
         <div class="div__line__pri">
           <mat-checkbox #loadUpdate color="primary" (change)="
-            loadUpdate.checked 
-              ? inputCommand(' load-interval ' + loadText.value, 3) 
-              : inputCommand('', 3)">
+            addLoadCommand(loadUpdate.checked, loadText.value)">
             load-interval
           </mat-checkbox>&nbsp;     
           <input type="text" #loadText [value]="30" class="short__input" (blur)="
-            loadUpdate.checked 
-              ? inputCommand(' load-interval ' + loadText.value, 3) 
-              : inputCommand('', 3)">
+            addLoadCommand(loadUpdate.checked, loadText.value)">
         </div>
         <!--Downstream channels-->
         <div class="div__line__pri" *ngFor="let downStream of downStreams">
-          <mat-checkbox #dsChange color="primary" (change)="
-            dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-            : inputCommand('', downStream)">
-              downstream Integrated-Cable {{interF}}/0/{{slt}} rf-channel
+          <mat-checkbox #dsChange color="primary" (change)="dsChange.checked ? false : dsNo.checked = false;
+            addDownStreamCommand(dsChange.checked, makeRfChannels(start.value, end.value), dsNo.checked, downStream)">
+            downstream Integrated-Cable {{interF}}/0/{{slt}} rf-channel
           </mat-checkbox>&nbsp;
           <input #start type="text" class="short__input" (blur)="
-            dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-            : inputCommand('', downStream)">
+            addDownStreamCommand(dsChange.checked, makeRfChannels(start.value, end.value), dsNo.checked, downStream)">
           <span>-</span>
           <input #end type="text" class="short__input" (blur)="
-            dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-            : inputCommand('', downStream)">&nbsp;
+            addDownStreamCommand(dsChange.checked, makeRfChannels(start.value, end.value), dsNo.checked, downStream)">&nbsp;
           <mat-checkbox #dsNo (change)="
-            dsChange.checked ? !dsNo.checked
-              ? inputCommand(' downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-              : inputCommand(' no downstream Integrated-Cable ' + interF + '/0/' + slt + ' rf-channel ' + makeRfChannels(start.value, end.value), downStream)
-            : inputCommand('', downStream)">
+            addDownStreamCommand(dsChange.checked, makeRfChannels(start.value, end.value), dsNo.checked, downStream)">
             No |
           </mat-checkbox>&nbsp;
           <mat-checkbox #dsOther (change)="dsOther.checked ? addDownStream(downStream + 1) : subDownStream()">
@@ -135,18 +102,12 @@
         </div>
         <!--Balance scheduling-->
         <div class="div__line__pri">
-          <mat-checkbox #schUpdate color="primary" (change)="
-            schUpdate.checked ? !schNo.checked 
-                ? inputCommand(' cable upstream balance-scheduling', 500) 
-                : inputCommand(' no cable upstream balance-scheduling', 500) 
-              : inputCommand('', 500)">
+          <mat-checkbox #schUpdate color="primary" (change)="schUpdate.checked ? false : schNo.checked = false;
+            addBalanceCommand(schUpdate.checked, schNo.checked)">
             cable upstream balance-scheduling
           </mat-checkbox>&nbsp;
           <mat-checkbox #schNo (change)="
-            schUpdate.checked ? !schNo.checked 
-              ? inputCommand(' cable upstream balance-scheduling', 500) 
-              : inputCommand(' no cable upstream balance-scheduling', 500) 
-            : inputCommand('', 500)">
+            addBalanceCommand(schUpdate.checked, schNo.checked)">
             No
           </mat-checkbox>&nbsp;
         </div>
@@ -155,203 +116,123 @@
         </app-bonding-group>
         <!--cable bundle-->
         <div class="div__line__pri">
-          <mat-checkbox #bundle color="primary" (change)="
-            bundle.checked ? !bundleNo.checked 
-              ? inputCommand(' cable bundle ' + bundleText.value, 900) 
-              : inputCommand(' no cable bundle ' + bundleText.value, 900) 
-            : inputCommand('', 900)">
+          <mat-checkbox #bundle color="primary" (change)="bundle.checked ? false : bundleNo.checked = false;
+            addBundleCommand(bundle.checked, bundleText.value, bundleNo.checked)">
             cable bundle
           </mat-checkbox>&nbsp;
           <input type="text" #bundleText value="2" class="short__input" (blur)="
-            bundle.checked ? !bundleNo.checked 
-              ? inputCommand(' cable bundle ' + bundleText.value, 900) 
-              : inputCommand(' no cable bundle ' + bundleText.value, 900) 
-            : inputCommand('', 900)">&nbsp;
+            addBundleCommand(bundle.checked, bundleText.value, bundleNo.checked)">&nbsp;
           <mat-checkbox #bundleNo (change)="
-            bundle.checked ? !bundleNo.checked 
-              ? inputCommand(' cable bundle ' + bundleText.value, 900) 
-              : inputCommand(' no cable bundle ' + bundleText.value, 900) 
-            : inputCommand('', 900)">
+            addBundleCommand(bundle.checked, bundleText.value, bundleNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--dynamic-secret-->
         <div class="div__line__pri">
-          <mat-checkbox color="primary" #secret (change)="
-            secret.checked ? !secretNo.checked 
-              ? inputCommand(' cable dynamic-secret ' + secretText.value, 901) 
-              : inputCommand(' no cable dynamic-secret', 901) 
-            : inputCommand('', 901)">
+          <mat-checkbox color="primary" #secret (change)="secret.checked ? false : secretNo.checked = false;
+            addDynamicCommand(secret.checked, secretText.value, secretNo.checked)">
             cable dynamic-secret
           </mat-checkbox>&nbsp;
           <input type="text" #secretText value="reject" class="midd__input" (blur)="
-            secret.checked ? !secretNo.checked 
-              ? inputCommand(' cable dynamic-secret ' + secretText.value, 901) 
-              : inputCommand(' no cable dynamic-secret', 901) 
-            : inputCommand('', 901)">&nbsp;
-          <mat-checkbox #secretNo (change)="secretNo.checked ? secretText.value = '' : false" (change)="
-            secret.checked ? !secretNo.checked 
-              ? inputCommand(' cable dynamic-secret ' + secretText.value, 901) 
-              : inputCommand(' no cable dynamic-secret', 901) 
-            : inputCommand('', 901)">
+            addDynamicCommand(secret.checked, secretText.value, secretNo.checked)">&nbsp;
+          <mat-checkbox #secretNo (change)="secretNo.checked ? secretText.value = '' : false;
+            addDynamicCommand(secret.checked, secretText.value, secretNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--enable-trap-->
         <div class="div__line__pri">
-          <mat-checkbox color="primary" #trap (change)="
-          trap.checked ? !trapNo.checked 
-            ? inputCommand(' cable enable-trap ' + trapText.value, 902) 
-            : inputCommand(' no cable enable-trap', 902) 
-          : inputCommand('', 902)">
-          cable enable-trap
+          <mat-checkbox color="primary" #trap (change)="trap.checked ? false : trapNo.checked = false;
+            addTrapCommand(trap.checked, trapText.value, trapNo.checked)">
+            cable enable-trap
           </mat-checkbox>&nbsp;
           <input type="text" #trapText value="cmonoff-notification" class="middplus__input" (blur)="
-            trap.checked ? !trapNo.checked 
-              ? inputCommand(' cable enable-trap ' + trapText.value, 902) 
-              : inputCommand(' no cable enable-trap', 902) 
-            : inputCommand('', 902)">&nbsp;
-          <mat-checkbox #trapNo (change)="!trapNo.checked ? trapText.value = '' : false" (change)="
-            trap.checked ? !trapNo.checked 
-              ? inputCommand(' cable enable-trap ' + trapText.value, 902) 
-              : inputCommand(' no cable enable-trap', 902) 
-            : inputCommand('', 902)">
+            addTrapCommand(trap.checked, trapText.value, trapNo.checked)">&nbsp;
+          <mat-checkbox #trapNo (change)="trapNo.checked ? trapText.value = '' : false;
+            addTrapCommand(trap.checked, trapText.value, trapNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--trap-interval-->
         <div class="div__line__pri">
-          <mat-checkbox color="primary" #trapi (change)="
-            trapi.checked ? !trapiNo.checked 
-              ? inputCommand(' cable enable-trap cmonoff-interval ' + trapiText.value, 903) 
-              : inputCommand(' no cable enable-trap cmonoff-interval', 903) 
-            : inputCommand('', 903)">
+          <mat-checkbox color="primary" #trapi (change)="trapi.checked ? false : trapiNo.checked = false;
+            addTrapiCommand(trapi.checked, trapiText.value, trapiNo.checked)">
             cable enable-trap cmonoff-interval
           </mat-checkbox>&nbsp;
           <input type="text" #trapiText value="1200" class="midd__input" (blur)="
-            trapi.checked ? !trapiNo.checked 
-              ? inputCommand(' cable enable-trap cmonoff-interval ' + trapiText.value, 903) 
-              : inputCommand(' no cable enable-trap cmonoff-interval', 903) 
-            : inputCommand('', 903)">&nbsp;
-          <mat-checkbox #trapiNo (change)="!trapiNo.checked ? trapiText.value = '' : false" (change)="
-            trapi.checked ? !trapiNo.checked 
-              ? inputCommand(' cable enable-trap cmonoff-interval ' + trapiText.value, 903) 
-              : inputCommand(' no cable enable-trap cmonoff-interval', 903) 
-            : inputCommand('', 903)">
+            addTrapiCommand(trapi.checked, trapiText.value, trapiNo.checked)">&nbsp;
+          <mat-checkbox #trapiNo (change)="trapiNo.checked ? trapiText.value = '' : false;
+            addTrapiCommand(trapi.checked, trapiText.value, trapiNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--registration-timeout-->
         <div class="div__line__pri">
-          <mat-checkbox #timeout color="primary" (change)="
-            timeout.checked ? !timeoutNo.checked
-              ? inputCommand(' cable registration-timeout ' + timeoutText.value, 904)
-              : inputCommand(' no cable registration-timeout', 904) 
-            : inputCommand('', 904)">
+          <mat-checkbox #timeout color="primary" (change)="timeout.checked ? false : timeoutNo.checked = false;
+            addTimeoutCommand(timeout.checked, timeoutText.value, timeoutNo.checked)">
             cable registration-timeout
           </mat-checkbox>&nbsp;
           <input type="text" #timeoutText value="2" class="short__input" (blur)="
-            timeout.checked ? !timeoutNo.checked
-              ? inputCommand(' cable registration-timeout ' + timeoutText.value, 904)
-              : inputCommand(' no cable registration-timeout', 904) 
-            : inputCommand('', 904)">&nbsp;
-          <mat-checkbox #timeoutNo (change)="!timeoutNo.checked ? timeoutText.value = '' : false" (change)="
-            timeout.checked ? !timeoutNo.checked
-              ? inputCommand(' cable registration-timeout ' + timeoutText.value, 904)
-              : inputCommand(' no cable registration-timeout', 904) 
-            : inputCommand('', 904)">
+            addTimeoutCommand(timeout.checked, timeoutText.value, timeoutNo.checked)">&nbsp;
+          <mat-checkbox #timeoutNo (change)="timeoutNo.checked ? timeoutText.value = '' : false;
+            addTimeoutCommand(timeout.checked, timeoutText.value, timeoutNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--privacy mandatory-->
         <div class="div__line__pri">
-          <mat-checkbox #privacy color="primary" (change)="
-            privacy.checked ? !privacyNo.checked
-              ? inputCommand(' cable privacy mandatory' , 905) 
-              : inputCommand(' no cable privacy mandatory', 905) 
-            : inputCommand('', 905)">
+          <mat-checkbox #privacy color="primary" (change)="privacy.checked ? false : privacyNo.checked = false;
+            addMandatoryCommand(privacy.checked, privacyNo.checked)">
             cable privacy mandatory
           </mat-checkbox>&nbsp;
           <mat-checkbox #privacyNo (change)="
-            privacy.checked ? !privacyNo.checked
-              ? inputCommand(' cable privacy mandatory' , 905) 
-              : inputCommand(' no cable privacy mandatory', 905) 
-            : inputCommand('', 905)">
+            addMandatoryCommand(privacy.checked, privacyNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--bpi-plus-policy-->
         <div class="div__line__pri">
-          <mat-checkbox #bpi color="primary" (change)="
-            bpi.checked ? !bpiNo.checked 
-              ? inputCommand(' cable privacy bpi-plus-policy ' + bpiText.value, 906) 
-              : inputCommand(' no cable privacy bpi-plus-policy', 906) 
-            : inputCommand('', 906)">
+          <mat-checkbox #bpi color="primary" (change)="bpi.checked ? false : bpiNo.checked = false;
+            addBpiCommand(bpi.checked, bpiText.value, bpiNo.checked)">
             cable privacy bpi-plus-policy
           </mat-checkbox>&nbsp;
           <input type="text" #bpiText value="capable-enforcement" class="middplus__input" (blur)="
-            bpi.checked ? !bpiNo.checked 
-              ? inputCommand(' cable privacy bpi-plus-policy ' + bpiText.value, 906) 
-              : inputCommand(' no cable privacy bpi-plus-policy', 906) 
-            : inputCommand('', 906)">&nbsp;
-          <mat-checkbox #bpiNo (change)="!bpiNo.checked ? bpiText.value = '' : false" (change)="
-            bpi.checked ? !bpiNo.checked 
-            ? inputCommand(' cable privacy bpi-plus-policy ' + bpiText.value, 906) 
-            : inputCommand(' no cable privacy bpi-plus-policy', 906) 
-          : inputCommand('', 906)">
+            addBpiCommand(bpi.checked, bpiText.value, bpiNo.checked)">&nbsp;
+          <mat-checkbox #bpiNo (change)="bpiNo.checked ? bpiText.value = '' : false;
+            addBpiCommand(bpi.checked, bpiText.value, bpiNo.checked)">
           No
           </mat-checkbox>
         </div>
         <!--hold-queue in-->
         <div class="div__line__pri">  
-          <mat-checkbox #holdIn color="primary" (change)="
-            holdIn.checked ? !holdInNo.checked 
-              ? inputCommand(' cable privacy mandatory ' + holdInText.value + ' in', 907) 
-              : inputCommand(' no cable privacy mandatory in', 907)
-            : inputCommand('', 907)">
+          <mat-checkbox #holdIn color="primary" (change)="holdIn.checked ? false : holdInNo.checked = false;
+            addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)">
             hold-queue
             <input type="text" #holdInText value="2048" class="midd__input" (blur)="
-              holdIn.checked ? !holdInNo.checked 
-                ? inputCommand(' cable privacy mandatory ' + holdInText.value + ' in', 907) 
-                : inputCommand(' no cable privacy mandatory in', 907)
-              : inputCommand('', 907)"> in
+              addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)"> in
           </mat-checkbox>&nbsp;
-          <mat-checkbox #holdInNo (change)="!holdInNo.checked ? holdInText.value = '' : false;
-            holdIn.checked ? !holdInNo.checked 
-              ? inputCommand(' cable privacy mandatory ' + holdInText.value + ' in', 907) 
-              : inputCommand(' no cable privacy mandatory in', 907)
-            : inputCommand('', 907)">
+          <mat-checkbox #holdInNo (change)="holdInNo.checked ? holdInText.value = '' : false;
+            addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--hold-queue out-->
         <div class="div__line__pri">
-          <mat-checkbox #holdOut color="primary" (change)="
-            holdOut.checked ? !holdOutNo.checked 
-                ? inputCommand(' cable privacy mandatory ' + holdOutText.value + ' out', 908) 
-                : inputCommand(' no cable privacy mandatory out', 908)
-              : inputCommand('', 908)">
-              hold-queue
+          <mat-checkbox #holdOut color="primary" (change)="holdOut.checked ? false : holdOutNo.checked = false;
+            addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)">
+            hold-queue
             <input type="text" #holdOutText value="2048" class="midd__input" (blur)="
-              holdOut.checked ? !holdOutNo.checked 
-                ? inputCommand(' cable privacy mandatory ' + holdOutText.value + ' out', 908) 
-                : inputCommand(' no cable privacy mandatory out', 908)
-              : inputCommand('', 908)"> out
+              addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)"> out
           </mat-checkbox>&nbsp;
-          <mat-checkbox #holdOutNo (change)="!holdOutNo.checked ? holdOutText.value = '' : false" (change)="
-            holdOut.checked ? !holdOutNo.checked 
-              ? inputCommand(' cable privacy mandatory ' + holdOutText.value + ' out', 908) 
-              : inputCommand(' no cable privacy mandatory out', 908)
-            : inputCommand('', 908)">
+          <mat-checkbox #holdOutNo (change)="holdOutNo.checked ? holdOutText.value = '' : false;
+            addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)">
             No
           </mat-checkbox>
         </div>
         <!--shutdown-->
         <div class="div__line__pri">
           <mat-checkbox #shutEnd color="primary" (change)="
-            shutEnd.checked  
-              ? inputCommand(' no shutdown', 909) 
-              : inputCommand('', 909)">
+            addShutEndCommand(shutEnd.checked)">
             no shutdown
           </mat-checkbox>
         </div>
@@ -371,7 +252,9 @@
             Click to {{panelOpenStateWide ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-wide-band [interF]="interF" [slt]="slt" [pos]="1000" [description]="descText.value"></app-wide-band>
+        <div *ngIf="interF !== '' &&  slt !== ''">
+          <app-wide-band [interF]="interF" [slt]="slt" [pos]="1000" [description]="descText.value"></app-wide-band>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
     <br>
@@ -388,8 +271,10 @@
             Click to {{panelOpenStateDown ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-integrated-cable [interF]="interF" [slt]="slt" [pos]="1100" [description]="descText.value"></app-integrated-cable>
-      </mat-expansion-panel>
+        <div *ngIf="interF !== '' &&  slt !== ''">
+          <app-integrated-cable [interF]="interF" [slt]="slt" [pos]="1100" [description]="descText.value"></app-integrated-cable>
+        </div>
+        </mat-expansion-panel>
     </mat-accordion>
     <br>
     <!--controllers Upstream-Cable A-->
@@ -405,7 +290,9 @@
             Click to {{panelOpenStateUpA ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-upstream-cable [interF]="interF" [slt]="slt*2" [description]="descText.value" [pos]="1200"></app-upstream-cable>
+        <div *ngIf="interF !== '' &&  slt !== ''">
+          <app-upstream-cable [interF]="interF" [slt]="slt*2" [description]="descText.value" [pos]="1200"></app-upstream-cable>
+      </div>
       </mat-expansion-panel>
     </mat-accordion>
     <br>
@@ -422,8 +309,10 @@
             Click to {{panelOpenStateUpB ? 'close' : 'open'}}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-upstream-cable [interF]="interF" [slt]="slt*2+1" [description]="descText.value" [pos]="1300"></app-upstream-cable>
-      </mat-expansion-panel>
+        <div *ngIf="interF !== '' &&  slt !== ''">
+          <app-upstream-cable [interF]="interF" [slt]="slt*2+1" [description]="descText.value" [pos]="1300"></app-upstream-cable>
+        </div>
+        </mat-expansion-panel>
     </mat-accordion>
     <br>
     <!--Generate script-->

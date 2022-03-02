@@ -1,74 +1,43 @@
-
-    <div class="div__line__pri">
-        <mat-checkbox #bg color="primary" (change)="
-        bg.checked ? !bgNo.checked           
-          ? inputCommand(' cable upstream bonding-group ' + bgText.value, pos)  
-          : inputCommand(' no cable upstream bonding-group ' + bgText.value, pos)
-        : inputCommand('', pos)">
-          cable upstream bonding-group
-        </mat-checkbox>&nbsp;
-        <input type="text" #bgText class="short__input" (blur)="
-        bg.checked ? !bgNo.checked           
-          ? inputCommand(' cable upstream bonding-group ' + bgText.value, pos)  
-          : inputCommand(' no cable upstream bonding-group ' + bgText.value, pos)
-        : inputCommand('', pos)">&nbsp;
-        <mat-checkbox #bgNo (change)="
-        bg.checked ? !bgNo.checked           
-          ? inputCommand(' cable upstream bonding-group ' + bgText.value, pos)  
-          : inputCommand(' no cable upstream bonding-group ' + bgText.value, pos)
-        : inputCommand('', pos)">
-          No</mat-checkbox>&nbsp;
-      </div>
-      <!--Upstream-->
-      <div class="div__line__sec" *ngFor="let posBgUp of posBgUps">
-        <mat-checkbox #us color="primary" [disabled]="!bg.checked" (change)="
-          us.checked ? !usNo.checked
-            ? inputCommand('  upstream ' + usText.value, posBgUp)
-            : inputCommand('  no upstream', posBgUp)
-          : inputCommand('', posBgUp)">
-            upstream
-        </mat-checkbox>&nbsp;
-        <input type="text" #usText [disabled]="!bg.checked" class="short__input" (blur)="
-          us.checked ? !usNo.checked
-            ? inputCommand('  upstream ' + usText.value, posBgUp)
-            : inputCommand('  no upstream', posBgUp)
-          : inputCommand('', posBgUp)">&nbsp;
-        <mat-checkbox #usNo [disabled]="!bg.checked" (change)="
-          us.checked ? !usNo.checked
-            ? inputCommand('  upstream ' + usText.value, posBgUp)
-            : inputCommand('  no upstream', posBgUp)
-          : inputCommand('', posBgUp)">&nbsp;
-            No |
-        </mat-checkbox>&nbsp;
-        <mat-checkbox #usOther [disabled]="!bg.checked" (change)="usOther.checked ? addBgUp(posBgUp + 1) : subBgUp()">
-          Add upstream
-        </mat-checkbox>&nbsp;
-    </div>
-      <!--Attributes-->
-      <div class="div__line__sec">
-        <mat-checkbox #att color="primary" [disabled]="!bg.checked" (change)="
-          att.checked ? !attNo.checked           
-            ? inputCommand('  attributes ' + attText.value, pos + 9) 
-            : inputCommand('  no attributes', pos + 9)
-          : inputCommand('', pos + 9)">
-          attributes
-        </mat-checkbox>&nbsp;
-        <input type="text" #attText [disabled]="!bg.checked" value="80000000" class="midd__input" (blur)="
-          att.checked ? !attNo.checked           
-            ? inputCommand('  attributes ' + attText.value, pos + 9)  
-            : inputCommand('  no attributes', pos + 9)
-          : inputCommand('', pos + 9)">&nbsp;
-        <mat-checkbox #attNo [disabled]="!bg.checked" (change)="
-          att.checked ? !attNo.checked           
-            ? inputCommand('   attributes ' + attText.value, pos + 9)  
-            : inputCommand('  no attributes', pos + 9)
-          : inputCommand('', pos + 9)">
-          No |
-        </mat-checkbox>&nbsp;
-        <mat-checkbox #bgOther (change)="bgOther.checked ? addBg(pos + 10) : subBg()">
-          Add bonding-group
-        </mat-checkbox>
-      </div>
-  
-  
-  
+<div class="div__line__pri">
+  <mat-checkbox #bg color="primary" (change)="bg.checked ? false : bgNo.checked = false;
+    addBondingCommand(bg.checked, bgText.value, bgNo.checked)">
+    cable upstream bonding-group
+  </mat-checkbox>&nbsp;
+  <input type="text" #bgText class="short__input" (blur)="
+    addBondingCommand(bg.checked, bgText.value, bgNo.checked)">&nbsp;
+  <mat-checkbox #bgNo (change)="
+    addBondingCommand(bg.checked, bgText.value, bgNo.checked)">
+    No</mat-checkbox>&nbsp;
+</div>
+<!--Upstream-->
+<div class="div__line__sec" *ngFor="let posBgUp of posBgUps">
+  <mat-checkbox #us color="primary" [disabled]="!bg.checked" (change)=" us.checked ? false : usNo.checked = false;
+    addUpCommand(us.checked, usText.value, usNo.checked, posBgUp)">
+    upstream
+  </mat-checkbox>&nbsp;
+  <input type="text" #usText [disabled]="!bg.checked" class="short__input" (blur)="
+    addUpCommand(us.checked, usText.value, usNo.checked, posBgUp)">&nbsp;
+  <mat-checkbox #usNo [disabled]="!bg.checked" (change)="
+    addUpCommand(us.checked, usText.value, usNo.checked, posBgUp)">&nbsp;
+    No |
+  </mat-checkbox>&nbsp;
+  <mat-checkbox #usOther [disabled]="!bg.checked" (change)="usOther.checked ? addBgUp(posBgUp + 1) : subBgUp()">
+    Add upstream
+  </mat-checkbox>&nbsp;
+</div>
+<!--Attributes-->
+<div class="div__line__sec">
+  <mat-checkbox #att color="primary" [disabled]="!bg.checked" (change)="att.checked ? false : attNo.checked = false;
+    addAttCommand(att.checked, attText.value, attNo.checked)">
+    attributes
+  </mat-checkbox>&nbsp;
+  <input type="text" #attText [disabled]="!bg.checked" value="80000000" class="midd__input" (blur)="
+    addAttCommand(att.checked, attText.value, attNo.checked)">&nbsp;
+  <mat-checkbox #attNo [disabled]="!bg.checked" (change)="
+    addAttCommand(att.checked, attText.value, attNo.checked)">
+    No |
+  </mat-checkbox>&nbsp;
+  <mat-checkbox #bgOther (change)="bgOther.checked ? addBg(pos + 10) : subBg()">
+    Add bonding-group
+  </mat-checkbox>
+</div>

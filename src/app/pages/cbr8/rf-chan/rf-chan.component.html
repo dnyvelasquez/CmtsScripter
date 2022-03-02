@@ -2,144 +2,90 @@
 <div class="div__line__sec">
     <mat-checkbox #rfChange color="primary" [disabled]="!checked" (change)=" typeChange.checked = false; freqChange.checked = false;
         outputChange.checked = false; powerChange.checked = false; qamChange.checked = false; idChange.checked = false;
-        rfChange.checked ? !rfNo.checked
-            ? inputCommand(' rf-chan ' + start.value + ' ' + end.value, pos)
-            : inputCommand(' no rf-chan ' + start.value + ' ' + end.value, pos)
-        : inputCommand('', pos);
-        typeChange.checked 
-            ? inputCommand('  type ' + typeText.value, this.pos + 1)
-            : inputCommand('', pos + 1);
-        freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
-        : inputCommand('', pos + 2);
-        outputChange.checked 
-            ? inputCommand('  rf-output ' + outputText.value, pos + 3)
-            : inputCommand('', pos + 3);
-        powerChange.checked 
-            ? inputCommand('  power-adjust ' + powerText.value, pos + 4)
-            : inputCommand('', pos + 4);
-        qamChange.checked 
-            ? inputCommand('  qam-profile ' + qamText.value, pos + 5)
-            : inputCommand('', pos + 5);
-        idChange.checked 
-            ? inputCommand('  docsis-channel-id ' + idText.value, pos + 6)
-            : inputCommand('', pos + 6)">
+        rfNo.checked = false;
+        addRfChannelCommand(rfChange.checked, start.value + ' ' + end.value, rfNo.checked);
+        addTypeCommand(typeChange.checked, typeText.value);
+        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked);
+        addOutputCommand(outputChange.checked, outputText.value);
+        addPowerCommand(powerChange.checked, powerText.value);
+        addQamCommand(qamChange.checked, qamText.value);
+        addIdCommand(idChange.checked, idText.value)">
         rf-chan
     </mat-checkbox>&nbsp;
     <input type="text" #start class="short__input" [disabled]="!checked" (blur)="
-        rfChange.checked ? !rfNo.checked
-            ? inputCommand(' rf-chan ' + start.value + ' ' + end.value, pos)
-            : inputCommand(' no rf-chan ' + start.value + ' ' + end.value, this.pos)
-        : inputCommand('', pos)">&nbsp;
+        addRfChannelCommand(rfChange.checked, start.value + ' ' + end.value, rfNo.checked)">&nbsp;
     <input type="text" #end class="short__input" [disabled]="!checked" (blur)="
-        rfChange.checked ? !rfNo.checked
-            ? inputCommand(' rf-chan ' + start.value + ' ' + end.value, pos)
-            : inputCommand(' no rf-chan ' + start.value + ' ' + end.value, this.pos)
-        : inputCommand('', pos)">&nbsp;
+        addRfChannelCommand(rfChange.checked, start.value + ' ' + end.value, rfNo.checked)">&nbsp;
     <mat-checkbox #rfNo [disabled]="!checked" (change)="
-        rfChange.checked ? !rfNo.checked
-            ? inputCommand(' rf-chan ' + start.value + ' ' + end.value, pos)
-            : inputCommand(' no rf-chan ' + start.value + ' ' + end.value, this.pos)
-        : inputCommand('', pos)">
+        addRfChannelCommand(rfChange.checked, start.value + ' ' + end.value, rfNo.checked)">
         No
     </mat-checkbox>&nbsp;
 </div>
 <!--type-->
 <div class="div__line__thi">
-    <mat-checkbox #typeChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" 
-        (change)="
-        typeChange.checked 
-            ? inputCommand('  type ' + typeText.value, this.pos + 1)
-            : inputCommand('', pos + 1)">
+    <mat-checkbox #typeChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
+        addTypeCommand(typeChange.checked, typeText.value)">
         type
     </mat-checkbox>&nbsp;
     <input type="text" #typeText class="midd__input" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" value="DOCSIS" (blur)="
-        typeChange.checked 
-            ? inputCommand('  type ' + typeText.value, this.pos + 1)
-            : inputCommand('', pos + 1)">&nbsp;
+        addTypeCommand(typeChange.checked, typeText.value)">&nbsp;
 </div>
 <!--frequency-->
 <div class="div__line__thi">
     <mat-checkbox #freqChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
-        : inputCommand('', pos + 2)">
+        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
         frequency
     </mat-checkbox>&nbsp;
     <select class="freq__select" #freqSelect [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
-        : inputCommand('', pos + 2)">
+        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
         <option *ngFor="let freq of freqs">{{freq}}</option>
     </select>
     <span>000000</span>&nbsp;
     <mat-checkbox #freqNo [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        freqChange.checked ? !freqNo.checked
-            ? inputCommand('  frequency ' + freqSelect.value + '000000', pos + 2)
-            : inputCommand('  no frequency ' + freqSelect.value + '000000', pos + 2)
-        : inputCommand('', pos + 2)">
+        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
         No
     </mat-checkbox>&nbsp;
 </div>
 <!--output-->
 <div class="div__line__thi">
     <mat-checkbox #outputChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        outputChange.checked 
-            ? inputCommand('  rf-output ' + outputText.value, pos + 3)
-            : inputCommand('', pos + 3)">
+        addOutputCommand(outputChange.checked, outputText.value)">
         rf-output
     </mat-checkbox>&nbsp;
     <input type="text" #outputText [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" class="midd__input" value="NORMAL" (blur)="
-        outputChange.checked 
-            ? inputCommand('  rf-output ' + outputText.value, pos + 3)
-            : inputCommand('', pos + 3)">&nbsp;
+        addOutputCommand(outputChange.checked, outputText.value)">&nbsp;
 </div>
 <!--power-adjust-->
 <div class="div__line__thi">
     <mat-checkbox #powerChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        powerChange.checked 
-            ? inputCommand('  power-adjust ' + powerText.value, pos + 4)
-            : inputCommand('', pos + 4)">
+        addPowerCommand(powerChange.checked, powerText.value)">
         power-adjust
     </mat-checkbox>&nbsp;
     <input type="text" #powerText [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" class="short__input" (blur)="
-        powerChange.checked 
-            ? inputCommand('  power-adjust ' + powerText.value, pos + 4)
-            : inputCommand('', pos + 4)">&nbsp;
+        addPowerCommand(powerChange.checked, powerText.value)">&nbsp;
 </div>
 <!--qam-profile-->
 <div class="div__line__thi">
     <mat-checkbox #qamChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        qamChange.checked 
-            ? inputCommand('  qam-profile ' + qamText.value, pos + 5)
-            : inputCommand('', pos + 5)">
+        addQamCommand(qamChange.checked, qamText.value)">
         qam-profile
     </mat-checkbox>&nbsp;
     <input type="text" #qamText [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" class="short__input" value="1" (blur)="
-        qamChange.checked 
-            ? inputCommand('  qam-profile ' + qamText.value, pos + 5)
-            : inputCommand('', pos + 5)">&nbsp;
+        addQamCommand(qamChange.checked, qamText.value)">&nbsp;
 </div>
 <!--docsis-channel-id-->
 <div class="div__line__thi">
     <mat-checkbox #idChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        idChange.checked 
-            ? inputCommand('  docsis-channel-id ' + idText.value, pos + 6)
-            : inputCommand('', pos + 6)">
+        addIdCommand(idChange.checked, idText.value)">
         docsis-channel-id
     </mat-checkbox>&nbsp;
     <input type="text" #idText [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" class="short__input" (blur)="
-        idChange.checked 
-            ? inputCommand('  docsis-channel-id ' + idText.value, pos + 6)
-            : inputCommand('', pos + 6)">&nbsp;
+        addIdCommand(idChange.checked, idText.value)">&nbsp;
     <mat-checkbox #rfOther  [disabled]="!rfChange.checked">
         Add rf-chan
     </mat-checkbox>
 </div>
-<app-rf-chan *ngIf="rfOther.checked; else noCheck" [checked]="checked" [pos]="pos+10"></app-rf-chan>
+<app-rf-chan *ngIf="rfOther.checked; else noCheck" [checked]="checked" [pos]="pos + 10"></app-rf-chan>
 <ng-template #noCheck>
     {{inputNoRfChn(pos+10)}}
 </ng-template>

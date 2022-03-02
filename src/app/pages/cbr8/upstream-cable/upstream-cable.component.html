@@ -1,31 +1,44 @@
-<div class="div__line__pri">
-    <mat-checkbox #upstreamChange color="primary" (change)="upstreamChange.checked 
-        ? inputCommand('\ncontroller Upstream-Cable ' + interF + '/0/' + slt, pos) 
-        : inputCommand('', pos)">
-        controller Upstream-Cable {{interF}}/0/{{slt}}
+<div class="scroll__div">
+  <div class="div__line__pri">
+    <mat-checkbox #upstreamChange color="primary" (change)="
+        addCommand(upstreamChange.checked)">
+      controller Upstream-Cable {{interF}}/0/{{slt}}
     </mat-checkbox>&nbsp;
+  </div>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs0" [usCh]="'0'" [pos]="pos + 15"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs0>
+    <app-us-channel [usCh]="'0'" [pos]="pos + 15" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+15)}}</app-us-channel>
+  </ng-template>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs1" [usCh]="'1'" [pos]="pos + 30"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs1>
+    <app-us-channel [usCh]="'1'" [pos]="pos + 30" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+30)}}</app-us-channel>
+  </ng-template>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs2" [usCh]="'2'" [pos]="pos + 45"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs2>
+    <app-us-channel [usCh]="'2'" [pos]="pos + 45" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+45)}}</app-us-channel>
+  </ng-template>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs3" [usCh]="'3'" [pos]="pos + 60"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs3>
+    <app-us-channel [usCh]="'3'" [pos]="pos + 60" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+60)}}</app-us-channel>
+  </ng-template>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs4" [usCh]="'4'" [pos]="pos + 75"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs4>
+    <app-us-channel [usCh]="'4'" [pos]="pos + 75" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+75)}}</app-us-channel>
+  </ng-template>
+  <app-us-channel *ngIf="upstreamChange.checked; else noUs5" [usCh]="'5'" [pos]="pos + 90"
+    [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
+  <ng-template #noUs5>
+    <app-us-channel [usCh]="'5'" [pos]="pos + 90" [checked]="upstreamChange.checked" [description]="description">
+      {{inputNoUsChan(pos+90)}}</app-us-channel>
+  </ng-template>
 </div>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs0" [usCh]="'0'" [pos]="pos + 15" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs0>
-    <app-us-channel [usCh]="'0'" [pos]="pos + 15" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+15)}}</app-us-channel>
-</ng-template>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs1" [usCh]="'1'" [pos]="pos + 30" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs1>
-    <app-us-channel [usCh]="'1'" [pos]="pos + 30" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+30)}}</app-us-channel>
-</ng-template>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs2" [usCh]="'2'" [pos]="pos + 45" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs2>
-    <app-us-channel [usCh]="'2'" [pos]="pos + 45" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+45)}}</app-us-channel>
-</ng-template>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs3" [usCh]="'3'" [pos]="pos + 60" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs3>
-    <app-us-channel [usCh]="'3'" [pos]="pos + 60" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+60)}}</app-us-channel>
-</ng-template>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs4" [usCh]="'4'" [pos]="pos + 75" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs4>
-    <app-us-channel [usCh]="'4'" [pos]="pos + 75" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+75)}}</app-us-channel>
-</ng-template>
-<app-us-channel *ngIf="upstreamChange.checked; else noUs5" [usCh]="'5'" [pos]="pos + 90" [checked]="upstreamChange.checked" [description]="description"></app-us-channel>
-<ng-template #noUs5>
-    <app-us-channel [usCh]="'5'" [pos]="pos + 90" [checked]="upstreamChange.checked" [description]="description">{{inputNoUsChan(pos+90)}}</app-us-channel>
-</ng-template>
