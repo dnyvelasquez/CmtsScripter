@@ -5,6 +5,22 @@
       <!--interface cable-mac-->
       <div class="div__interface">
         <mat-checkbox #interFaceUpdate color="primary" (change)="
+          interFaceUpdate.checked ? false : shutStartUpdate.checked = false;
+          interFaceUpdate.checked ? false : descUpdate.checked = false;
+          interFaceUpdate.checked ? false : maxUpdate.checked = false;
+          interFaceUpdate.checked ? false : rangeUpdate.checked = false;
+          interFaceUpdate.checked ? false : tcsUpdate.checked = false;
+          interFaceUpdate.checked ? false : tftpUpdate.checked = false;
+          interFaceUpdate.checked ? false : dynamicUpdate.checked = false;
+          interFaceUpdate.checked ? false : modeUpdate.checked = false;
+          interFaceUpdate.checked ? false : rcpUpdate.checked = false;
+          interFaceUpdate.checked ? false : rccUpdate.checked = false;
+          interFaceUpdate.checked ? false : downbgUpdate.checked = false;
+          interFaceUpdate.checked ? false : upbgUpdate.checked = false;
+          interFaceUpdate.checked ? false : multUpdate.checked = false;
+          interFaceUpdate.checked ? false : privacyUpdate.checked = false;
+          interFaceUpdate.checked ? false : genUpdate.checked = false;
+          interFaceUpdate.checked ? false : shutEndtUpdate.checked = false;
           addMacCommand(interFaceUpdate.checked)">
         </mat-checkbox>&nbsp;
         <strong>

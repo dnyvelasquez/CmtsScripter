@@ -26,6 +26,7 @@ export class CableDownStreamComponent implements OnInit {
   slts: number[] = [];
   frequencies: number[] = this.sharedSvc.getFrequencies();
   freqs: number[] = this.sharedSvc.getFrequencies();
+    ////TO DELETE///////
   quot: string = '"';
 
 
@@ -33,7 +34,7 @@ export class CableDownStreamComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/////TO DELETE//////
   inputCommand(command: string, pos: number){
     this.sharedSvc.addCommand(command, pos);
   }
@@ -72,5 +73,126 @@ export class CableDownStreamComponent implements OnInit {
   outputSubInterFace(value: string){
     this.subInterFaceEvent.emit(value);
   }
+
+  addInterfaceCommand(update: boolean, slt: number, i: number){
+    let pos = this.pos + 1 + i * 10;
+    if(update){
+      this.sharedSvc.addCommand(`\ninterface cable-downstream ${this.interFace}/${this.subInterFace}/${slt}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addShutStartCommand(update: boolean, i: number){
+    let pos = this.pos + 2 + i * 10;
+    if(update){
+      this.sharedSvc.addCommand(` cable shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addMacCommand(update: boolean, i: number, no: boolean){
+    let pos = this.pos + 3 + i * 10;
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` cable cable-mac ${this.mac}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no cable cable-mac ${this.mac}`, pos);
+      }     
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addDescCommand(update: boolean, i: number, text: string, no: boolean){
+    let pos = this.pos + 4 + i * 10;
+    let command = 'description';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} "${text}"`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addIdCommand(update: boolean, i: number, text: string){
+    let pos = this.pos + 5 + i * 10;
+    let command = 'cable channel-id';
+    if(update){
+      this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addFreqCommand(update: boolean, i: number, text: string, no: boolean){
+    let pos = this.pos + 6 + i * 10;
+    let command = 'cable frequency';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}000000`, pos);
+      }else{
+        this.sharedSvc.addCommand(` ${command} 0`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addInterCommand(update: boolean, i: number, text: string, no: boolean){
+    let pos = this.pos + 7 + i * 10;
+    let command = 'cable interleave-depth';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addModCommand(update: boolean, i: number, text: string, no: boolean){
+    let pos = this.pos + 8 + i * 10;
+    let command = 'cable modulation';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addCapableCommand(update: boolean, i: number, no: boolean){
+    let pos = this.pos + 9 + i * 10;
+    let command = 'cable primary-capable';
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }     
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addShutEndCommand(update: boolean, i: number){
+    let pos = this.pos + 10 + i * 10;
+    if(update){
+      this.sharedSvc.addCommand(` no cable shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
 
 }
