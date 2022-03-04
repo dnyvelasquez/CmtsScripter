@@ -21,19 +21,19 @@ export class C100GComponent implements OnInit {
   panelOpenStateServiceB = false
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
   sifUpstreams: number[] = [];
-  interfaceUp!: number;
-  sifAUp!: number;
-  sifBUp!: number;
+  interfaceUp!: any;
+  sifAUp!: any;
+  sifBUp!: any;
   upstreamsA: number[] = [0, 1, 2, 3];
   upstreamsB: number[] = [0, 1, 2, 3];
   ifDownstreams: number[] = [0, 1, 2, 3, 4];
   sifDownstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
   chDownstreams: number[] = [];
   channels: number[] = [];
-  chDownEnd!: number;
-  interfaceDown!: number;
-  sifDown!: number;
-  slotDown!: number;
+  chDownEnd!: any;
+  interfaceDown!: any;
+  sifDown!: any;
+  slotDown!: any;
   downstreams: number[] = [];
   upA: string = '';
   upB: string = '';
@@ -52,10 +52,6 @@ export class C100GComponent implements OnInit {
     }
   }
 
-  parse_Int(value: string): number{
-    return parseInt(value);
-  }
-
   addUpstreamA(value: number){
     this.upstreamsA.push(value);
   }
@@ -70,185 +66,166 @@ export class C100GComponent implements OnInit {
     }
   }
 
-  addCommand(id: string, update: boolean, no: boolean, text: string){
-    //interface docsis-mac
-    if(id === 'interFaceUpdate'){
-      if(update){
-        this.sharedSvc.addCommand(`interface docsis-mac ${this.mac}`, 0);
-      }else{
-        this.sharedSvc.addCommand(``, 0);
-      }
+  addInterfaceCommand(update: boolean){
+    if(update){
+      this.sharedSvc.addCommand(`interface docsis-mac ${this.mac}`, 0);
+    }else{
+      this.sharedSvc.addCommand(``, 0);
     }
-    //cable shutdown start
-    if(id === 'shutStartUpdate'){
-      let pos = 1;
-      if(update){
-        this.sharedSvc.addCommand(` cable shutdown`, pos);
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
+  }
+
+  addShutStartCommand(update: boolean){
+    let pos = 1;
+    if(update){
+      this.sharedSvc.addCommand(` cable shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
     }
-    //description
-    if(id === 'descUpdate'){
-      let pos = 2;
-      let command = `description`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command} "${text}"`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
+  }
+
+  addDescCommand(update: boolean, text: string, no: boolean){
+    let pos = 2;
+    let command = `description`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} "${text}"`, pos);
       }else{
-        this.sharedSvc.addCommand(``, pos);
+        this.sharedSvc.addCommand(` no ${command}`, pos);
       }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
     }
-    //initial-tech
-    if(id === 'initialUpdate'){
-      let pos = 3;
-      let command = `initial-tech`
-      if(update){
+  }
+
+  addInitialCommand(update: boolean, text: string){
+    let pos = 3;
+    let command = `initial-tech`
+    if(update){
+      this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addEarlyCommand(update: boolean, no: boolean){
+    let pos = 4;
+    let command = `early-authentication-encryption`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addMultiCommand(update: boolean, no: boolean){
+    let pos = 5;
+    let command = `multicast-dsid-forward`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTftpCommand(update: boolean, no: boolean){
+    let pos = 6;
+    let command = `tftp-proxy`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addBundleCommand(update: boolean, text: string, no: boolean){
+    let pos = 7;
+    let command = `ip bundle`
+    if(update){
+      if(!no){
         this.sharedSvc.addCommand(` ${command} ${text}`, pos);
       }else{
-        this.sharedSvc.addCommand(``, pos);
+        this.sharedSvc.addCommand(` no ${command}`, pos);
       }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
     }
-    //early-authentication-encryption
-    if(id === 'earlyUpdate'){
-      let pos = 4;
-      let command = `early-authentication-encryption`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //multicast-dsid-forward
-    if(id === 'multicastUpdate'){
-      let pos = 5;
-      let command = `multicast-dsid-forward`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //tftp-proxy
-    if(id === 'tftpUpdate'){
-      let pos = 6;
-      let command = `tftp-proxy`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //ip bundle
-    if(id === 'bundleUpdate'){
-      let pos = 7;
-      let command = `ip bundle`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command} ${text}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //downstreams
-    if(id === 'downUpdate'){
-      let pos = 30;
-      for(let i = 0; i < this.downstreams.length; i ++){
-        if(update){
-          if(!no){
-            this.sharedSvc.addCommand(` downstream ${this.downstreams[i]} interface qam ${this.interfaceDown}/${this.sifDown}/${this.chDownstreams[i]}`, pos + i);
-          }else{
-            this.sharedSvc.addCommand(` no downstream ${this.downstreams[i]}`, pos + i);
-          }
-        }else{
-          this.sharedSvc.addCommand(``, pos + i);
-        }
-      }
-    }
-    //mgmd ipv4
-    if(id === 'mgmdUpdate'){
-      let pos = 40;
-      let command = `mgmd ipv4 shutdown`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //cm-status report event-list
-    if(id === 'reportUpdate'){
-      let pos = 41;
-      let command = `cm-status report event-list`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command} ${text}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //cm trap online-offline-only
-    if(id === 'trapoUpdate'){
-      let pos = 42;
-      let command = `cm trap online-offline-only`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //cm trap interval
-    if(id === 'trapiUpdate'){
-      let pos = 43;
-      let command = `cm trap interval`
-      if(update){
-        if(!no){
-          this.sharedSvc.addCommand(` ${command} ${text}`, pos);
-        }else{
-          this.sharedSvc.addCommand(` no ${command}`, pos);
-        }
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
-    //cable shutdown End
-    if(id === 'shutEndUpdate'){
-      let pos = 44;
-      if(update){
-        this.sharedSvc.addCommand(` no cable shutdown`, pos);
-      }else{
-        this.sharedSvc.addCommand(``, pos);
-      }
-    }
+  }
 
+  addMgdCommand(update: boolean, no: boolean){
+    let pos = 40;
+    let command = `mgmd ipv4 shutdown`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addReportCommand(update: boolean, text: string, no: boolean){
+    let pos = 41;
+    let command = `cm-status report event-list`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTrapoCommand(update: boolean, no: boolean){
+    let pos = 42;
+    let command = `cm trap online-offline-only`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addTrapiCommand(update: boolean, text: string, no: boolean){
+    let pos = 43;
+    let command = `cm trap interval`
+    if(update){
+      if(!no){
+        this.sharedSvc.addCommand(` ${command} ${text}`, pos);
+      }else{
+        this.sharedSvc.addCommand(` no ${command}`, pos);
+      }
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
+  }
+
+  addShutEndCommand(update: boolean){
+    let pos = 44;
+    if(update){
+      this.sharedSvc.addCommand(` no cable shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand(``, pos);
+    }
   }
 
   addChannel(ch: number) {
