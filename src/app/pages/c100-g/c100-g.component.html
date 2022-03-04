@@ -4,8 +4,24 @@
     <mat-card-subtitle>Casa</mat-card-subtitle>
     <!--interface docsis-mac-->
     <div class="div__interface">
-      <mat-checkbox #interFaceUpdate color="primary" (change)="
-        addInterfaceCommand(interFaceUpdate.checked)">
+      <mat-checkbox #interFaceUpdate color="primary" (change)="interFaceUpdate.checked ? false : shutStartUpdate.checked = false;
+        interFaceUpdate.checked ? false : descUpdate.checked = false; interFaceUpdate.checked ? false : descNo.checked = false;
+        interFaceUpdate.checked ? false : initialUpdate.checked = false; interFaceUpdate.checked ? false : earlyUpdate.checked = false;
+        interFaceUpdate.checked ? false : earlyNo.checked = false; interFaceUpdate.checked ? false : multicastUpdate.checked = false;
+        interFaceUpdate.checked ? false : multicastNo.checked = false; interFaceUpdate.checked ? false : tftpUpdate.checked = false;
+        interFaceUpdate.checked ? false : tftpNo.checked = false; interFaceUpdate.checked ? false : bundleUpdate.checked = false;
+        interFaceUpdate.checked ? false : bundleNo.checked = false; interFaceUpdate.checked ? false : mgmdUpdate.checked = false;
+        interFaceUpdate.checked ? false : mgmdNo.checked = false; interFaceUpdate.checked ? false : reportUpdate.checked = false;
+        interFaceUpdate.checked ? false : reportNo.checked = false; interFaceUpdate.checked ? false : trapoUpdate.checked = false;
+        interFaceUpdate.checked ? false : trapoNo.checked = false; interFaceUpdate.checked ? false : trapiUpdate.checked = false;
+        interFaceUpdate.checked ? false : trapiNo.checked = false; interFaceUpdate.checked ? false : shutEndUpdate.checked = false;
+        addInterfaceCommand(interFaceUpdate.checked); addShutStartCommand(shutStartUpdate.checked);
+        addDescCommand(descUpdate.checked, descText.value, descNo.checked); addInitialCommand(initialUpdate.checked, initialText.value);
+        addEarlyCommand(earlyUpdate.checked, earlyNo.checked); addMultiCommand(multicastUpdate.checked, multicastNo.checked);
+        addTftpCommand(tftpUpdate.checked, tftpNo.checked); addBundleCommand(bundleUpdate.checked, bundleText.value, bundleNo.checked);
+        addMgdCommand(mgmdUpdate.checked, mgmdNo.checked); addReportCommand(reportUpdate.checked, reportText.value, reportNo.checked);
+        addTrapoCommand(trapoUpdate.checked, trapoNo.checked); addTrapiCommand(trapiUpdate.checked, trapiText.value, trapiNo.checked);
+        addShutEndCommand(shutEndUpdate.checked)">
       </mat-checkbox>&nbsp;
       <strong>
         <span>interface docsis-mac</span>&nbsp;
