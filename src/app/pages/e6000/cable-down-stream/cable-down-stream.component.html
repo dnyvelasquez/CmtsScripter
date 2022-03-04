@@ -2,12 +2,12 @@
 <div class="div__subinterface">
     <strong>
       interfaces cable-downstream
-      <select #ifSelect class="ifPri__select" (change)="interFace = parse_Int(ifSelect.value); outputInterFace(ifSelect.value)">
+      <select #ifSelect class="ifPri__select" (change)="interFace = ifSelect.value; outputInterFace(ifSelect.value)">
         <option></option>
         <option *ngFor="let interFace of interFaces">{{interFace}}</option>
       </select>
       /
-      <select #sifSelect class="ifPri__select" (change)="subInterFace = parse_Int(sifSelect.value); outputSubInterFace(sifSelect.value)">
+      <select #sifSelect class="ifPri__select" (change)="subInterFace = sifSelect.value; outputSubInterFace(sifSelect.value)">
         <option></option>
         <option *ngFor="let subInterFace of subInterFaces">{{subInterFace}}</option>
       </select>

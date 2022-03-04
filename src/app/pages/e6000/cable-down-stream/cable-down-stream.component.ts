@@ -21,26 +21,15 @@ export class CableDownStreamComponent implements OnInit {
                     12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
                     24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
                     36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47];
-  interFace!: number;
-  subInterFace!: number;
+  interFace!: string;
+  subInterFace!: string;
   slts: number[] = [];
   frequencies: number[] = this.sharedSvc.getFrequencies();
   freqs: number[] = this.sharedSvc.getFrequencies();
-    ////TO DELETE///////
-  quot: string = '"';
-
 
   constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
-  }
-/////TO DELETE//////
-  inputCommand(command: string, pos: number){
-    this.sharedSvc.addCommand(command, pos);
-  }
-
-  parse_Int(value: string):number{
-    return parseInt(value);
   }
 
   getSlts(start: string, end: string){
@@ -94,11 +83,12 @@ export class CableDownStreamComponent implements OnInit {
 
   addMacCommand(update: boolean, i: number, no: boolean){
     let pos = this.pos + 3 + i * 10;
+    let command = 'cable cable-mac';
     if(update){
       if(!no){
-        this.sharedSvc.addCommand(` cable cable-mac ${this.mac}`, pos);
+        this.sharedSvc.addCommand(` ${command} ${this.mac}`, pos);
       }else{
-        this.sharedSvc.addCommand(` no cable cable-mac ${this.mac}`, pos);
+        this.sharedSvc.addCommand(` no ${command} ${this.mac}`, pos);
       }     
     }else{
       this.sharedSvc.addCommand(``, pos);
