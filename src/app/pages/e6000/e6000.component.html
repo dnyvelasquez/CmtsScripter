@@ -5,6 +5,7 @@
       <!--interface cable-mac-->
       <div class="div__interface">
         <mat-checkbox #interFaceUpdate color="primary" (change)="
+          interFaceUpdate.checked ? false : interfaceNo.checked = false;
           interFaceUpdate.checked ? false : shutStartUpdate.checked = false;
           interFaceUpdate.checked ? false : descUpdate.checked = false;
           interFaceUpdate.checked ? false : maxUpdate.checked = false;
@@ -26,7 +27,11 @@
         <strong>
           <span>interface cable-mac</span>&nbsp;
           <input type="text" class="mac__input" #macText (blur)="mac  = macText.value;
-            addMacCommand(interFaceUpdate.checked)">
+            addMacCommand(interFaceUpdate.checked); addNoMacCommand(interfaceNo.checked)">&nbsp;
+          <mat-checkbox #interfaceNo (change)="
+            addNoMacCommand(interfaceNo.checked); addNoMacCommand(interfaceNo.checked)">
+            No
+          </mat-checkbox>
         </strong>
       </div>
       <!--interface cable-mac attributes-->
@@ -40,6 +45,110 @@
               Click to {{panelOpenStateAtt ? 'close' : 'open'}}
             </mat-panel-description>
           </mat-expansion-panel-header>
+          <!--Cable-mac templates toolbar-->
+          <mat-toolbar class="template__toolbar">
+            <mat-toolbar-row>
+              <strong>Templates:</strong>
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1" class="template__radio" (change)="interFaceUpdate.checked = false;
+                  interfaceNo.checked = false; shutStartUpdate.checked = false; descUpdate.checked = false;
+                  descText.value = ''; descNo.checked = false; maxUpdate.checked = false; maxText.value = '85';
+                  rangeUpdate.checked = false; rangeText.value = 'Extended'; rangeNo.checked = false;
+                  tcsUpdate.checked = false; tcsText.value = '2'; tcsNo.checked = false;
+                  tftpUpdate.checked = false; tftpNo.checked = false; dynamicUpdate.checked = false;
+                  dynamicText.value = 'mark'; dynamicNo.checked = false; modeUpdate.checked = false;
+                  modeText.value = 'ipv4only'; modeNo.checked = false; rcpUpdate.checked = false;
+                  rcpNo.checked = false; rccUpdate.checked = false; rccNo.checked = false;
+                  downbgUpdate.checked = false; downbgSelect.value = 'enable'; upbgUpdate.checked = false;
+                  upbgSelect.value = 'enable'; multUpdate.checked = false; multNo.checked = false;
+                  privacyUpdate.checked = false; privacyText.value = 'bpi-plus'; privacyNo.checked = false;
+                  genUpdate.checked = false; shutEndtUpdate.checked = false; maxNo.checked = false;
+                  addShutStartCommand(shutStartUpdate.checked);
+                  addDescCommand(descUpdate.checked, descText.value, descNo.checked);
+                  addMaxCommand(maxUpdate.checked, maxText.value, maxNo.checked);
+                  addRangeCommand(rangeUpdate.checked, rangeText.value, rangeNo.checked);
+                  addTcsCommand(tcsUpdate.checked, tcsText.value, tcsNo.checked);
+                  addTftpCommand(tftpUpdate.checked, tftpNo.checked);
+                  addDynamicCommand(dynamicUpdate.checked, dynamicText.value, dynamicNo.checked);
+                  addModeCommand(modeUpdate.checked, modeText.value, modeNo.checked);
+                  addRcpCommand(rcpUpdate.checked, rcpNo.checked);
+                  addRccCommand(rccUpdate.checked, rccNo.checked);
+                  addDownbgCommand(downbgUpdate.checked, downbgSelect.value);
+                  addUpbgCommand(upbgUpdate.checked, upbgSelect.value);
+                  addMultCommand(multUpdate.checked, multNo.checked);
+                  addPrivacyCommand(privacyUpdate.checked, privacyText.value,  privacyNo.checked);
+                  addGenerateCommand(genUpdate.checked);
+                  addShutEndCommand(shutEndtUpdate.checked);
+                  addNoMacCommand(interfaceNo.checked)">
+                  None
+                </mat-radio-button>
+                <mat-radio-button value="2" class="template__radio" (change)="interFaceUpdate.checked = true;
+                  interfaceNo.checked = true; shutStartUpdate.checked = true; descUpdate.checked = false;
+                  descText.value = ''; descNo.checked = false; maxUpdate.checked = false; maxText.value = '85';
+                  rangeUpdate.checked = false; rangeText.value = 'Extended'; rangeNo.checked = false;
+                  tcsUpdate.checked = false; tcsText.value = '2'; tcsNo.checked = false;
+                  tftpUpdate.checked = false; tftpNo.checked = false; dynamicUpdate.checked = false;
+                  dynamicText.value = 'mark'; dynamicNo.checked = false; modeUpdate.checked = false;
+                  modeText.value = 'ipv4only'; modeNo.checked = false; rcpUpdate.checked = false;
+                  rcpNo.checked = false; rccUpdate.checked = false; rccNo.checked = false;
+                  downbgUpdate.checked = false; downbgSelect.value = 'enable'; upbgUpdate.checked = false;
+                  upbgSelect.value = 'enable'; multUpdate.checked = false; multNo.checked = false;
+                  privacyUpdate.checked = false; privacyText.value = 'bpi-plus'; privacyNo.checked = false;
+                  genUpdate.checked = false; shutEndtUpdate.checked = false; maxNo.checked = false;
+                  addShutStartCommand(shutStartUpdate.checked);
+                  addDescCommand(descUpdate.checked, descText.value, descNo.checked);
+                  addMaxCommand(maxUpdate.checked, maxText.value, maxNo.checked);
+                  addRangeCommand(rangeUpdate.checked, rangeText.value, rangeNo.checked);
+                  addTcsCommand(tcsUpdate.checked, tcsText.value, tcsNo.checked);
+                  addTftpCommand(tftpUpdate.checked, tftpNo.checked);
+                  addDynamicCommand(dynamicUpdate.checked, dynamicText.value, dynamicNo.checked);
+                  addModeCommand(modeUpdate.checked, modeText.value, modeNo.checked);
+                  addRcpCommand(rcpUpdate.checked, rcpNo.checked);
+                  addRccCommand(rccUpdate.checked, rccNo.checked);
+                  addDownbgCommand(downbgUpdate.checked, downbgSelect.value);
+                  addUpbgCommand(upbgUpdate.checked, upbgSelect.value);
+                  addMultCommand(multUpdate.checked, multNo.checked);
+                  addPrivacyCommand(privacyUpdate.checked, privacyText.value,  privacyNo.checked);
+                  addGenerateCommand(genUpdate.checked);
+                  addShutEndCommand(shutEndtUpdate.checked);
+                  addNoMacCommand(interfaceNo.checked)">
+                  Delete cable-mac
+                </mat-radio-button>
+                <mat-radio-button value="3" class="template__radio" (change)="interFaceUpdate.checked = true;
+                  interfaceNo.checked = false; shutStartUpdate.checked = false; descUpdate.checked = true;
+                  descText.value = ''; descNo.checked = false; maxUpdate.checked = true; maxText.value = '85';
+                  rangeUpdate.checked = true; rangeText.value = 'Extended'; rangeNo.checked = false;
+                  tcsUpdate.checked = true; tcsText.value = '2'; tcsNo.checked = false;
+                  tftpUpdate.checked = true; tftpNo.checked = false; dynamicUpdate.checked = true;
+                  dynamicText.value = 'mark'; dynamicNo.checked = false; modeUpdate.checked = true;
+                  modeText.value = 'ipv4only'; modeNo.checked = false; rcpUpdate.checked = true;
+                  rcpNo.checked = false; rccUpdate.checked = true; rccNo.checked = false;
+                  downbgUpdate.checked = true; downbgSelect.value = 'enable'; upbgUpdate.checked = true;
+                  upbgSelect.value = 'enable'; multUpdate.checked = true; multNo.checked = false;
+                  privacyUpdate.checked = true; privacyText.value = 'bpi-plus'; privacyNo.checked = false;
+                  genUpdate.checked = false; shutEndtUpdate.checked = true; maxNo.checked = false;
+                  addShutStartCommand(shutStartUpdate.checked);
+                  addDescCommand(descUpdate.checked, descText.value, descNo.checked);
+                  addMaxCommand(maxUpdate.checked, maxText.value, maxNo.checked);
+                  addRangeCommand(rangeUpdate.checked, rangeText.value, rangeNo.checked);
+                  addTcsCommand(tcsUpdate.checked, tcsText.value, tcsNo.checked);
+                  addTftpCommand(tftpUpdate.checked, tftpNo.checked);
+                  addDynamicCommand(dynamicUpdate.checked, dynamicText.value, dynamicNo.checked);
+                  addModeCommand(modeUpdate.checked, modeText.value, modeNo.checked);
+                  addRcpCommand(rcpUpdate.checked, rcpNo.checked);
+                  addRccCommand(rccUpdate.checked, rccNo.checked);
+                  addDownbgCommand(downbgUpdate.checked, downbgSelect.value);
+                  addUpbgCommand(upbgUpdate.checked, upbgSelect.value);
+                  addMultCommand(multUpdate.checked, multNo.checked);
+                  addPrivacyCommand(privacyUpdate.checked, privacyText.value,  privacyNo.checked);
+                  addGenerateCommand(genUpdate.checked);
+                  addShutEndCommand(shutEndtUpdate.checked);
+                  addNoMacCommand(interfaceNo.checked)">
+                  Create cable-mac
+                </mat-radio-button>
+              </mat-radio-group>
+            </mat-toolbar-row>
+          </mat-toolbar>
           <!--shutdown-->
           <div class="div__line__pri">
             <mat-checkbox #shutStartUpdate color="primary" (change)="
@@ -49,7 +158,7 @@
           </div>
           <!--Description-->
           <div class="div__line__pri">
-            <mat-checkbox #descUpdate color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
+            <mat-checkbox #descUpdate id="descUpdate" color="primary" (change)="descUpdate.checked ? false : descNo.checked = false;
               addDescCommand(descUpdate.checked, descText.value, descNo.checked)">
               description
             </mat-checkbox>&nbsp;
@@ -96,7 +205,7 @@
             addTcsCommand(tcsUpdate.checked, tcsText.value, tcsNo.checked)">&nbsp;
           <mat-checkbox #tcsNo (change)="tcsNo.checked ? tcsText.value = '' : false;
             addTcsCommand(tcsUpdate.checked, tcsText.value, tcsNo.checked)">
-            No (Only V1)
+            No
           </mat-checkbox>
         </div>
           <!--tftp-enforce-->
@@ -227,7 +336,7 @@
       </mat-accordion>
       <br>
       <!--interface cable-downstream-->
-      <app-cable-down-stream [mac]="mac" [desc]="desc" [pos]="20" 
+      <app-cable-down-stream [mac]="mac" [desc]="desc" [pos]="30" 
         (downstreamEvent)="setDownstream($event)" (interFaceEvent)="setDownIf($event)" (subInterFaceEvent)="setDownSif($event)">
       </app-cable-down-stream>
       <!--interface cable-upstream section A-->

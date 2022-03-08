@@ -47,7 +47,7 @@ export class E6000Component implements OnInit {
   addMacCommand(update: boolean){
     let pos = 0;
     if(update){
-      this.sharedSvc.addCommand(`interface cable-mac  ${this.mac}`, pos);
+      this.sharedSvc.addCommand(`interface cable-mac ${this.mac}`, pos);
     }else{
       this.sharedSvc.addCommand('', pos);
     }
@@ -249,6 +249,15 @@ export class E6000Component implements OnInit {
     let pos = 19;
     if(update){
       this.sharedSvc.addCommand(` no cable shutdown`, pos);
+    }else{
+      this.sharedSvc.addCommand('', pos);
+    }
+  }
+
+  addNoMacCommand(update: boolean){
+    let pos = 20;
+    if(update){
+      this.sharedSvc.addCommand(`\nno interface cable-mac ${this.mac}`, pos);
     }else{
       this.sharedSvc.addCommand('', pos);
     }

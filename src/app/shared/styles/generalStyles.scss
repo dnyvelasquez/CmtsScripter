@@ -172,3 +172,13 @@
     border-top : solid 1px lightgray;
     border-bottom : solid 1px lightgray;
   }
+
+  .template__radio ~ .template__radio{
+    margin-left: 16px;
+  }
+
+  .template__toolbar{
+      strong, mat-radio-button{
+          font-size: 0.8em;
+      }
+  }
