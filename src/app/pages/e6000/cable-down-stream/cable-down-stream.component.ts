@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
@@ -26,6 +27,8 @@ export class CableDownStreamComponent implements OnInit {
   slts: number[] = [];
   frequencies: number[] = this.sharedSvc.getFrequencies();
   freqs: number[] = this.sharedSvc.getFrequencies();
+  shutdown: boolean = false;
+  none: boolean = false;
 
   constructor(private sharedSvc: SharedService) { }
 
@@ -184,5 +187,21 @@ export class CableDownStreamComponent implements OnInit {
     }
   }
 
+  shutdownTemplate(){
+    this.shutdown = true;
+    for(let i = 0; i < this.slts.length; i ++){
+      this.addInterfaceCommand(true, this.slts[i], i);
+      this.addShutStartCommand(true, i);
+    }
+  }
+
+  noneTemplate(){
+    this.none = false;
+    for(let i = 0; i < this.slts.length; i ++){
+      this.addInterfaceCommand(false, this.slts[i], i);
+      this.addShutStartCommand(false, i);
+    }
+
+  }
 
 }

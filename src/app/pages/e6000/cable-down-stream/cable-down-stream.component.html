@@ -1,44 +1,62 @@
 <!--interfaces cable-downstream-->
 <div class="div__subinterface">
-    <strong>
-      interfaces cable-downstream
-      <select #ifSelect class="ifPri__select" (change)="interFace = ifSelect.value; outputInterFace(ifSelect.value)">
-        <option></option>
-        <option *ngFor="let interFace of interFaces">{{interFace}}</option>
-      </select>
-      /
-      <select #sifSelect class="ifPri__select" (change)="subInterFace = sifSelect.value; outputSubInterFace(sifSelect.value)">
-        <option></option>
-        <option *ngFor="let subInterFace of subInterFaces">{{subInterFace}}</option>
-      </select>
-      /
-      <select #startSlotSelect class="ifPri__select">
-        <option></option>
-        <option *ngFor="let slot of slots">{{slot}}</option>
-      </select>
-      -->
-      <select #endSlotSelect class="ifPri__select" (click)="getSlts(startSlotSelect.value, endSlotSelect.value);
-        outputDownstream(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)"> 
-        <option></option>
-        <option *ngFor="let slot of slots">{{slot}}</option>
-      </select>
-    </strong>
-  </div>
-  <mat-accordion>
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          interfaces cable-downstream atrributes
-        </mat-panel-title>
-        <mat-panel-description>
-          Click to {{panelOpenState ? 'close' : 'open'}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
+  <strong>
+    interfaces cable-downstream
+    <select #ifSelect class="ifPri__select" (change)="interFace = ifSelect.value; outputInterFace(ifSelect.value)">
+      <option></option>
+      <option *ngFor="let interFace of interFaces">{{interFace}}</option>
+    </select>
+    /
+    <select #sifSelect class="ifPri__select"
+      (change)="subInterFace = sifSelect.value; outputSubInterFace(sifSelect.value)">
+      <option></option>
+      <option *ngFor="let subInterFace of subInterFaces">{{subInterFace}}</option>
+    </select>
+    /
+    <select #startSlotSelect class="ifPri__select">
+      <option></option>
+      <option *ngFor="let slot of slots">{{slot}}</option>
+    </select>
+    -->
+    <select #endSlotSelect class="ifPri__select"
+      (change)="getSlts(startSlotSelect.value, endSlotSelect.value);
+        outputDownstream(ifSelect.value + '/' + sifSelect.value + '/' + startSlotSelect.value + '-' + endSlotSelect.value)">
+      <option></option>
+      <option *ngFor="let slot of slots">{{slot}}</option>
+    </select>
+  </strong>
+</div>
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        interfaces cable-downstream atrributes
+      </mat-panel-title>
+      <mat-panel-description>
+        Click to {{panelOpenState ? 'close' : 'open'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!--Cable-mac templates toolbar-->
+    <div *ngIf="endSlotSelect.value !== ''">
+      <mat-toolbar class="template__toolbar">
+        <mat-toolbar-row>
+          <strong>Templates:</strong>
+          <mat-radio-group aria-label="Select an option" (change)="noneTemplate()">
+            <mat-radio-button value="1" class="template__radio">
+              None
+            </mat-radio-button>
+            <mat-radio-button value="2" class="template__radio" (change)="shutdownTemplate()">
+              Shutdown carriers
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-toolbar-row>
+      </mat-toolbar>
       <div class="scroll__div">
-      <div *ngFor="let slt of slts; index as i">
-        <!--interface cable-downstream-->
-        <div class="div__line__pri">
-          <mat-checkbox #ifUpdate color="primary" (change)="ifUpdate.checked ? false : (shutStartUpdate.checked = false);
+        <div *ngFor="let slt of slts; index as i">
+          <!--interface cable-downstream-->
+          <div class="div__line__pri">
+            <mat-checkbox #ifUpdate color="primary" [checked] = shutdown$
+              (change)="ifUpdate.checked ? false : (shutStartUpdate.checked = false);
             ifUpdate.checked ? false : macUpdate.checked = false; ifUpdate.checked ? false : descUpdate.checked = false;
             ifUpdate.checked ? false : idUpdate.checked = false; ifUpdate.checked ? false : freqUpdate.checked = false;
             ifUpdate.checked ? false : interUpdate.checked = false; ifUpdate.checked ? false : modUpdate.checked = false;
@@ -51,112 +69,115 @@
             addIdCommand(idUpdate.checked, i, idText.value); addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked);
             addInterCommand(interUpdate.checked, i, interText.value, interNo.checked); addModCommand(modUpdate.checked, i, modText.value, modNo.checked);
             addCapableCommand(capableUpdate.checked, i, capableNo.checked); addShutEndCommand(shutEndUpdate.checked, i)">
-            interface cable-downstream {{interFace}}/{{subInterFace}}/{{slt}}
-          </mat-checkbox>&nbsp;
-        </div>
-        <!--shutdown-->
-        <div class="div__line__sec">
-          <mat-checkbox #shutStartUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="          
+              interface cable-downstream {{interFace}}/{{subInterFace}}/{{slt}}
+            </mat-checkbox>&nbsp;
+          </div>
+          <!--shutdown-->
+          <div class="div__line__sec">
+            <mat-checkbox #shutStartUpdate color="primary" [disabled]="!ifUpdate.checked" 
+            [checked] = shutdown$ (change)="          
             addShutStartCommand(shutStartUpdate.checked, i)">
-            cable shutdown
-          </mat-checkbox>&nbsp;
-        </div>
-        <!--cable-mac-->
-        <div class="div__line__sec">
-          <mat-checkbox #macUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="macUpdate.checked ? false : macNo.checked = false;
+              cable shutdown
+            </mat-checkbox>&nbsp;
+          </div>
+          <!--cable-mac-->
+          <div class="div__line__sec">
+            <mat-checkbox #macUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="macUpdate.checked ? false : macNo.checked = false;
             addMacCommand(macUpdate.checked, i, macNo.checked)">
-            cable cable-mac {{mac}}
-          </mat-checkbox>&nbsp;
-          <mat-checkbox #macNo [disabled]="!ifUpdate.checked" (change)="
+              cable cable-mac {{mac}}
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #macNo [disabled]="!ifUpdate.checked" (change)="
             addMacCommand(macUpdate.checked, i, macNo.checked)">
-            No
-          </mat-checkbox>
-        </div>
-        <!--Description-->
-        <div class="div__line__sec">
-          <mat-checkbox #descUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="descUpdate.checked ? false : descNo.checked = false;
+              No
+            </mat-checkbox>
+          </div>
+          <!--Description-->
+          <div class="div__line__sec">
+            <mat-checkbox #descUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="descUpdate.checked ? false : descNo.checked = false;
             addDescCommand(descUpdate.checked, i, descText.value, descNo.checked)">
-            description
-          </mat-checkbox>&nbsp;
-          <input type="text" #descText [disabled]="descNo.checked" [disabled]="!ifUpdate.checked" [value]="desc" (blur)="            
+              description
+            </mat-checkbox>&nbsp;
+            <input type="text" #descText [disabled]="descNo.checked" [disabled]="!ifUpdate.checked" [value]="desc"
+              (blur)="            
             addDescCommand(descUpdate.checked, i, descText.value, descNo.checked)">&nbsp;
-          <mat-checkbox #descNo [disabled]="!ifUpdate.checked" (change)="descNo.checked ? descText.value = '' : false;
+            <mat-checkbox #descNo [disabled]="!ifUpdate.checked" (change)="descNo.checked ? descText.value = '' : false;
             addDescCommand(descUpdate.checked, i, descText.value, descNo.checked)">
-            No
-          </mat-checkbox>
-        </div>
-        <!--channel-id-->
-        <div class="div__line__sec">
-          <mat-checkbox #idUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="
+              No
+            </mat-checkbox>
+          </div>
+          <!--channel-id-->
+          <div class="div__line__sec">
+            <mat-checkbox #idUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="
             addIdCommand(idUpdate.checked, i, idText.value)">
-            cable channel-id
-          </mat-checkbox>&nbsp;
-          <input type="text" #idText class="short__input" [disabled]="!ifUpdate.checked" [value]="i + 1" (blur)="            
+              cable channel-id
+            </mat-checkbox>&nbsp;
+            <input type="text" #idText class="short__input" [disabled]="!ifUpdate.checked" [value]="i + 1" (blur)="            
             addIdCommand(idUpdate.checked, i, idText.value)">&nbsp;
-        </div>
-        <!--frequency-->
-        <div class="div__line__sec">
-          <mat-checkbox #freqUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="freqUpdate.checked ? false : freqNo.checked = false;
+          </div>
+          <!--frequency-->
+          <div class="div__line__sec">
+            <mat-checkbox #freqUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="freqUpdate.checked ? false : freqNo.checked = false;
             addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
-            cable frequency
-            <select #freqSelect class="freq__select" [disabled]="!ifUpdate.checked" (change)="changeFreqs(i, freqSelect.value);    
+              cable frequency
+              <select #freqSelect class="freq__select" [disabled]="!ifUpdate.checked" (change)="changeFreqs(i, freqSelect.value);    
               addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
-              <option>{{freqs[i]}}</option>
-              <option *ngFor="let frequency of frequencies">{{frequency}}</option>
-            </select>
-            000000
-          </mat-checkbox>&nbsp;
-          <mat-checkbox #freqNo [disabled]="!ifUpdate.checked" (change)="freqNo.checked ? freqSelect.value = '' : false;
+                <option>{{freqs[i]}}</option>
+                <option *ngFor="let frequency of frequencies">{{frequency}}</option>
+              </select>
+              000000
+            </mat-checkbox>&nbsp;
+            <mat-checkbox #freqNo [disabled]="!ifUpdate.checked" (change)="freqNo.checked ? freqSelect.value = '' : false;
             addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
-            No
-          </mat-checkbox>
-        </div>
-        <!--interleave-depth-->
-        <div class="div__line__sec">
-          <mat-checkbox #interUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="interUpdate.checked ? false : interNo.checked = false;
+              No
+            </mat-checkbox>
+          </div>
+          <!--interleave-depth-->
+          <div class="div__line__sec">
+            <mat-checkbox #interUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="interUpdate.checked ? false : interNo.checked = false;
             addInterCommand(interUpdate.checked, i, interText.value, interNo.checked)">
-            cable interleave-depth
-          </mat-checkbox>&nbsp;
-          <input type="text" #interText class="short__input" [disabled]="!ifUpdate.checked" value="32" (blur)="            
+              cable interleave-depth
+            </mat-checkbox>&nbsp;
+            <input type="text" #interText class="short__input" [disabled]="!ifUpdate.checked" value="32" (blur)="            
             addInterCommand(interUpdate.checked, i, interText.value, interNo.checked)">&nbsp;
-          <mat-checkbox #interNo [disabled]="!ifUpdate.checked" (change)="interNo.checked ? interText.value = '' : false;
+            <mat-checkbox #interNo [disabled]="!ifUpdate.checked" (change)="interNo.checked ? interText.value = '' : false;
             addInterCommand(interUpdate.checked, i, interText.value, interNo.checked)">
-            No
-          </mat-checkbox>
-        </div>
-        <!--modulation-->
-        <div class="div__line__sec">
+              No
+            </mat-checkbox>
+          </div>
+          <!--modulation-->
+          <div class="div__line__sec">
             <mat-checkbox #modUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="modUpdate.checked ? false : modNo.checked = false;
               addModCommand(modUpdate.checked, i, modText.value, modNo.checked)">
               cable modulation
             </mat-checkbox>&nbsp;
-            <input type="text" #modText [disabled]="modNo.checked" class="midd__input" [disabled]="!ifUpdate.checked" value="256qam" (blur)="            
+            <input type="text" #modText [disabled]="modNo.checked" class="midd__input" [disabled]="!ifUpdate.checked"
+              value="256qam" (blur)="            
               addModCommand(modUpdate.checked, i, modText.value, modNo.checked)">&nbsp;
             <mat-checkbox #modNo [disabled]="!ifUpdate.checked" (change)="modNo.checked ? modText.value = '' : false;
               addModCommand(modUpdate.checked, i, modText.value, modNo.checked)">
               No (Only V2)
             </mat-checkbox>
           </div>
-        <!--primary-capable-->
-        <div class="div__line__sec">
+          <!--primary-capable-->
+          <div class="div__line__sec">
             <mat-checkbox #capableUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="capableUpdate.checked ? false : capableNo.checked = false;
               addCapableCommand(capableUpdate.checked, i, capableNo.checked)">
               cable primary-capable
             </mat-checkbox>&nbsp;
             <mat-checkbox #capableNo [disabled]="!ifUpdate.checked" (change)="
               addCapableCommand(capableUpdate.checked, i, capableNo.checked)">
-              No (Only V2)
+              No
             </mat-checkbox>
           </div>
           <!--shutdown-->
-        <div class="div__line__sec">
-          <mat-checkbox #shutEndUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="          
+          <div class="div__line__sec">
+            <mat-checkbox #shutEndUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="          
             addShutEndCommand(shutEndUpdate.checked, i)">
-            no cable shutdown
-          </mat-checkbox>&nbsp;
+              no cable shutdown
+            </mat-checkbox>&nbsp;
+          </div>
         </div>
       </div>
     </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  
+  </mat-expansion-panel>
+</mat-accordion>
