@@ -55,7 +55,7 @@
         <div *ngFor="let slt of slts; index as i">
           <!--interface cable-downstream-->
           <div class="div__line__pri">
-            <mat-checkbox #ifUpdate color="primary" [checked] = shutdown$
+            <mat-checkbox #ifUpdate color="primary" [checked] = shutdown
               (change)="ifUpdate.checked ? false : (shutStartUpdate.checked = false);
             ifUpdate.checked ? false : macUpdate.checked = false; ifUpdate.checked ? false : descUpdate.checked = false;
             ifUpdate.checked ? false : idUpdate.checked = false; ifUpdate.checked ? false : freqUpdate.checked = false;
@@ -75,7 +75,7 @@
           <!--shutdown-->
           <div class="div__line__sec">
             <mat-checkbox #shutStartUpdate color="primary" [disabled]="!ifUpdate.checked" 
-            [checked] = shutdown$ (change)="          
+            [checked] = shutdown (change)="          
             addShutStartCommand(shutStartUpdate.checked, i)">
               cable shutdown
             </mat-checkbox>&nbsp;
