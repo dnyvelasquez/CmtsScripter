@@ -24,9 +24,9 @@ export class WideBandComponent implements OnInit {
     let pos = this.pos;
     if(update){
       if(!no){
-        this.sharedSvc.addCommand(`\ninterface Wideband-Cable ${this.interF}/0/${this.slt}: ${text}`, pos);
+        this.sharedSvc.addCommand(`\ninterface Wideband-Cable ${this.interF}/0/${this.slt}:${text}`, pos);
       }else{
-        this.sharedSvc.addCommand(`\nno interface Wideband-Cable ${this.interF}/0/${this.slt}: ${text}`, pos);
+        this.sharedSvc.addCommand(`\nno interface Wideband-Cable ${this.interF}/0/${this.slt}:${text}`, pos);
       }
     }else{
       this.sharedSvc.addCommand(``, pos);
