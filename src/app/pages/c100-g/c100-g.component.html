@@ -385,6 +385,26 @@
       </mat-accordion>
       <br>
     </div>
+    <!--Verification commands-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateVerif = true" (closed)="panelOpenStateVerif = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>
+              <span>Verification commands</span>
+            </strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateVerif ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="mac !== ''">
+          <app-verif-c100-g [mac]="mac" [pos]="900"></app-verif-c100-g>
+        </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <!--Generate script-->
     <app-script></app-script>
   </mat-card>
 </div>

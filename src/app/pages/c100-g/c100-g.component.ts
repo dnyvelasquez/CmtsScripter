@@ -19,6 +19,7 @@ export class C100GComponent implements OnInit {
   panelOpenStateDown = false
   panelOpenStateServiceA = false
   panelOpenStateServiceB = false
+  panelOpenStateVerif = false
   ifUpstreams: number[] = [13, 12, 11, 10, 9];
   sifUpstreams: number[] = [];
   interfaceUp!: any;

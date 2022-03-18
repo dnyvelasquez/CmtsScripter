@@ -36,6 +36,7 @@ import { DownstreamC100GComponent } from './pages/c100-g/downstream-c100-g/downs
 import { InterfaceDownstreamComponent } from './pages/c100-g/interface-downstream/interface-downstream.component';
 import { ServiceGroupComponent } from './pages/c100-g/service-group/service-group.component';
 import { VerifCBR8Component } from './pages/cbr8/verif-cbr8/verif-cbr8.component';
+import { VerifC100GComponent } from './pages/c100-g/verif-c100-g/verif-c100-g.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { VerifCBR8Component } from './pages/cbr8/verif-cbr8/verif-cbr8.component
     InterfaceDownstreamComponent,
     ServiceGroupComponent,
     VerifCBR8Component,
+    VerifC100GComponent,
   ],
   imports: [
     BrowserModule, 

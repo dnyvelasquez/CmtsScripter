@@ -1,0 +1,12 @@
+<!--summary-->
+<div class="div__line__pri">
+    <mat-checkbox color="primary" #sumaryUpdate (change)="addSummaryCommand(sumaryUpdate.checked)">
+        show cable modem docsis-mac {{mac}} summary
+    </mat-checkbox>&nbsp;
+</div>
+<!--topology-->
+<div class="div__line__pri">
+    <mat-checkbox color="primary" #topologyUpdate (change)="addTopologyCommand(topologyUpdate.checked)">
+        show interface docsis-mac {{mac}} topology
+    </mat-checkbox>&nbsp;
+</div>
