@@ -19,7 +19,7 @@ export class DownstreamC100GComponent implements OnInit {
   @Input() channels!: number;
 
   ngOnInit(): void {
-    for(let i = 0; i <= 47; i ++){
+    for(let i = 0; i <= 60; i ++){
       this.chDownstreams.push(i);
     }
   }

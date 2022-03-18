@@ -127,7 +127,7 @@
             </select>
             <span>/</span>
             <select #selectSifUp class="mod__select"
-              (change)="sifAUp = selectSifUp.value; sifBUp = selectSifUp.value + 1">
+              (change)="sifAUp = selectSifUp.value; sifBUp = sifBUpFunc(selectSifUp.value)">
               <option></option>
               <option *ngFor="let sifUpstream of sifUpstreams">{{sifUpstream}}</option>
             </select>&nbsp;
@@ -214,10 +214,12 @@
                 Click to {{panelOpenStateDs ? 'close' : 'open'}}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngFor="let downstream of downstreams; index as i">
-              <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown"
-                [slotDown]="i" [pos]="30 + i">
-              </app-downstream-c100-g>
+            <div class="scroll__div">
+              <div *ngFor="let downstream of downstreams; index as i">
+                <app-downstream-c100-g [downstream]="downstream" [interfaceDown]="interfaceDown" [sifDown]="sifDown"
+                  [slotDown]="i" [pos]="30 + i">
+                </app-downstream-c100-g>
+              </div>
             </div>
           </mat-expansion-panel>
         </mat-accordion>
@@ -293,7 +295,7 @@
         </mat-expansion-panel-header>
         <div *ngIf="selectIfUp.value !==''">
           <div *ngFor="let upstream of upstreamsA; index as i">
-            <app-interface-upstream [pos]="50 + i * 20" [interface]="interfaceUp" [subinterface]="sifAUp"
+            <app-interface-upstream [pos]="150 + i * 20" [interface]="interfaceUp" [subinterface]="sifAUp"
               [slot]="upstream" [desc]="desc">
             </app-interface-upstream>
           </div>
@@ -315,7 +317,7 @@
           </mat-expansion-panel-header>
           <div *ngIf="selectIfUp.value !==''">
             <div *ngFor="let upstream of upstreamsB; index as i">
-              <app-interface-upstream [pos]="150 + i * 20" [interface]="interfaceUp" [subinterface]="sifBUp"
+              <app-interface-upstream [pos]="200 + i * 20" [interface]="interfaceUp" [subinterface]="sifBUp"
                 [slot]="upstream" [desc]="desc">
               </app-interface-upstream>
             </div>
@@ -336,7 +338,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="selectSifDown.value !==''">
-          <app-interface-downstream [pos]="250" [interface]="interfaceDown" [subinterface]="sifDown" [desc]="desc"
+          <app-interface-downstream [pos]="300" [interface]="interfaceDown" [subinterface]="sifDown" [desc]="desc"
             [channels]="channels" (addChannelEvent)="addChannel($event)">
           </app-interface-downstream>
         </div>
@@ -355,7 +357,7 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="selectSifUp.value !==''">
-          <app-service-group [pos]="600" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
+          <app-service-group [pos]="700" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
             [sifUp]="sifAUp" [desc]="desc" [mac]="mac" [sec]="upA" [ups]="upstreamsA" [channels]="channels">
           </app-service-group>
         </div>
@@ -375,7 +377,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <div *ngIf="selectSifUp.value !==''">
-            <app-service-group [pos]="700" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
+            <app-service-group [pos]="800" [ifDown]="interfaceDown" [sifDown]="sifDown" [ifUp]="interfaceUp"
               [sifUp]="sifBUp" [desc]="desc" [mac]="mac" [sec]="upB" [ups]="upstreamsB" [channels]="channels">
             </app-service-group>
           </div>

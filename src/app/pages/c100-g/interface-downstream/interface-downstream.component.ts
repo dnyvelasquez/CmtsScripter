@@ -138,7 +138,7 @@ export class InterfaceDownstreamComponent implements OnInit {
       if (!no) {
         this.sharedSvc.addCommand(` channel ${this.channels[ch]} frequency ${text}000000`, pos);
       } else {
-        this.sharedSvc.addCommand(` no channel ${this.channels[ch]} frequency`, pos);
+        this.sharedSvc.addCommand(` channel ${this.channels[ch]} frequency 0`, pos);
       }
     } else {
       this.sharedSvc.addCommand(``, pos);
@@ -148,7 +148,7 @@ export class InterfaceDownstreamComponent implements OnInit {
   addChShutEndCommand(update: boolean, ch: number) {
     let pos = this.pos + 8 + ch * 4;
     if (update) {
-      this.sharedSvc.addCommand(` no channel ${this.channels[ch]} shutdown  ${pos}`, pos);
+      this.sharedSvc.addCommand(` no channel ${this.channels[ch]} shutdown`, pos);
     } else {
       this.sharedSvc.addCommand(``, pos);
     }

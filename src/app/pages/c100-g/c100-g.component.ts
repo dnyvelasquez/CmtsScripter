@@ -77,7 +77,7 @@ export class C100GComponent implements OnInit {
   addShutStartCommand(update: boolean){
     let pos = 1;
     if(update){
-      this.sharedSvc.addCommand(` cable shutdown`, pos);
+      this.sharedSvc.addCommand(` shutdown`, pos);
     }else{
       this.sharedSvc.addCommand(``, pos);
     }
@@ -164,7 +164,7 @@ export class C100GComponent implements OnInit {
   }
 
   addMgdCommand(update: boolean, no: boolean){
-    let pos = 40;
+    let pos = 100;
     let command = `mgmd ipv4 shutdown`
     if(update){
       if(!no){
@@ -178,7 +178,7 @@ export class C100GComponent implements OnInit {
   }
 
   addReportCommand(update: boolean, text: string, no: boolean){
-    let pos = 41;
+    let pos = 101;
     let command = `cm-status report event-list`
     if(update){
       if(!no){
@@ -192,7 +192,7 @@ export class C100GComponent implements OnInit {
   }
 
   addTrapoCommand(update: boolean, no: boolean){
-    let pos = 42;
+    let pos = 102;
     let command = `cm trap online-offline-only`
     if(update){
       if(!no){
@@ -206,7 +206,7 @@ export class C100GComponent implements OnInit {
   }
 
   addTrapiCommand(update: boolean, text: string, no: boolean){
-    let pos = 43;
+    let pos = 103;
     let command = `cm trap interval`
     if(update){
       if(!no){
@@ -220,9 +220,9 @@ export class C100GComponent implements OnInit {
   }
 
   addShutEndCommand(update: boolean){
-    let pos = 44;
+    let pos = 104;
     if(update){
-      this.sharedSvc.addCommand(` no cable shutdown`, pos);
+      this.sharedSvc.addCommand(` no shutdown`, pos);
     }else{
       this.sharedSvc.addCommand(``, pos);
     }
@@ -232,4 +232,9 @@ export class C100GComponent implements OnInit {
     this.channels.push(ch);
   }
   
+  sifBUpFunc(value: string): string{
+    let temp = parseInt(value) + 1;
+    return temp.toString();
+  }
+
 }

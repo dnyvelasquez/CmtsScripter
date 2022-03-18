@@ -24,6 +24,7 @@ export class CBR8Component implements OnInit {
   panelOpenStateDown = false;
   panelOpenStateUpA = false;
   panelOpenStateUpB = false;
+  panelOpenStateVerif = false;
   interF: any = '';
   slt: any = '';
   

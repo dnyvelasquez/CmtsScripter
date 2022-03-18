@@ -310,7 +310,26 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="interF !== '' &&  slt !== ''">
-          <app-upstream-cable [interF]="interF" [slt]="slt*2+1" [description]="descText.value" [pos]="1400"></app-upstream-cable>
+          <app-upstream-cable [interF]="interF" [slt]="slt*2+1" [description]="descText.value" [pos]="1500"></app-upstream-cable>
+        </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <!--Verification commands-->
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenStateVerif = true" (closed)="panelOpenStateVerif = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>
+              <span>Verification commands</span>
+            </strong>
+          </mat-panel-title>
+          <mat-panel-description>
+            Click to {{panelOpenStateVerif ? 'close' : 'open'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="interF !== '' &&  slt !== ''">
+          <app-verif-cbr8 [interF]="interF" [slt]="slt" [pos]="1700"></app-verif-cbr8>
         </div>
         </mat-expansion-panel>
     </mat-accordion>
