@@ -46,7 +46,7 @@
   </div>
   <!--channels-->
   <div class="scroll__div">
-    <div *ngFor="let channel of channels">
+    <div *ngFor="let channel of channels; index as i">
       <!--shutdown Start Channel-->
       <div class="div__line__sec">
         <mat-checkbox #shutStartChUpdate color="primary" (change)="
@@ -70,18 +70,24 @@
       <!--frequency-->
       <div class="div__line__sec">
         <mat-checkbox #freqUpdate color="primary" (change)="freqUpdate.checked ? false : freqNo.checked = false;
-          addChFreqCommand(freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
+          addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">
           channel {{channel}} frequency
         </mat-checkbox>&nbsp;
-        <select #freqSelect class="freq__select" (change)="
-          addChFreqCommand(freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
-          <option></option>
-          <option *ngFor="let freq of freqs">{{freq}}</option>
-        </select>000000
-        <mat-checkbox #freqNo (change)="freqNo.checked ? freqSelect.value = '' : false;
-          addChFreqCommand(freqUpdate.checked, freqNo.checked, freqSelect.value, channel)">
+        <input #frq type="text" class="shortplus__input" [value]="frequency[i]" (click)="showFreqs[i] = true;
+          addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">000000
+        <mat-checkbox #freqNo (change)="freqNo.checked ? frq.value = '' : false;
+          addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">
           No
         </mat-checkbox>
+        <mat-toolbar class="freqs__toolbar" *ngIf="showFreqs[i]">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngFor="let freq of freqs" color="accent" selected (click)="showFreqs[i] = false;
+              frequency[i] = freq;
+              addChFreqCommand(freqUpdate.checked, freqNo.checked, frequency[i], channel)">
+              {{freq}}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-toolbar>
       </div>
       <!--shutdown End Channel-->
       <div class="div__line__sec">

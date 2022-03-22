@@ -16,10 +16,15 @@ export class InterfaceDownstreamComponent implements OnInit {
   @Input() channels: number[] = [];
   @Output() addChannelEvent = new EventEmitter<number>();
   freqs: number[] = this.sharedSvc.getFrequencies();
+  showFreqs: boolean[] = [];
+  frequency: any[] = [];
 
   constructor(private sharedSvc: SharedService) { }
 
   ngOnInit(): void {
+    for(let i = 0; i < 48; i ++){
+      this.frequency.push("");
+    }
   }
 
 
