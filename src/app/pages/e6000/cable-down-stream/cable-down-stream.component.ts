@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
 import { SharedService } from 'src/app/shared/services/shared.service';
 
 @Component({
@@ -26,14 +25,15 @@ export class CableDownStreamComponent implements OnInit {
   subInterFace!: string;
   slts: number[] = [];
   frequencies: number[] = this.sharedSvc.getFrequencies();
-  freqs: number[] = this.sharedSvc.getFrequencies();
+  freqs: any[] = this.sharedSvc.getFrequencies();
   shutdown: boolean = false;
   none: boolean = false;
+  showFreqs: boolean[] = [];
+
 
   constructor(private sharedSvc: SharedService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   getSlts(start: string, end: string){
     for(let i = 0; i <= (parseInt(end) - parseInt(start)); i++){
@@ -41,10 +41,10 @@ export class CableDownStreamComponent implements OnInit {
     }
   }
 
-  changeFreqs(ch: number, freq: string){
+  changeFreqs(ch: number, freq: number){
     let pos = 0;
     for(let i = 0; i < this.frequencies.length; i++){
-      if(this.freqs[i] === parseInt(freq)){
+      if(this.freqs[i] === freq){
         pos = i;
       }
     }

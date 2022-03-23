@@ -66,7 +66,7 @@
             ifUpdate.checked ? false : modNo.checked = false; ifUpdate.checked ? false : capableNo.checked = false;
             addInterfaceCommand(ifUpdate.checked, slt, i); addShutStartCommand(shutStartUpdate.checked, i);
             addMacCommand(macUpdate.checked, i, macNo.checked); addDescCommand(descUpdate.checked, i, descText.value, descNo.checked);
-            addIdCommand(idUpdate.checked, i, idText.value); addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked);
+            addIdCommand(idUpdate.checked, i, idText.value); addFreqCommand(freqUpdate.checked, i, freqs[i], freqNo.checked);
             addInterCommand(interUpdate.checked, i, interText.value, interNo.checked); addModCommand(modUpdate.checked, i, modText.value, modNo.checked);
             addCapableCommand(capableUpdate.checked, i, capableNo.checked); addShutEndCommand(shutEndUpdate.checked, i)">
               interface cable-downstream {{interFace}}/{{subInterFace}}/{{slt}}
@@ -117,20 +117,25 @@
           <!--frequency-->
           <div class="div__line__sec">
             <mat-checkbox #freqUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="freqUpdate.checked ? false : freqNo.checked = false;
-            addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
+            addFreqCommand(freqUpdate.checked, i, freqs[i], freqNo.checked)">
               cable frequency
-              <select #freqSelect class="freq__select" [disabled]="!ifUpdate.checked" (change)="changeFreqs(i, freqSelect.value);    
-              addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
-                <option>{{freqs[i]}}</option>
-                <option *ngFor="let frequency of frequencies">{{frequency}}</option>
-              </select>
-              000000
+              <input #frq type="text" class="shortplus__input" [value]="frequencies[i]" (click)="showFreqs[i] ? showFreqs[i] = false : showFreqs[i] = true;
+              addFreqCommand(freqUpdate.checked, i, freqs[i], freqNo.checked)">000000
             </mat-checkbox>&nbsp;
-            <mat-checkbox #freqNo [disabled]="!ifUpdate.checked" (change)="freqNo.checked ? freqSelect.value = '' : false;
-            addFreqCommand(freqUpdate.checked, i, freqSelect.value, freqNo.checked)">
+            <mat-checkbox #freqNo [disabled]="!ifUpdate.checked" (change)="freqNo.checked ? freqs[i] = '' : false;
+            addFreqCommand(freqUpdate.checked, i, freqs[i], freqNo.checked)">
               No
             </mat-checkbox>
-          </div>
+            <mat-toolbar class="freqs__toolbar" *ngIf="showFreqs[i]">
+              <mat-chip-list aria-label="Fish selection">
+                <mat-chip *ngFor="let freq of freqs" color="accent" selected (click)="showFreqs[i] = false;
+                  freqs[i] = freq; changeFreqs(i, freq);
+                  addFreqCommand(freqUpdate.checked, i, freqs[i], freqNo.checked)">
+                  {{freq}}
+                </mat-chip>
+              </mat-chip-list>
+            </mat-toolbar>
+              </div>
           <!--interleave-depth-->
           <div class="div__line__sec">
             <mat-checkbox #interUpdate color="primary" [disabled]="!ifUpdate.checked" (change)="interUpdate.checked ? false : interNo.checked = false;
