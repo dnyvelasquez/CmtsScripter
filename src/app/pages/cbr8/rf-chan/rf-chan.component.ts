@@ -11,6 +11,8 @@ export class RfChanComponent implements OnInit {
   @Input() checked!: boolean;
   @Input() pos!: number;
   freqs!: number[];
+  showFreqs: boolean = false;
+  frequency: any = '';
 
   constructor(private sharedSvc: SharedService) { }
 

@@ -73,7 +73,7 @@
           addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">
           channel {{channel}} frequency
         </mat-checkbox>&nbsp;
-        <input #frq type="text" class="shortplus__input" [value]="frequency[i]" (click)="showFreqs[i] = true;
+        <input #frq type="text" class="shortplus__input" [value]="frequency[i]" (click)="showFreqs[i] ? showFreqs[i] = false : showFreqs[i] = true;
           addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">000000
         <mat-checkbox #freqNo (change)="freqNo.checked ? frq.value = '' : false;
           addChFreqCommand(freqUpdate.checked, freqNo.checked, frq.value, channel)">

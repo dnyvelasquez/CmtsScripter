@@ -5,7 +5,7 @@
         rfNo.checked = false;
         addRfChannelCommand(rfChange.checked, start.value + ' ' + end.value, rfNo.checked);
         addTypeCommand(typeChange.checked, typeText.value);
-        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked);
+        addFreqCommand(freqChange.checked, frq.value, freqNo.checked);
         addOutputCommand(outputChange.checked, outputText.value);
         addPowerCommand(powerChange.checked, powerText.value);
         addQamCommand(qamChange.checked, qamText.value);
@@ -33,18 +33,24 @@
 <!--frequency-->
 <div class="div__line__thi">
     <mat-checkbox #freqChange color="primary" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
+        addFreqCommand(freqChange.checked, frq.value, freqNo.checked)">
         frequency
     </mat-checkbox>&nbsp;
-    <select class="freq__select" #freqSelect [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
-        <option *ngFor="let freq of freqs">{{freq}}</option>
-    </select>
-    <span>000000</span>&nbsp;
+    <input #frq type="text" class="shortplus__input" [value]="frequency" (click)="showFreqs ? showFreqs = false : showFreqs = true;
+        addFreqCommand(freqChange.checked, frq.value, freqNo.checked)">000000
     <mat-checkbox #freqNo [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" [disabled]="!rfChange.checked" (change)="
-        addFreqCommand(freqChange.checked, freqSelect.value, freqNo.checked)">
+        addFreqCommand(freqChange.checked, frq.value, freqNo.checked)">
         No
     </mat-checkbox>&nbsp;
+    <mat-toolbar class="freqs__toolbar" *ngIf="showFreqs">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngFor="let freq of freqs" color="accent" selected (click)="showFreqs = false;
+            frequency = freq;
+            addFreqCommand(freqChange.checked, frequency, freqNo.checked)">
+            {{freq}}
+          </mat-chip>
+        </mat-chip-list>
+      </mat-toolbar>
 </div>
 <!--output-->
 <div class="div__line__thi">
