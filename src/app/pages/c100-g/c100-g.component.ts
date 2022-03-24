@@ -25,8 +25,8 @@ export class C100GComponent implements OnInit {
   interfaceUp!: any;
   sifAUp!: any;
   sifBUp!: any;
-  upstreamsA: number[] = [0, 1, 2, 3];
-  upstreamsB: number[] = [0, 1, 2, 3];
+  upstreamsA: number[] = [1, 2, 3, 4];
+  upstreamsB: number[] = [5, 6, 7, 8];
   ifDownstreams: number[] = [0, 1, 2, 3, 4];
   sifDownstreams: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
   chDownstreams: number[] = [];

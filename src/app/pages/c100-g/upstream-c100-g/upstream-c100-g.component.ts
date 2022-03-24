@@ -29,7 +29,7 @@ export class UpstreamC100GComponent implements OnInit {
   addCommand(update: boolean, no: boolean){
     if(update){
       if(!no){
-        this.sharedSvc.addCommand(` upstream ${this.up} interface qam ${this.interface}/${this.subinterface}/${this.slot}`, this.pos);
+        this.sharedSvc.addCommand(` upstream ${this.up} interface upstream ${this.interface}/${this.subinterface}.${this.slot}/0`, this.pos);
       }else{
         this.sharedSvc.addCommand(` no upstream ${this.up}`, this.pos);
       }
