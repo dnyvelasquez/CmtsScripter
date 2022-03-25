@@ -1,6 +1,6 @@
 <div class="div__line__sec">
   <mat-checkbox #shutStartChange color="primary" [disabled]="!checked" (change)="
-        addShutStartCommand(shutStartChange.checked)">
+    addShutStartCommand(shutStartChange.checked)">
     us-channel {{usCh}} shutdown
   </mat-checkbox>&nbsp;
 </div>
@@ -9,10 +9,10 @@
   <mat-checkbox #channelChange color="primary" [disabled]="!checked" (change)="channelChange.value ? false : noCh.checked = false;
     addFreqCommand(channelChange.checked, channelText.value, noCh.checked)">
     us-channel {{usCh}} frequency
-    <input type="text" class="shortplus__input" #channelText (blur)="
-        addFreqCommand(channelChange.checked, channelText.value, noCh.checked)">
-        00000
   </mat-checkbox>&nbsp;
+  <input type="text" class="shortplus__input" [disabled]="!checked" #channelText (blur)="
+    addFreqCommand(channelChange.checked, channelText.value, noCh.checked)">
+    00000
   <mat-checkbox #noCh [disabled]="!checked" (change)="
     addFreqCommand(channelChange.checked, channelText.value, noCh.checked)">
     No
@@ -23,22 +23,22 @@
   <mat-checkbox #channelWidthChange color="primary" [disabled]="!checked" (change)="
     addWidthCommand(channelWidthChange.checked, channelWidthS.value, channelWidthE.value)">
     us-channel {{usCh}} channel-width
-    <input type="text" class="shortplus__input" #channelWidthS [disabled]="!checked" (input)="channelWidthE.value = channelWidthS.value" (blur)="
-        addWidthCommand(channelWidthChange.checked, channelWidthS.value, channelWidthE.value)">
-        00000
-    <input type="text" class="shortplus__input" #channelWidthE (blur)="
-        addWidthCommand(channelWidthChange.checked, channelWidthS.value, channelWidthE.value)">
-        00000
   </mat-checkbox>&nbsp;
+  <input type="text" class="shortplus__input" #channelWidthS [disabled]="!checked" (input)="channelWidthE.value = channelWidthS.value" (blur)="
+    addWidthCommand(channelWidthChange.checked, channelWidthS.value, channelWidthE.value)">
+    00000
+  <input type="text" class="shortplus__input" #channelWidthE [disabled]="!checked" (blur)="
+    addWidthCommand(channelWidthChange.checked, channelWidthS.value, channelWidthE.value)">
+    00000
 </div>
 <!--snr-profiles-->
 <div class="div__line__sec">
   <mat-checkbox #snrChange color="primary" [disabled]="!checked" (change)="snrChange.checked ? false : noSnr.checked = false;
     addSnrCommand(snrChange.checked, snrText.value, noSnr.checked)">
     us-channel {{usCh}} threshold snr-profiles
-    <input type="text" class="midd__input" #snrText value="24 19" [disabled]="!checked" (blur)="
-        addSnrCommand(snrChange.checked, snrText.value, noSnr.checked)">
   </mat-checkbox>&nbsp;
+  <input type="text" class="midd__input" #snrText value="24 19" [disabled]="!checked" (blur)="
+    addSnrCommand(snrChange.checked, snrText.value, noSnr.checked)">&nbsp;
   <mat-checkbox #noSnr [disabled]="!checked" (change)="
     addSnrCommand(snrChange.checked, snrText.value, noSnr.checked)">
     No
@@ -49,9 +49,9 @@
   <mat-checkbox #corrChange color="primary" [disabled]="!checked" (change)="corrChange.value ? false : noCorr.checked = false;
     addCorrCommand(corrChange.checked, corrText.value, noCorr.checked)">
     us-channel {{usCh}} threshold corr-fec
-    <input type="text" class="short__input" value="0" [disabled]="!checked" #corrText (blur)="
-        addCorrCommand(corrChange.checked, corrText.value, noCorr.checked)">
   </mat-checkbox>&nbsp;
+  <input type="text" class="short__input" value="0" [disabled]="!checked" #corrText (blur)="
+    addCorrCommand(corrChange.checked, corrText.value, noCorr.checked)">&nbsp;
   <mat-checkbox #noCorr [disabled]="!checked" (change)="
     addCorrCommand(corrChange.checked, corrText.value, noCorr.checked)">
     No
@@ -62,10 +62,10 @@
   <mat-checkbox #hystChange color="primary" [disabled]="!checked" (change)="hystChange.checked ? false : noHyst.checked = false;
     addHystCommand(hystChange.checked, hystText.value, noHyst.checked)">
     us-channel {{usCh}} threshold hysteresis
-    <input type="text" class="short__input" value="4" #hystText [disabled]="!checked" (blur)="
-        addHystCommand(hystChange.checked, hystText.value, noHyst.checked)">
   </mat-checkbox>&nbsp;
-  <mat-checkbox #noHyst (change)="
+  <input type="text" class="short__input" value="4" #hystText [disabled]="!checked" (blur)="
+    addHystCommand(hystChange.checked, hystText.value, noHyst.checked)">&nbsp;
+  <mat-checkbox #noHyst [disabled]="!checked" (change)="
     addHystCommand(hystChange.checked, hystText.value, noHyst.checked)">
     No
   </mat-checkbox>
@@ -75,9 +75,9 @@
   <mat-checkbox #descChange color="primary" [disabled]="!checked" (change)="descChange.checked ? false : noDesc.checked = false;
     addDescCommand(descChange.checked, descText.value, noDesc.checked)">
     us-channel {{usCh}} description
-    <input type="text" #descText [value]="description" [disabled]="!checked" (blur)="
-        addDescCommand(descChange.checked, descText.value, noDesc.checked)">
   </mat-checkbox>&nbsp;
+  <input type="text" #descText [value]="description" [disabled]="!checked" (blur)="
+    addDescCommand(descChange.checked, descText.value, noDesc.checked)">&nbsp;
   <mat-checkbox #noDesc [disabled]="!checked" (change)="noDesc.checked ? descText.value = '' : false;
     addDescCommand(descChange.checked, descText.value, noDesc.checked)">
     No
@@ -88,27 +88,27 @@
   <mat-checkbox #docsisChange color="primary" [disabled]="!checked" (change)="
     addDocsisCommand(docsisChange.checked, docsisText.value)">
     us-channel {{usCh}} docsis-mode
-    <input type="text" value="atdma" class="midd__input" #docsisText [disabled]="!checked" (blur)="
-        addDocsisCommand(docsisChange.checked, docsisText.value)">
   </mat-checkbox>&nbsp;
+  <input type="text" value="atdma" class="midd__input" #docsisText [disabled]="!checked" (blur)="
+    addDocsisCommand(docsisChange.checked, docsisText.value)">&nbsp;
 </div>
 <!--minislot-size-->
 <div class="div__line__sec">
   <mat-checkbox #miniChange color="primary" [disabled]="!checked" (change)="
     addMiniCommand(miniChange.checked, miniText.value)">
     us-channel {{usCh}} minislot-size
-    <input type="text" value="2" class="short__input" #miniText [disabled]="!checked" (blur)="
-        addMiniCommand(miniChange.checked, miniText.value)">
   </mat-checkbox>&nbsp;
+  <input type="text" value="2" class="short__input" #miniText [disabled]="!checked" (blur)="
+    addMiniCommand(miniChange.checked, miniText.value)">
 </div>
 <!--modulation-profile-->
 <div class="div__line__sec">
   <mat-checkbox #modulationChange [disabled]="!checked" color="primary" (change)="
     addModCommand(modulationChange.checked, modulationText.value)">
     us-channel {{usCh}} modulation-profile
-    <input type="text" value="224 223 222" class="midd__input" #modulationText [disabled]="!checked" (blur)="
-        addModCommand(modulationChange.checked, modulationText.value)">
   </mat-checkbox>&nbsp;
+  <input type="text" value="224 223 222" class="midd__input" #modulationText [disabled]="!checked" (blur)="
+    addModCommand(modulationChange.checked, modulationText.value)">
 </div>
 <!--equalization-coefficient-->
 <div class="div__line__sec">

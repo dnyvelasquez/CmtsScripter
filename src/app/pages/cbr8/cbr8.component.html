@@ -5,7 +5,49 @@
     <!--interface Cable-->
     <div class="div__interface">
       <mat-checkbox #interFaceUpdate color="primary" (change)="
-        addInterfaceCommand(interFaceUpdate.checked)">
+        interFaceUpdate.checked ? false : shutStart.checked = false;
+        interFaceUpdate.checked ? false : descUpdate.checked = false;
+        interFaceUpdate.checked ? false : descNo.checked = false;
+        interFaceUpdate.checked ? false : loadUpdate.checked = false;
+        interFaceUpdate.checked ? false : pa.checked = false;
+        interFaceUpdate.checked ? false : schUpdate.checked = false;
+        interFaceUpdate.checked ? false : schNo.checked = false;
+        interFaceUpdate.checked ? false : bundle.checked = false;
+        interFaceUpdate.checked ? false : bundleNo.checked = false;
+        interFaceUpdate.checked ? false : secret.checked = false;
+        interFaceUpdate.checked ? false : secretNo.checked = false;
+        interFaceUpdate.checked ? false : trap.checked = false;
+        interFaceUpdate.checked ? false : trapNo.checked = false;
+        interFaceUpdate.checked ? false : trapi.checked = false;
+        interFaceUpdate.checked ? false : trapiNo.checked = false;
+        interFaceUpdate.checked ? false : timeout.checked = false;
+        interFaceUpdate.checked ? false : timeoutNo.checked = false;
+        interFaceUpdate.checked ? false : privacy.checked = false;
+        interFaceUpdate.checked ? false : privacyNo.checked = false;
+        interFaceUpdate.checked ? false : bpi.checked = false;
+        interFaceUpdate.checked ? false : bpiNo.checked = false;
+        interFaceUpdate.checked ? false : holdIn.checked = false;
+        interFaceUpdate.checked ? false : holdIn.checked = false;
+        interFaceUpdate.checked ? false : holdInNo.checked = false;
+        interFaceUpdate.checked ? false : holdOut.checked = false;
+        interFaceUpdate.checked ? false : holdOutNo.checked = false;
+        interFaceUpdate.checked ? false : shutEnd.checked = false;
+        addInterfaceCommand(interFaceUpdate.checked);
+        addShutStartCommand(shutStart.checked);
+        addDescCommand(descUpdate.checked, descText.value, false);
+        addLoadCommand(loadUpdate.checked, loadText.value);
+        powerAdjust(pa.checked);
+        addBalanceCommand(schUpdate.checked, schNo.checked);
+        addBundleCommand(bundle.checked, bundleText.value, bundleNo.checked);
+        addDynamicCommand(secret.checked, secretText.value, secretNo.checked);
+        addTrapCommand(trap.checked, trapText.value, trapNo.checked);
+        addTrapiCommand(trapi.checked, trapiText.value, trapiNo.checked);
+        addTimeoutCommand(timeout.checked, timeoutText.value, timeoutNo.checked);
+        addMandatoryCommand(privacy.checked, privacyNo.checked);
+        addBpiCommand(bpi.checked, bpiText.value, bpiNo.checked);
+        addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked);
+        addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked);
+        addShutEndCommand(shutEnd.checked)">
       </mat-checkbox>&nbsp;
       <strong>
         <span>Interface Cable</span>
@@ -90,7 +132,9 @@
         <app-up-stream [interF]="interF" [slt]="slt*2+1" [us]=5 [usCh]=0 [pos]=300></app-up-stream>
         <!--Power adjust-->
         <div class="div__line__pri">
-          <mat-checkbox #pa color="primary" (change)="powerAdjust(pa.checked)"><strong>Setting power-adjust?</strong> (yes)</mat-checkbox>
+          <mat-checkbox #pa color="primary" (change)="powerAdjust(pa.checked)">
+            <strong>Setting power-adjust?</strong> (yes)
+          </mat-checkbox>
         </div>
         <div class="div__line__pri" *ngIf="pa.checked">
           <div *ngFor="let upStream of upStreams">
@@ -208,9 +252,9 @@
           <mat-checkbox #holdIn color="primary" (change)="holdIn.checked ? false : holdInNo.checked = false;
             addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)">
             hold-queue
-            <input type="text" #holdInText value="2048" class="midd__input" (blur)="
-              addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)"> in
           </mat-checkbox>&nbsp;
+          <input type="text" #holdInText value="2048" class="midd__input" (blur)="
+            addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)"> in
           <mat-checkbox #holdInNo (change)="holdInNo.checked ? holdInText.value = '' : false;
             addHoldInCommand(holdIn.checked, holdInText.value, holdInNo.checked)">
             No
@@ -221,9 +265,9 @@
           <mat-checkbox #holdOut color="primary" (change)="holdOut.checked ? false : holdOutNo.checked = false;
             addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)">
             hold-queue
-            <input type="text" #holdOutText value="2048" class="midd__input" (blur)="
-              addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)"> out
           </mat-checkbox>&nbsp;
+          <input type="text" #holdOutText value="2048" class="midd__input" (blur)="
+            addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)"> out
           <mat-checkbox #holdOutNo (change)="holdOutNo.checked ? holdOutText.value = '' : false;
             addHoldOutCommand(holdOut.checked, holdOutText.value, holdOutNo.checked)">
             No

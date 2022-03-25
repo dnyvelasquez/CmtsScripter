@@ -16,3 +16,15 @@
         f{{interF}}0{{slt}}
     </mat-checkbox>&nbsp;
 </div>
+<!--snr-->
+<div class="div__line__pri">
+    <mat-checkbox color="primary" #snrUpdate (change)="addSnrCommand(snrUpdate.checked)">
+        snr{{interF}}0{{slt}}
+    </mat-checkbox>&nbsp;
+</div>
+<!--partial-->
+<div class="div__line__pri">
+    <mat-checkbox color="primary" #partialUpdate (change)="addPartialCommand(partialUpdate.checked)">
+        show cable modem cable {{interF}}/0/{{slt}} partial mode
+    </mat-checkbox>&nbsp;
+</div>

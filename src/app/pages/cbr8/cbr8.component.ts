@@ -74,7 +74,7 @@ export class CBR8Component implements OnInit {
   addInterfaceCommand(update: boolean){
     let pos = 0;
     if(update){
-      this.sharedSvc.addCommand(`interface Cable  ${this.interF}/0/${this.slt}`, pos);
+      this.sharedSvc.addCommand(`interface Cable${this.interF}/0/${this.slt}`, pos);
     }else{
       this.sharedSvc.addCommand('', pos);
     }

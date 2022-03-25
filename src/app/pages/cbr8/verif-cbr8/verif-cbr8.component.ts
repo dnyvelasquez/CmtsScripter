@@ -44,5 +44,22 @@ export class VerifCBR8Component implements OnInit {
     }
   }
 
+  addSnrCommand(update: boolean){
+    let pos = this.pos + 3;
+    if(update){
+      this.sharedSvc.addCommand(`snr${this.interF}0${this.slt}`, pos);
+    }else{
+      this.sharedSvc.addCommand('', pos);
+    }
+  }
+
+  addPartialCommand(update: boolean){
+    let pos = this.pos + 4;
+    if(update){
+      this.sharedSvc.addCommand(`show cable modem cable ${this.interF}/0/${this.slt} partial mode`, pos);
+    }else{
+      this.sharedSvc.addCommand('', pos);
+    }
+  }
 
 }
